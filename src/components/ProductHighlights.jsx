@@ -6,37 +6,51 @@ import { Plus } from 'lucide-react'
 const ProductHighlights = () => {
   const { addItem } = useQuote()
 
-  // Produtos em destaque baseados no mockup
+  // Produtos em destaque com imagens reais
   const highlightedProducts = [
     {
       id: '2680-32',
       code: '2680-32',
       dimensions: '25x25cm',
-      color: 'Turquesa'
+      color: 'Turquesa',
+      image: '/fotos1/fotos1/2680 TURQUESA.jpg'
     },
     {
-      id: '2862-41',
-      code: '2862-41', 
-      dimensions: '7 cm x 41 cm',
-      color: 'Bronze'
+      id: '1300-32',
+      code: '1300-32', 
+      dimensions: '30x30cm',
+      color: 'Bronze',
+      image: '/fotos1/fotos1/1300 BRONZE COM AMBAR.jpg'
     },
     {
-      id: '2686-22',
-      code: '2686-22',
-      dimensions: '32 cm 22 cm',
-      color: 'Verde'
+      id: '1704-32',
+      code: '1704-32',
+      dimensions: '40x22cm',
+      color: 'Verde',
+      image: '/fotos1/fotos1/1704- VERDE.jpg'
     },
     {
-      id: '2920-20',
-      code: '2920-20',
-      dimensions: '20 cm 8 m',
-      color: 'Azul'
+      id: '215-32',
+      code: '215-32',
+      dimensions: '35x35cm',
+      color: 'Branco',
+      image: '/fotos1/fotos1/215 BRANCO.jpg'
     }
   ]
 
   const handleAddToQuote = (product) => {
     addItem(product)
-    // Feedback visual opcional
+    // Feedback visual melhorado
+    const button = event.target.closest('button')
+    const originalText = button.textContent
+    button.textContent = '✓ Adicionado!'
+    button.classList.add('bg-green-600')
+    
+    setTimeout(() => {
+      button.textContent = originalText
+      button.classList.remove('bg-green-600')
+    }, 2000)
+    
     console.log('Produto adicionado ao orçamento:', product.code)
   }
 
@@ -61,12 +75,14 @@ const ProductHighlights = () => {
             >
               {/* Product Image */}
               <div className="aspect-square bg-gray-200 overflow-hidden">
-                <div className="w-full h-full bg-gradient-to-br from-teal-100 to-teal-200 flex items-center justify-center">
-                  <div className="text-center">
-                    <div className="w-24 h-24 bg-teal-500 rounded-full mx-auto mb-2 opacity-60"></div>
-                    <p className="text-sm text-gray-600">{product.code}</p>
-                  </div>
-                </div>
+                <img 
+                  src={product.image} 
+                  alt={product.code}
+                  className="w-full h-full object-cover hover:scale-105 transition-transform duration-300"
+                  onError={(e) => {
+                    e.target.src = '/fotosinstagram/fotosinstagram/post_insta (2).jpg'
+                  }}
+                />
               </div>
 
               {/* Product Info */}
@@ -79,7 +95,7 @@ const ProductHighlights = () => {
                 </p>
                 
                 <Button 
-                  onClick={() => handleAddToQuote(product)}
+                  onClick={(e) => handleAddToQuote(product, e)}
                   className="w-full btn-primary font-montserrat font-medium group-hover:scale-105 transition-transform duration-200"
                   size="sm"
                 >

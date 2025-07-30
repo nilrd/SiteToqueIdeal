@@ -12,10 +12,10 @@ const Header = () => {
   const menuItems = [
     { name: 'Home', href: '/' },
     { name: 'Catálogo', href: '/catalogo' },
-    { name: 'Feiras & Eventos', href: '#eventos' },
-    { name: 'Blog', href: '#blog' },
-    { name: 'Trabalhe Conosco', href: '#trabalhe' },
-    { name: 'Contato', href: '#contato' }
+    { name: 'Feiras & Eventos', href: '/eventos' },
+    { name: 'Blog', href: '/blog' },
+    { name: 'Trabalhe Conosco', href: '/trabalhe-conosco' },
+    { name: 'Contato', href: '/contato' }
   ]
 
   const isActive = (href) => {
@@ -33,9 +33,12 @@ const Header = () => {
           <div className="flex-shrink-0">
             <Link to="/">
               <img 
-                src="/src/assets/logotoqueideal/logo toque ideal/retangular logo.png" 
+                src="/logotoqueideal/logotoqueideal/retangular logo.png" 
                 alt="Toque Ideal" 
                 className="h-10 w-auto"
+                onError={(e) => {
+                  e.target.src = '/logotoqueideal/logotoqueideal/1.png'
+                }}
               />
             </Link>
           </div>
@@ -43,27 +46,17 @@ const Header = () => {
           {/* Desktop Navigation */}
           <nav className="hidden md:flex space-x-8">
             {menuItems.map((item) => (
-              item.href.startsWith('#') ? (
-                <a
-                  key={item.name}
-                  href={item.href}
-                  className="text-gray-700 hover:text-primary transition-colors duration-200 font-montserrat font-medium"
-                >
-                  {item.name}
-                </a>
-              ) : (
-                <Link
-                  key={item.name}
-                  to={item.href}
-                  className={`transition-colors duration-200 font-montserrat font-medium ${
-                    isActive(item.href) 
-                      ? 'text-primary border-b-2 border-primary' 
-                      : 'text-gray-700 hover:text-primary'
-                  }`}
-                >
-                  {item.name}
-                </Link>
-              )
+              <Link
+                key={item.name}
+                to={item.href}
+                className={`transition-colors duration-200 font-montserrat font-medium ${
+                  isActive(item.href) 
+                    ? 'text-primary border-b-2 border-primary' 
+                    : 'text-gray-700 hover:text-primary'
+                }`}
+              >
+                {item.name}
+              </Link>
             ))}
           </nav>
 
@@ -107,29 +100,18 @@ const Header = () => {
           <div className="md:hidden">
             <div className="px-2 pt-2 pb-3 space-y-1 sm:px-3 bg-white border-t">
               {menuItems.map((item) => (
-                item.href.startsWith('#') ? (
-                  <a
-                    key={item.name}
-                    href={item.href}
-                    className="block px-3 py-2 text-gray-700 hover:text-primary transition-colors duration-200 font-montserrat font-medium"
-                    onClick={() => setIsMenuOpen(false)}
-                  >
-                    {item.name}
-                  </a>
-                ) : (
-                  <Link
-                    key={item.name}
-                    to={item.href}
-                    className={`block px-3 py-2 transition-colors duration-200 font-montserrat font-medium ${
-                      isActive(item.href) 
-                        ? 'text-primary bg-teal-50' 
-                        : 'text-gray-700 hover:text-primary'
-                    }`}
-                    onClick={() => setIsMenuOpen(false)}
-                  >
-                    {item.name}
-                  </Link>
-                )
+                <Link
+                  key={item.name}
+                  to={item.href}
+                  className={`block px-3 py-2 transition-colors duration-200 font-montserrat font-medium ${
+                    isActive(item.href) 
+                      ? 'text-primary bg-teal-50' 
+                      : 'text-gray-700 hover:text-primary'
+                  }`}
+                  onClick={() => setIsMenuOpen(false)}
+                >
+                  {item.name}
+                </Link>
               ))}
               <div className="px-3 py-2">
                 <Link to="/orcamento">
