@@ -5,11 +5,11 @@ import { ChevronRight } from 'lucide-react'
 const Hero = () => {
   return (
     <section className="relative h-screen flex items-center justify-center overflow-hidden">
-      {/* Background Gradient */}
+      {/* Background Image */}
       <div 
-        className="absolute inset-0 bg-gradient-to-br from-teal-800 via-teal-700 to-teal-600"
+        className="absolute inset-0 bg-cover bg-center bg-no-repeat"
         style={{
-          background: `linear-gradient(135deg, #1F4C55 0%, #2A6B75 50%, #357A85 100%)`
+          backgroundImage: `linear-gradient(rgba(31, 76, 85, 0.7), rgba(31, 76, 85, 0.7)), url("/fotosinstagram/fotosinstagram/post_insta (2).jpg")`
         }}
       />
       

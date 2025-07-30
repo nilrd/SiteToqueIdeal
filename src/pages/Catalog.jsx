@@ -121,12 +121,16 @@ const Catalog = () => {
               key={product.code}
               className="bg-white rounded-lg shadow-md overflow-hidden hover:shadow-xl transition-shadow duration-300 group"
             >
-              {/* Product Image Placeholder */}
-              <div className="aspect-square bg-gradient-to-br from-teal-100 to-teal-200 flex items-center justify-center">
-                <div className="text-center">
-                  <div className="w-20 h-20 bg-teal-500 rounded-full mx-auto mb-2 opacity-60"></div>
-                  <p className="text-xs text-gray-600 font-montserrat">{product.code}</p>
-                </div>
+              {/* Product Image */}
+              <div className="aspect-square bg-gray-200 overflow-hidden">
+                <img 
+                  src={product.image} 
+                  alt={product.code}
+                  className="w-full h-full object-cover hover:scale-105 transition-transform duration-300"
+                  onError={(e) => {
+                    e.target.src = '/placeholder.jpg'
+                  }}
+                />
               </div>
 
               {/* Product Info */}
