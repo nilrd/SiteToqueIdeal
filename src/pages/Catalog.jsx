@@ -2,7 +2,7 @@ import { useState, useEffect } from 'react'
 import { useQuote } from '../context/QuoteContext'
 import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
-import { Search, Filter, Plus } from 'lucide-react'
+import { Search, Filter, Plus, ChevronLeft, ChevronRight } from 'lucide-react'
 import productsData from '../assets/products.json'
 
 const Catalog = () => {
@@ -11,6 +11,9 @@ const Catalog = () => {
   const [filteredProducts, setFilteredProducts] = useState([])
   const [searchTerm, setSearchTerm] = useState('')
   const [selectedFilter, setSelectedFilter] = useState('all')
+  const [currentPage, setCurrentPage] = useState(1)
+  const [loading, setLoading] = useState(false)
+  const productsPerPage = 24 // Reduzido para melhor performance
 
   useEffect(() => {
     setProducts(productsData)
@@ -18,6 +21,7 @@ const Catalog = () => {
   }, [])
 
   useEffect(() => {
+    setLoading(true)
     let filtered = products
 
     // Filtro por busca
@@ -36,6 +40,8 @@ const Catalog = () => {
     }
 
     setFilteredProducts(filtered)
+    setCurrentPage(1) // Reset para primeira página ao filtrar
+    setLoading(false)
   }, [searchTerm, selectedFilter, products])
 
   const categories = [
@@ -47,9 +53,8 @@ const Catalog = () => {
     { value: '-46', label: 'Série 46' },
     { value: '-48', label: 'Série 48' },
     { value: '-52', label: 'Série 52' },
-    { value: '-58', label: 'Série 58' },
-    { value: '-62', label: 'Série 62' },
-    { value: '-66', label: 'Série 66' },
+    { value: '-56', label: 'Série 56' },
+    { value: '-68', label: 'Série 68' },
     { value: '-72', label: 'Série 72' },
     { value: '-76', label: 'Série 76' },
     { value: '-78', label: 'Série 78' },
@@ -57,32 +62,94 @@ const Catalog = () => {
     { value: '-86', label: 'Série 86' }
   ]
 
-  const handleAddToQuote = (product) => {
+  // Cálculos de paginação
+  const totalPages = Math.ceil(filteredProducts.length / productsPerPage)
+  const startIndex = (currentPage - 1) * productsPerPage
+  const endIndex = startIndex + productsPerPage
+  const currentProducts = filteredProducts.slice(startIndex, endIndex)
+
+  const handleAddToQuote = (product, event) => {
     addItem(product)
-    // Feedback visual opcional
-    console.log('Produto adicionado ao orçamento:', product.code)
+    
+    // Feedback visual melhorado
+    const button = event.target.closest('button')
+    const originalText = button.textContent
+    const originalClasses = button.className
+    
+    button.textContent = '✓ Adicionado!'
+    button.className = button.className.replace('btn-primary', 'bg-green-600 hover:bg-green-700')
+    
+    setTimeout(() => {
+      button.textContent = originalText
+      button.className = originalClasses
+    }, 2000)
+  }
+
+  const handlePageChange = (page) => {
+    setCurrentPage(page)
+    // Scroll suave para o topo da seção de produtos
+    document.getElementById('products-grid')?.scrollIntoView({ 
+      behavior: 'smooth', 
+      block: 'start' 
+    })
+  }
+
+  // Componente de imagem com lazy loading
+  const LazyImage = ({ src, alt, code }) => {
+    const [imageSrc, setImageSrc] = useState('/fotosinstagram/fotosinstagram/post_insta (2).jpg')
+    const [imageLoaded, setImageLoaded] = useState(false)
+
+    useEffect(() => {
+      const img = new Image()
+      img.onload = () => {
+        setImageSrc(src)
+        setImageLoaded(true)
+      }
+      img.onerror = () => {
+        setImageSrc('/fotosinstagram/fotosinstagram/post_insta (2).jpg')
+        setImageLoaded(true)
+      }
+      img.src = src
+    }, [src])
+
+    return (
+      <div className="aspect-square bg-gray-100 overflow-hidden rounded-t-lg">
+        <img 
+          src={imageSrc}
+          alt={alt}
+          className={`w-full h-full object-cover transition-all duration-300 hover:scale-105 ${
+            imageLoaded ? 'opacity-100' : 'opacity-50'
+          }`}
+          loading="lazy"
+        />
+        {!imageLoaded && (
+          <div className="absolute inset-0 flex items-center justify-center bg-gray-100">
+            <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-primary"></div>
+          </div>
+        )}
+      </div>
+    )
   }
 
   return (
     <div className="min-h-screen bg-gray-50 pt-20">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
         {/* Header */}
-        <div className="text-center mb-8">
-          <h1 className="text-4xl font-montserrat font-bold text-gray-900 mb-4">
+        <div className="text-center mb-12">
+          <h1 className="text-4xl md:text-5xl font-montserrat font-bold text-gray-900 mb-6">
             Catálogo de Produtos
           </h1>
-          <p className="text-lg text-gray-600 font-lato max-w-2xl mx-auto">
-            Explore nossa coleção completa de peças em vidro. 
-            Use os filtros para encontrar exatamente o que procura.
+          <p className="text-xl text-gray-600 font-lato leading-relaxed">
+            Explore nossa coleção completa de peças em vidro. Use os filtros para encontrar exatamente o que procura.
           </p>
         </div>
 
-        {/* Filters and Search */}
+        {/* Filters */}
         <div className="bg-white rounded-lg shadow-sm p-6 mb-8">
-          <div className="flex flex-col lg:flex-row gap-4 items-center">
+          <div className="grid md:grid-cols-2 gap-4">
             {/* Search */}
-            <div className="relative flex-1">
-              <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 h-5 w-5" />
+            <div className="relative">
+              <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 h-4 w-4 text-gray-400" />
               <Input
                 type="text"
                 placeholder="Buscar por código ou dimensões..."
@@ -93,14 +160,14 @@ const Catalog = () => {
             </div>
 
             {/* Category Filter */}
-            <div className="flex items-center gap-2">
-              <Filter className="h-5 w-5 text-gray-400" />
+            <div className="relative">
+              <Filter className="absolute left-3 top-1/2 transform -translate-y-1/2 h-4 w-4 text-gray-400" />
               <select
                 value={selectedFilter}
                 onChange={(e) => setSelectedFilter(e.target.value)}
-                className="px-4 py-2 border border-gray-300 rounded-lg font-lato focus:outline-none focus:ring-2 focus:ring-teal-500"
+                className="w-full pl-10 pr-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary font-lato"
               >
-                {categories.map(category => (
+                {categories.map((category) => (
                   <option key={category.value} value={category.value}>
                     {category.label}
                   </option>
@@ -109,66 +176,151 @@ const Catalog = () => {
             </div>
           </div>
 
+          {/* Results Count */}
           <div className="mt-4 text-sm text-gray-600 font-lato">
-            Mostrando {filteredProducts.length} de {products.length} produtos
+            Mostrando {startIndex + 1}-{Math.min(endIndex, filteredProducts.length)} de {filteredProducts.length} produtos
+            {searchTerm && (
+              <span className="ml-2 text-primary font-medium">
+                para "{searchTerm}"
+              </span>
+            )}
           </div>
         </div>
 
         {/* Products Grid */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
-          {filteredProducts.map((product) => (
-            <div 
-              key={product.code}
-              className="bg-white rounded-lg shadow-md overflow-hidden hover:shadow-xl transition-shadow duration-300 group"
-            >
-              {/* Product Image */}
-              <div className="aspect-square bg-gray-200 overflow-hidden">
-                <img 
-                  src={product.image} 
-                  alt={product.code}
-                  className="w-full h-full object-cover hover:scale-105 transition-transform duration-300"
-                  onError={(e) => {
-                    e.target.src = '/placeholder.jpg'
-                  }}
-                />
+        <div id="products-grid">
+          {loading ? (
+            <div className="flex justify-center items-center py-12">
+              <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-primary"></div>
+            </div>
+          ) : (
+            <>
+              <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-6 gap-6">
+                {currentProducts.map((product) => (
+                  <div 
+                    key={product.id}
+                    className="bg-white rounded-lg shadow-md overflow-hidden hover:shadow-xl transition-all duration-300 group"
+                  >
+                    {/* Product Image */}
+                    <div className="relative">
+                      <LazyImage 
+                        src={product.image} 
+                        alt={product.code}
+                        code={product.code}
+                      />
+                    </div>
+
+                    {/* Product Info */}
+                    <div className="p-4">
+                      <h3 className="text-lg font-montserrat font-semibold text-gray-900 mb-1">
+                        {product.code}
+                      </h3>
+                      <p className="text-gray-600 font-lato text-sm mb-3">
+                        {product.dimensions}
+                      </p>
+                      
+                      <Button 
+                        onClick={(e) => handleAddToQuote(product, e)}
+                        className="w-full btn-primary font-montserrat font-medium text-sm group-hover:scale-105 transition-transform duration-200"
+                        size="sm"
+                      >
+                        <Plus className="mr-1 h-3 w-3" />
+                        Adicionar ao orçamento
+                      </Button>
+                    </div>
+                  </div>
+                ))}
               </div>
 
-              {/* Product Info */}
-              <div className="p-4">
-                <h3 className="text-lg font-montserrat font-semibold text-gray-900 mb-1">
-                  {product.code}
-                </h3>
-                <p className="text-gray-600 font-lato text-sm mb-3">
-                  {product.dimensions}
-                </p>
-                
-                <Button 
-                  onClick={() => handleAddToQuote(product)}
-                  className="w-full btn-primary font-montserrat font-medium group-hover:scale-105 transition-transform duration-200"
-                  size="sm"
-                >
-                  <Plus className="mr-2 h-4 w-4" />
-                  Adicionar ao orçamento
-                </Button>
-              </div>
-            </div>
-          ))}
+              {/* Pagination */}
+              {totalPages > 1 && (
+                <div className="mt-12 flex justify-center items-center space-x-2">
+                  <Button
+                    variant="outline"
+                    size="sm"
+                    onClick={() => handlePageChange(currentPage - 1)}
+                    disabled={currentPage === 1}
+                    className="font-montserrat"
+                  >
+                    <ChevronLeft className="h-4 w-4" />
+                  </Button>
+
+                  {/* Page Numbers */}
+                  <div className="flex space-x-1">
+                    {Array.from({ length: Math.min(5, totalPages) }, (_, i) => {
+                      let pageNum
+                      if (totalPages <= 5) {
+                        pageNum = i + 1
+                      } else if (currentPage <= 3) {
+                        pageNum = i + 1
+                      } else if (currentPage >= totalPages - 2) {
+                        pageNum = totalPages - 4 + i
+                      } else {
+                        pageNum = currentPage - 2 + i
+                      }
+
+                      return (
+                        <Button
+                          key={pageNum}
+                          variant={currentPage === pageNum ? "default" : "outline"}
+                          size="sm"
+                          onClick={() => handlePageChange(pageNum)}
+                          className={`font-montserrat ${
+                            currentPage === pageNum ? "btn-primary" : ""
+                          }`}
+                        >
+                          {pageNum}
+                        </Button>
+                      )
+                    })}
+                  </div>
+
+                  <Button
+                    variant="outline"
+                    size="sm"
+                    onClick={() => handlePageChange(currentPage + 1)}
+                    disabled={currentPage === totalPages}
+                    className="font-montserrat"
+                  >
+                    <ChevronRight className="h-4 w-4" />
+                  </Button>
+                </div>
+              )}
+
+              {/* No Results */}
+              {filteredProducts.length === 0 && (
+                <div className="text-center py-12">
+                  <div className="text-gray-400 mb-4">
+                    <Search className="h-16 w-16 mx-auto" />
+                  </div>
+                  <h3 className="text-xl font-montserrat font-semibold text-gray-900 mb-2">
+                    Nenhum produto encontrado
+                  </h3>
+                  <p className="text-gray-600 font-lato">
+                    Tente ajustar os filtros ou termo de busca
+                  </p>
+                </div>
+              )}
+            </>
+          )}
         </div>
 
-        {/* No Results */}
-        {filteredProducts.length === 0 && (
-          <div className="text-center py-12">
-            <div className="text-gray-400 mb-4">
-              <Search className="h-16 w-16 mx-auto" />
-            </div>
-            <h3 className="text-xl font-montserrat font-semibold text-gray-900 mb-2">
-              Nenhum produto encontrado
-            </h3>
-            <p className="text-gray-600 font-lato">
-              Tente ajustar os filtros ou termo de busca.
-            </p>
-          </div>
-        )}
+        {/* Call to Action */}
+        <div className="mt-16 bg-primary text-white rounded-lg p-8 text-center">
+          <h2 className="text-2xl font-montserrat font-bold mb-4">
+            Não encontrou o que procura?
+          </h2>
+          <p className="text-lg mb-6 opacity-90">
+            Entre em contato conosco para produtos personalizados ou mais informações
+          </p>
+          <Button 
+            variant="secondary" 
+            size="lg"
+            className="bg-white text-primary hover:bg-gray-100 font-montserrat font-semibold"
+          >
+            Falar no WhatsApp
+          </Button>
+        </div>
       </div>
     </div>
   )
