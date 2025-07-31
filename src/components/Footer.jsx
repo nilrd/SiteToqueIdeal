@@ -5,7 +5,25 @@ const Footer = () => {
   return (
     <footer className="bg-teal-800 text-white">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+        <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
+          {/* Logo and Company Info */}
+          <div>
+            <div className="flex items-center space-x-3 mb-4">
+              <img 
+                src="/logo toque ideal (2).png" 
+                alt="Toque Ideal" 
+                className="h-12 w-auto"
+                onError={(e) => {
+                  e.target.src = '/retangularlogo.png'
+                }}
+              />
+            </div>
+            <p className="text-sm text-teal-300 font-lato leading-relaxed">
+              Há mais de 5 anos criando peças únicas em vidro que transformam ambientes 
+              e expressam personalidade com qualidade e sofisticação.
+            </p>
+          </div>
+
           {/* Contact Info */}
           <div>
             <h3 className="text-lg font-montserrat font-semibold mb-4">
@@ -23,8 +41,8 @@ const Footer = () => {
               <div className="flex items-start space-x-3">
                 <MapPin className="h-5 w-5 text-teal-300 mt-1" />
                 <div className="font-lato">
-                  <p>R. Iout Bernarda Pinto, 383</p>
-                  <p>São Paulo - SP</p>
+                  <p>R. José Bernardo Pinto, 333</p>
+                  <p>Vila Guilherme, São Paulo - SP</p>
                 </div>
               </div>
             </div>
@@ -65,7 +83,16 @@ const Footer = () => {
             <h3 className="text-lg font-montserrat font-semibold mb-4">
               Redes Sociais
             </h3>
-            <div className="flex space-x-4">
+            <div className="flex space-x-4 mb-4">
+              <a 
+                href="https://www.instagram.com/toque.ideal?igsh=cnhzZGNzeGIya2F5" 
+                target="_blank"
+                rel="noopener noreferrer"
+                className="w-10 h-10 bg-teal-700 rounded-full flex items-center justify-center hover:bg-teal-600 transition-colors"
+                aria-label="Instagram"
+              >
+                <Instagram className="h-5 w-5" />
+              </a>
               <a 
                 href="#" 
                 className="w-10 h-10 bg-teal-700 rounded-full flex items-center justify-center hover:bg-teal-600 transition-colors"
@@ -76,20 +103,20 @@ const Footer = () => {
               <a 
                 href="#" 
                 className="w-10 h-10 bg-teal-700 rounded-full flex items-center justify-center hover:bg-teal-600 transition-colors"
-                aria-label="Instagram"
-              >
-                <Instagram className="h-5 w-5" />
-              </a>
-              <a 
-                href="#" 
-                className="w-10 h-10 bg-teal-700 rounded-full flex items-center justify-center hover:bg-teal-600 transition-colors"
                 aria-label="LinkedIn"
               >
                 <Linkedin className="h-5 w-5" />
               </a>
             </div>
-            <p className="text-sm text-teal-300 mt-4 font-lato">
-              Siga-nos para acompanhar nossas novidades, tendências em decoração e participações em eventos.
+            <p className="text-sm text-teal-300 font-lato">
+              Siga-nos <a 
+                href="https://www.instagram.com/toque.ideal?igsh=cnhzZGNzeGIya2F5" 
+                target="_blank"
+                rel="noopener noreferrer"
+                className="hover:text-white underline"
+              >
+                @toque.ideal
+              </a> para acompanhar nossas novidades e participações em eventos.
             </p>
           </div>
         </div>
@@ -97,10 +124,15 @@ const Footer = () => {
         {/* Bottom Bar */}
         <div className="border-t border-teal-700 mt-8 pt-8 text-center">
           <div className="flex flex-col md:flex-row justify-between items-center">
-            <div className="flex items-center space-x-2 mb-4 md:mb-0">
-              <div className="w-8 h-8 bg-white rounded flex items-center justify-center">
-                <span className="text-teal-800 font-montserrat font-bold text-sm">TI</span>
-              </div>
+            <div className="flex items-center space-x-3 mb-4 md:mb-0">
+              <img 
+                src="/logo toque ideal (3).png" 
+                alt="Toque Ideal" 
+                className="h-8 w-auto"
+                onError={(e) => {
+                  e.target.src = '/retangularlogo.png'
+                }}
+              />
               <span className="font-montserrat font-semibold">TOQUE IDEAL</span>
             </div>
             

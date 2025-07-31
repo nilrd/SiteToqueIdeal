@@ -113,18 +113,18 @@ const Catalog = () => {
     }, [src])
 
     return (
-      <div className="aspect-square bg-gray-100 overflow-hidden rounded-t-lg">
+      <div className="image-container">
         <img 
           src={imageSrc}
           alt={alt}
-          className={`w-full h-full object-cover transition-all duration-300 hover:scale-105 ${
+          className={`transition-all duration-300 hover:scale-105 ${
             imageLoaded ? 'opacity-100' : 'opacity-50'
           }`}
           loading="lazy"
         />
         {!imageLoaded && (
           <div className="absolute inset-0 flex items-center justify-center bg-gray-100">
-            <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-primary"></div>
+            <div className="loading-spinner"></div>
           </div>
         )}
       </div>

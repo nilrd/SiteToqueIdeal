@@ -12,6 +12,7 @@ const Header = () => {
   const menuItems = [
     { name: 'Home', href: '/' },
     { name: 'Catálogo', href: '/catalogo' },
+    { name: 'Sobre Nós', href: '/sobre-nos' },
     { name: 'Feiras & Eventos', href: '/eventos' },
     { name: 'Blog', href: '/blog' },
     { name: 'Trabalhe Conosco', href: '/trabalhe-conosco' },
@@ -33,11 +34,11 @@ const Header = () => {
           <div className="flex-shrink-0">
             <Link to="/">
               <img 
-                src="/logotoqueideal/logotoqueideal/retangular logo.png" 
+                src="/logo toque ideal (2).png" 
                 alt="Toque Ideal" 
                 className="h-10 w-auto"
                 onError={(e) => {
-                  e.target.src = '/logotoqueideal/logotoqueideal/1.png'
+                  e.target.src = '/retangularlogo.png'
                 }}
               />
             </Link>
