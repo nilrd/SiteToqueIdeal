@@ -123,17 +123,8 @@ const Footer = () => {
 
         {/* Bottom Bar */}
         <div className="border-t border-teal-700 mt-8 pt-8 text-center">
-          <div className="flex flex-col md:flex-row justify-between items-center">
-            <div className="flex items-center space-x-3 mb-4 md:mb-0">
-              <img 
-                src="/logo toque ideal (3).png" 
-                alt="Toque Ideal" 
-                className="h-8 w-auto"
-                onError={(e) => {
-                  e.target.src = '/retangularlogo.png'
-                }}
-              />
-              <span className="font-montserrat font-semibold">TOQUE IDEAL</span>
+          <div className="flex flex-col md:flex-row justify-between items-center">            <div className="flex items-center space-x-3 mb-4 md:mb-0">
+              <span className="font-montserrat font-semibold text-xl">TOQUE IDEAL</span>
             </div>
             
             <div className="text-sm text-teal-300 font-lato">

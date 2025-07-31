@@ -74,13 +74,15 @@ const ProductHighlights = () => {
               className="bg-white rounded-lg shadow-md overflow-hidden hover:shadow-xl transition-shadow duration-300 group"
             >
               {/* Product Image */}
-              <div className="product-thumbnail">
+              <div className="relative h-48 bg-gray-100 overflow-hidden">
                 <img 
                   src={product.image} 
                   alt={product.code}
-                  className="hover:scale-105 transition-transform duration-300"
+                  className="w-full h-full object-contain hover:scale-105 transition-transform duration-300"
+                  loading="lazy"
+                  decoding="async"
                   onError={(e) => {
-                    e.target.src = '/fotosinstagram/post_insta (2).jpg'
+                    e.target.src = '/fotosinstagram/fotosinstagram/post_insta (2).jpg'
                   }}
                 />
               </div>

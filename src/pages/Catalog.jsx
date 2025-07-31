@@ -94,37 +94,59 @@ const Catalog = () => {
     })
   }
 
-  // Componente de imagem com lazy loading
+  // Componente de imagem com lazy loading otimizado
   const LazyImage = ({ src, alt, code }) => {
-    const [imageSrc, setImageSrc] = useState('/fotosinstagram/fotosinstagram/post_insta (2).jpg')
+    const [imageSrc, setImageSrc] = useState(null)
     const [imageLoaded, setImageLoaded] = useState(false)
+    const [imageError, setImageError] = useState(false)
 
     useEffect(() => {
       const img = new Image()
+      
       img.onload = () => {
         setImageSrc(src)
         setImageLoaded(true)
+        setImageError(false)
       }
+      
       img.onerror = () => {
+        // Fallback para uma imagem padrão
         setImageSrc('/fotosinstagram/fotosinstagram/post_insta (2).jpg')
         setImageLoaded(true)
+        setImageError(true)
       }
-      img.src = src
+      
+      // Preload apenas quando necessário
+      const timer = setTimeout(() => {
+        img.src = src
+      }, 100)
+
+      return () => clearTimeout(timer)
     }, [src])
 
     return (
-      <div className="image-container">
-        <img 
-          src={imageSrc}
-          alt={alt}
-          className={`transition-all duration-300 hover:scale-105 ${
-            imageLoaded ? 'opacity-100' : 'opacity-50'
-          }`}
-          loading="lazy"
-        />
-        {!imageLoaded && (
+      <div className="relative w-full h-48 bg-gray-100 overflow-hidden">
+        {imageSrc ? (
+          <img 
+            src={imageSrc}
+            alt={alt}
+            className={`w-full h-full object-contain transition-all duration-300 hover:scale-105 ${
+              imageLoaded ? 'opacity-100' : 'opacity-50'
+            }`}
+            loading="lazy"
+            decoding="async"
+          />
+        ) : (
+          <div className="w-full h-full flex items-center justify-center bg-gray-100">
+            <div className="animate-pulse bg-gray-200 w-full h-full flex items-center justify-center">
+              <span className="text-gray-400 text-sm font-lato">{code}</span>
+            </div>
+          </div>
+        )}
+        
+        {!imageLoaded && imageSrc && (
           <div className="absolute inset-0 flex items-center justify-center bg-gray-100">
-            <div className="loading-spinner"></div>
+            <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-teal-600"></div>
           </div>
         )}
       </div>
@@ -202,7 +224,7 @@ const Catalog = () => {
                     className="bg-white rounded-lg shadow-md overflow-hidden hover:shadow-xl transition-all duration-300 group"
                   >
                     {/* Product Image */}
-                    <div className="relative">
+                    <div className="relative h-48 bg-gray-100">
                       <LazyImage 
                         src={product.image} 
                         alt={product.code}

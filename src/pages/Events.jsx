@@ -3,6 +3,7 @@ import { Calendar, MapPin, Clock, Users, Car, Hotel, ExternalLink, X } from 'luc
 
 const Events = () => {
   const [isMapModalOpen, setIsMapModalOpen] = useState(false)
+  const [isHotelsModalOpen, setIsHotelsModalOpen] = useState(false)
 
   const nextEvent = {
     name: "ABCasa Fair 2025",
@@ -17,28 +18,24 @@ const Events = () => {
       name: "Hotel Ibis São Paulo Expo",
       distance: "2.5 km",
       rating: 4.2,
-      price: "R$ 180/noite",
       amenities: ["Wi-Fi", "Café da manhã", "Estacionamento"]
     },
     {
       name: "Comfort Hotel Expo Center Norte",
       distance: "3.1 km", 
       rating: 4.0,
-      price: "R$ 165/noite",
       amenities: ["Wi-Fi", "Academia", "Business Center"]
     },
     {
       name: "Hotel Deville Prime São Paulo",
       distance: "4.2 km",
       rating: 4.5,
-      price: "R$ 220/noite",
       amenities: ["Wi-Fi", "Piscina", "Spa", "Restaurante"]
     },
     {
       name: "Mercure São Paulo Vila Olimpia",
       distance: "5.8 km",
       rating: 4.3,
-      price: "R$ 195/noite",
       amenities: ["Wi-Fi", "Academia", "Bar", "Room Service"]
     }
   ]
@@ -98,6 +95,12 @@ const Events = () => {
                     className="bg-white text-teal-600 px-8 py-3 rounded-full font-montserrat font-semibold hover:bg-gray-100 transition-colors duration-300 mr-4"
                   >
                     Ver no Mapa
+                  </button>
+                  <button 
+                    onClick={() => setIsHotelsModalOpen(true)}
+                    className="bg-white text-teal-600 px-8 py-3 rounded-full font-montserrat font-semibold hover:bg-gray-100 transition-colors duration-300 mr-4"
+                  >
+                    Hotéis Próximos
                   </button>
                   <a 
                     href="https://abcasafair.com.br/transporte-gratuito/"
@@ -192,14 +195,10 @@ const Events = () => {
                     </div>
                   </div>
                   
-                  <div className="flex items-center text-gray-600 mb-3">
-                    <MapPin className="h-4 w-4 mr-2" />
-                    <span className="text-sm font-lato">{hotel.distance} do evento</span>
-                  </div>
-                  
-                  <div className="text-2xl font-montserrat font-bold text-teal-600 mb-4">
-                    {hotel.price}
-                  </div>
+                    <div className="flex items-center text-gray-600 mb-3">
+                      <MapPin className="h-4 w-4 mr-2" />
+                      <span className="text-sm font-lato">{hotel.distance} do evento</span>
+                    </div>
                   
                   <div className="space-y-1">
                     {hotel.amenities.map((amenity, idx) => (
@@ -318,6 +317,60 @@ const Events = () => {
                     className="w-full h-60 object-contain rounded-lg border"
                   />
                 </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      )}
+
+      {/* Modal de Hotéis */}
+      {isHotelsModalOpen && (
+        <div className="fixed inset-0 bg-black bg-opacity-75 z-50 flex items-center justify-center p-4">
+          <div className="bg-white rounded-lg max-w-4xl w-full max-h-[90vh] overflow-hidden">
+            <div className="flex items-center justify-between p-6 border-b">
+              <h3 className="text-2xl font-montserrat font-bold text-gray-900">
+                Hotéis Recomendados
+              </h3>
+              <button 
+                onClick={() => setIsHotelsModalOpen(false)}
+                className="text-gray-500 hover:text-gray-700 transition-colors"
+              >
+                <X className="h-6 w-6" />
+              </button>
+            </div>
+            
+            <div className="p-6 overflow-y-auto">
+              <p className="text-center text-gray-600 font-lato mb-8 max-w-2xl mx-auto">
+                Selecionamos os melhores hotéis próximos ao evento para sua comodidade.
+              </p>
+              <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+                {nearbyHotels.map((hotel, index) => (
+                  <div key={index} className="bg-gray-50 rounded-lg shadow-lg overflow-hidden">
+                    <div className="p-6">
+                      <div className="flex items-start justify-between mb-3">
+                        <h3 className="text-lg font-montserrat font-semibold text-gray-900 leading-tight">
+                          {hotel.name}
+                        </h3>
+                        <div className="flex items-center bg-yellow-100 px-2 py-1 rounded">
+                          <span className="text-yellow-600 text-sm font-semibold">★ {hotel.rating}</span>
+                        </div>
+                      </div>
+                      
+                      <div className="flex items-center text-gray-600 mb-3">
+                        <MapPin className="h-4 w-4 mr-2" />
+                        <span className="text-sm font-lato">{hotel.distance} do evento</span>
+                      </div>
+                      
+                      <div className="space-y-1">
+                        {hotel.amenities.map((amenity, idx) => (
+                          <span key={idx} className="inline-block bg-gray-100 text-gray-700 text-xs px-2 py-1 rounded mr-1 mb-1">
+                            {amenity}
+                          </span>
+                        ))}
+                      </div>
+                    </div>
+                  </div>
+                ))}
               </div>
             </div>
           </div>

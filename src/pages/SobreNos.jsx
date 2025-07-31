@@ -57,8 +57,6 @@ const SobreNos = () => {
             <h2 className="text-3xl font-montserrat font-bold text-gray-900 mb-8 text-center">
               Nosso Fundador
             </h2>
-            <div className="grid md:grid-cols-2 gap-8 items-center">
-              <div className="order-2 md:order-1">
             <div className="grid md:grid-cols-2 gap-12 items-center">
               <div>
                 <h3 className="text-2xl font-montserrat font-bold text-gray-900 mb-4">
@@ -86,13 +84,37 @@ const SobreNos = () => {
                   className="w-full h-80 object-cover rounded-lg shadow-md"
                 />
               </div>
-            </div>  </div>
-              <div className="order-1 md:order-2 flex justify-center">
+            </div>
+          </div>
+        </section>
+
+        {/* Luana Andrade */}
+        <section className="mb-16">
+          <div className="bg-white rounded-lg shadow-lg p-8 md:p-12">
+            <h2 className="text-3xl font-montserrat font-bold text-gray-900 mb-8 text-center">
+              Nossa Co-Fundadora
+            </h2>
+            <div className="grid md:grid-cols-2 gap-12 items-center">
+              <div className="relative">
                 <img 
-                  src="/image.png" 
-                  alt="Devid Bomfim - Fundador da Toque Ideal"
-                  className="w-80 h-80 object-cover rounded-lg shadow-md"
+                  src="/devid-bomfim.jpg" 
+                  alt="Luana Andrade - Co-Fundadora da Toque Ideal"
+                  className="w-full h-80 object-cover rounded-lg shadow-md"
                 />
+              </div>
+              <div>
+                <h3 className="text-2xl font-montserrat font-bold text-gray-900 mb-4">
+                  Luana Andrade
+                </h3>
+                <p className="text-gray-600 font-lato mb-4 leading-relaxed">
+                  Co-fundadora da Toque Ideal, Luana Andrade é a força criativa por trás de muitas de nossas coleções.
+                </p>
+                <p className="text-gray-600 font-lato mb-4 leading-relaxed">
+                  Com um olhar apurado para as tendências e um talento inato para o design, Luana garante que cada peça da Toque Ideal seja uma obra de arte.
+                </p>
+                <p className="text-gray-600 font-lato leading-relaxed">
+                  Sua dedicação à estética e à funcionalidade é o que nos permite oferecer produtos que realmente transformam ambientes.
+                </p>
               </div>
             </div>
           </div>

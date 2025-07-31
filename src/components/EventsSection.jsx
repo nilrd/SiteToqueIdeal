@@ -1,5 +1,7 @@
 import { Button } from '@/components/ui/button'
 import { Calendar, MapPin, ChevronRight } from 'lucide-react'
+import NewsletterForm from './NewsletterForm'
+
 
 const EventsSection = () => {
   return (
@@ -70,44 +72,17 @@ const EventsSection = () => {
           </div>
         </div>
 
-        {/* Newsletter Section */}
-        <div className="mt-16 bg-gray-900 rounded-lg p-8 text-center">
-          <h3 className="text-2xl md:text-3xl font-montserrat font-bold text-white mb-4">
-            Receba novidades
-            <br />
-            e lançamentos
-            <br />
-            da Toque Ideal
-          </h3>
-          
-          <div className="max-w-md mx-auto mt-6">
-            <div className="flex flex-col sm:flex-row gap-4">
-              <input
-                type="email"
-                placeholder="E-mail"
-                className="flex-1 px-4 py-3 rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-teal-500 font-lato"
-              />
-              <Button className="btn-primary font-montserrat font-semibold px-8">
-                Cadastrar
-              </Button>
-            </div>
-          </div>
-          
-          <div className="mt-8 text-center">
-            <p className="text-gray-400 font-lato text-sm mb-4">
-              Mensagem
-            </p>
-            <textarea
-              placeholder="Deixe sua mensagem..."
-              rows="3"
-              className="w-full max-w-md px-4 py-3 rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-teal-500 font-lato resize-none"
-            />
-          </div>
-        </div>
+
       </div>
     </section>
   )
 }
 
 export default EventsSection
+
+
+
+        {/* Newsletter Section */}
+        <NewsletterForm />
+
 
