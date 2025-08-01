@@ -34,9 +34,9 @@ const Header = () => {
           <div className="flex-shrink-0">
             <Link to="/">
               <img 
-                src="/logo-toque-ideal.png" 
+                src="/logo-toque-ideal-novo.png" 
                 alt="Toque Ideal" 
-                className="h-12 w-auto"
+                className="h-8 w-auto"
                 onError={(e) => {
                   e.target.src = '/retangularlogo.png'
                 }}

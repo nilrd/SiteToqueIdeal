@@ -275,44 +275,6 @@ const InteractiveMapModal = ({ isOpen, onClose }) => {
                   maxHeight: '100%'
                 }}
               />
-              
-              {/* Marcador do Estande - posição corrigida para Rua 16 (canto superior direito) */}
-              {selectedMap === 'completo' && (
-                <div className="absolute top-[15%] right-[8%] transform translate-x-1/2 -translate-y-1/2">
-                  <div className="relative">
-                    {/* Pulso animado maior */}
-                    <div className="absolute inset-0 bg-red-500 rounded-full animate-ping opacity-75 w-8 h-8 -m-1"></div>
-                    <div className="absolute inset-0 bg-red-500 rounded-full animate-pulse opacity-50 w-8 h-8 -m-1"></div>
-                    
-                    {/* Marcador principal maior */}
-                    <div className="relative bg-red-600 text-white p-2 rounded-full shadow-lg border-4 border-white w-6 h-6 flex items-center justify-center z-10">
-                      <MapPin className="h-4 w-4" />
-                    </div>
-                    
-                    {/* Label do estande */}
-                    <div className="absolute top-full left-1/2 transform -translate-x-1/2 mt-3 bg-red-600 text-white px-4 py-2 rounded-lg text-sm font-montserrat font-bold whitespace-nowrap shadow-xl border-2 border-white">
-                      🎯 Estande 1643 - Rua 16
-                      <div className="absolute bottom-full left-1/2 transform -translate-x-1/2 w-0 h-0 border-l-4 border-r-4 border-b-4 border-transparent border-b-red-600"></div>
-                    </div>
-                  </div>
-                </div>
-              )}
-
-              {/* Marcador para o mapa detalhado */}
-              {selectedMap === 'detalhado' && (
-                <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2">
-                  <div className="relative">
-                    <div className="absolute inset-0 bg-red-500 rounded-full animate-ping opacity-75 w-8 h-8 -m-1"></div>
-                    <div className="relative bg-red-600 text-white p-2 rounded-full shadow-lg border-4 border-white w-6 h-6 flex items-center justify-center z-10">
-                      <MapPin className="h-4 w-4" />
-                    </div>
-                    <div className="absolute top-full left-1/2 transform -translate-x-1/2 mt-3 bg-red-600 text-white px-4 py-2 rounded-lg text-sm font-montserrat font-bold whitespace-nowrap shadow-xl border-2 border-white">
-                      🎯 Você está aqui!
-                      <div className="absolute bottom-full left-1/2 transform -translate-x-1/2 w-0 h-0 border-l-4 border-r-4 border-b-4 border-transparent border-b-red-600"></div>
-                    </div>
-                  </div>
-                </div>
-              )}
             </div>
 
             {/* Instruções de uso */}
