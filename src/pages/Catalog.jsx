@@ -94,7 +94,7 @@ const Catalog = () => {
     })
   }
 
-   // Componente otimizado para carregamento lazy de imagens
+  // Componente otimizado para carregamento lazy de imagens com WebP
   const LazyImage = ({ src, alt, code }) => {
     const [imageSrc, setImageSrc] = useState(null)
     const [imageLoaded, setImageLoaded] = useState(false)
@@ -113,7 +113,7 @@ const Catalog = () => {
         },
         { 
           threshold: 0.1,
-          rootMargin: '50px' // Carrega 50px antes de entrar na viewport
+          rootMargin: '100px' // Carrega 100px antes de entrar na viewport
         }
       )
 
@@ -124,26 +124,57 @@ const Catalog = () => {
       return () => observer.disconnect()
     }, [])
 
+    // Função para tentar carregar WebP primeiro, depois fallback
+    const loadImageWithFallback = (originalSrc) => {
+      return new Promise((resolve, reject) => {
+        // Tentar WebP primeiro (se suportado)
+        const webpSrc = originalSrc.replace(/\.(jpg|jpeg|png)$/i, '.webp')
+        const webpImg = new Image()
+        
+        webpImg.onload = () => resolve(webpSrc)
+        webpImg.onerror = () => {
+          // Fallback para imagem original
+          const originalImg = new Image()
+          originalImg.onload = () => resolve(originalSrc)
+          originalImg.onerror = () => reject()
+          originalImg.src = originalSrc
+        }
+        
+        // Verificar suporte a WebP
+        const canvas = document.createElement('canvas')
+        canvas.width = 1
+        canvas.height = 1
+        const ctx = canvas.getContext('2d')
+        const webpSupported = canvas.toDataURL('image/webp').indexOf('data:image/webp') === 0
+        
+        if (webpSupported) {
+          webpImg.src = webpSrc
+        } else {
+          // Se não suporta WebP, usar imagem original
+          const originalImg = new Image()
+          originalImg.onload = () => resolve(originalSrc)
+          originalImg.onerror = () => reject()
+          originalImg.src = originalSrc
+        }
+      })
+    }
+
     // Carrega a imagem apenas quando está na viewport
     useEffect(() => {
       if (!isInView) return
 
-      const img = new Image()
-      
-      img.onload = () => {
-        setImageSrc(src)
-        setImageLoaded(true)
-        setImageError(false)
-      }
-      
-      img.onerror = () => {
-        // Fallback para uma imagem padrão
-        setImageSrc('/fotosinstagram/fotosinstagram/post_insta (2).jpg')
-        setImageLoaded(true)
-        setImageError(true)
-      }
-      
-      img.src = src
+      loadImageWithFallback(src)
+        .then((optimizedSrc) => {
+          setImageSrc(optimizedSrc)
+          setImageLoaded(true)
+          setImageError(false)
+        })
+        .catch(() => {
+          // Fallback final para uma imagem padrão
+          setImageSrc('/fotosinstagram/fotosinstagram/post_insta (2).jpg')
+          setImageLoaded(true)
+          setImageError(true)
+        })
     }, [src, isInView])
 
     return (
@@ -159,7 +190,8 @@ const Catalog = () => {
             decoding="async"
             style={{ 
               imageRendering: 'auto',
-              transform: 'translateZ(0)' // Hardware acceleration
+              transform: 'translateZ(0)', // Hardware acceleration
+              willChange: 'transform' // Otimização de performance
             }}
           />
         ) : (
@@ -173,6 +205,13 @@ const Catalog = () => {
         {isInView && !imageLoaded && imageSrc && (
           <div className="absolute inset-0 flex items-center justify-center bg-gray-100">
             <div className="animate-spin rounded-full h-6 w-6 border-b-2 border-teal-600"></div>
+          </div>
+        )}
+        
+        {/* Indicador de erro de carregamento */}
+        {imageError && (
+          <div className="absolute top-2 right-2 bg-yellow-100 text-yellow-800 text-xs px-2 py-1 rounded">
+            Fallback
           </div>
         )}
       </div>

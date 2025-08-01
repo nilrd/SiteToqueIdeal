@@ -1,5 +1,6 @@
 import { Button } from '@/components/ui/button'
 import { Calendar, MapPin, ChevronRight } from 'lucide-react'
+import { Link } from 'react-router-dom'
 import NewsletterForm from './NewsletterForm'
 
 
@@ -25,13 +26,15 @@ const EventsSection = () => {
               Participe dos principais eventos do setor de decoração 
               e conheça de perto nossas últimas criações.
             </p>
-            <Button 
-              variant="secondary"
-              className="bg-white text-teal-600 hover:bg-gray-100 font-montserrat font-semibold"
-            >
-              Ver Eventos
-              <ChevronRight className="ml-2 h-4 w-4" />
-            </Button>
+            <Link to="/eventos">
+              <Button 
+                variant="secondary"
+                className="bg-white text-teal-600 hover:bg-gray-100 font-montserrat font-semibold"
+              >
+                Ver Eventos
+                <ChevronRight className="ml-2 h-4 w-4" />
+              </Button>
+            </Link>
           </div>
 
           {/* Right Side - Event Info */}

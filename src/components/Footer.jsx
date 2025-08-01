@@ -8,7 +8,12 @@ const Footer = () => {
         <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
           {/* Logo and Company Info */}
           <div>
-            <div className="mb-4">
+            <div className="flex items-center mb-4">
+              <img 
+                src="/logo-t.png" 
+                alt="Toque Ideal Logo" 
+                className="h-8 w-8 mr-3"
+              />
               <h3 className="text-xl font-montserrat font-bold text-white">
                 TOQUE IDEAL
               </h3>
@@ -118,10 +123,7 @@ const Footer = () => {
 
         {/* Bottom Bar */}
         <div className="border-t border-teal-700 mt-8 pt-8 text-center">
-          <div className="flex flex-col md:flex-row justify-between items-center">            <div className="flex items-center space-x-3 mb-4 md:mb-0">
-              <span className="font-montserrat font-semibold text-xl">TOQUE IDEAL</span>
-            </div>
-            
+          <div className="flex flex-col md:flex-row justify-center items-center">
             <div className="text-sm text-teal-300 font-lato">
               <p>&copy; 2024 Toque Ideal. Todos os direitos reservados.</p>
               <p className="mt-1">

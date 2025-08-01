@@ -122,11 +122,12 @@ const Events = () => {
                   
                   {/* Event Image */}
                   <div className="relative">
-                    <div className="rounded-2xl overflow-hidden shadow-2xl">
+                    <div className="rounded-2xl overflow-hidden shadow-2xl bg-white p-4">
                       <img 
                         src="/convite-feira.png" 
                         alt="ABCasa Fair 2025 - 13 a 16 de Agosto"
-                        className="w-full h-96 object-cover rounded-2xl"
+                        className="w-full h-auto object-contain rounded-xl"
+                        style={{ minHeight: '300px', maxHeight: '500px' }}
                         onError={(e) => {
                           e.target.src = '/placeholder-event.jpg'
                         }}
