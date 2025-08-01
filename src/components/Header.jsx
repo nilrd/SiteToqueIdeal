@@ -32,15 +32,15 @@ const Header = () => {
         <div className="flex justify-between items-center h-16">
           {/* Logo */}
           <div className="flex-shrink-0">
-            <Link to="/">
+            <Link to="/" className="flex items-center space-x-3 group">
               <img 
-                src="/logo toque ideal (2).png" 
-                alt="Toque Ideal" 
-                className="h-10 w-auto"
-                onError={(e) => {
-                  e.target.src = '/retangularlogo.png'
-                }}
+                src="/logo-t.png" 
+                alt="Toque Ideal Logo" 
+                className="h-12 w-12 transition-transform duration-300 group-hover:scale-110"
               />
+              <span className="text-2xl font-montserrat font-bold text-gray-900 tracking-wide group-hover:text-teal-600 transition-colors duration-300">
+                TOQUE IDEAL
+              </span>
             </Link>
           </div>
 
