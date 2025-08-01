@@ -1,7 +1,7 @@
 import { useState } from 'react'
 import { Calendar, MapPin, Clock, Users, Car, Hotel, ExternalLink, X, Navigation, Info } from 'lucide-react'
 import HotelsModal from '../components/HotelsModal'
-import MapModal from '../components/MapModal'
+import InteractiveMapModal from '../components/InteractiveMapModal'
 
 const Events = () => {
   const [isMapModalOpen, setIsMapModalOpen] = useState(false)
@@ -201,7 +201,7 @@ const Events = () => {
       </div>
 
       {/* Modals */}
-      <MapModal 
+      <InteractiveMapModal 
         isOpen={isMapModalOpen} 
         onClose={() => setIsMapModalOpen(false)} 
       />
