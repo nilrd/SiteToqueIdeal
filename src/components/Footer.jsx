@@ -10,7 +10,7 @@ const Footer = () => {
           <div>
             <div className="flex items-center space-x-3 mb-4">
               <img 
-                src="/logo toque ideal (2).png" 
+                src="/logo toque ideal (1).png" 
                 alt="Toque Ideal" 
                 className="h-12 w-auto"
                 onError={(e) => {

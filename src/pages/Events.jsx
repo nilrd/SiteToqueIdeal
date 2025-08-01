@@ -1,5 +1,6 @@
 import { useState } from 'react'
 import { Calendar, MapPin, Clock, Users, Car, Hotel, ExternalLink, X } from 'lucide-react'
+import HotelsModal from '../components/HotelsModal'
 
 const Events = () => {
   const [isMapModalOpen, setIsMapModalOpen] = useState(false)
@@ -12,33 +13,6 @@ const Events = () => {
     stand: "Estande 1643 (10x4m = 40,00m²)",
     description: "A maior feira de decoração da América Latina. Venha conhecer nossas novidades!"
   }
-
-  const nearbyHotels = [
-    {
-      name: "Hotel Ibis São Paulo Expo",
-      distance: "2.5 km",
-      rating: 4.2,
-      amenities: ["Wi-Fi", "Café da manhã", "Estacionamento"]
-    },
-    {
-      name: "Comfort Hotel Expo Center Norte",
-      distance: "3.1 km", 
-      rating: 4.0,
-      amenities: ["Wi-Fi", "Academia", "Business Center"]
-    },
-    {
-      name: "Hotel Deville Prime São Paulo",
-      distance: "4.2 km",
-      rating: 4.5,
-      amenities: ["Wi-Fi", "Piscina", "Spa", "Restaurante"]
-    },
-    {
-      name: "Mercure São Paulo Vila Olimpia",
-      distance: "5.8 km",
-      rating: 4.3,
-      amenities: ["Wi-Fi", "Academia", "Bar", "Room Service"]
-    }
-  ]
 
   return (
     <div className="min-h-screen bg-gray-50 pt-20">
@@ -173,46 +147,6 @@ const Events = () => {
           </div>
         </section>
 
-        {/* Hotéis Próximos */}
-        <section className="mb-16">
-          <h2 className="text-3xl font-montserrat font-bold text-gray-900 mb-8 text-center">
-            Hotéis Recomendados
-          </h2>
-          <p className="text-center text-gray-600 font-lato mb-8 max-w-2xl mx-auto">
-            Selecionamos os melhores hotéis próximos ao evento para sua comodidade.
-          </p>
-          
-          <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
-            {nearbyHotels.map((hotel, index) => (
-              <div key={index} className="bg-white rounded-lg shadow-lg overflow-hidden hover:shadow-xl transition-shadow duration-300">
-                <div className="p-6">
-                  <div className="flex items-start justify-between mb-3">
-                    <h3 className="text-lg font-montserrat font-semibold text-gray-900 leading-tight">
-                      {hotel.name}
-                    </h3>
-                    <div className="flex items-center bg-yellow-100 px-2 py-1 rounded">
-                      <span className="text-yellow-600 text-sm font-semibold">★ {hotel.rating}</span>
-                    </div>
-                  </div>
-                  
-                    <div className="flex items-center text-gray-600 mb-3">
-                      <MapPin className="h-4 w-4 mr-2" />
-                      <span className="text-sm font-lato">{hotel.distance} do evento</span>
-                    </div>
-                  
-                  <div className="space-y-1">
-                    {hotel.amenities.map((amenity, idx) => (
-                      <span key={idx} className="inline-block bg-gray-100 text-gray-700 text-xs px-2 py-1 rounded mr-1 mb-1">
-                        {amenity}
-                      </span>
-                    ))}
-                  </div>
-                </div>
-              </div>
-            ))}
-          </div>
-        </section>
-
         {/* Call to Action */}
         <section className="text-center">
           <div className="bg-white rounded-lg shadow-lg p-8 md:p-12">
@@ -324,58 +258,10 @@ const Events = () => {
       )}
 
       {/* Modal de Hotéis */}
-      {isHotelsModalOpen && (
-        <div className="fixed inset-0 bg-black bg-opacity-75 z-50 flex items-center justify-center p-4">
-          <div className="bg-white rounded-lg max-w-4xl w-full max-h-[90vh] overflow-hidden">
-            <div className="flex items-center justify-between p-6 border-b">
-              <h3 className="text-2xl font-montserrat font-bold text-gray-900">
-                Hotéis Recomendados
-              </h3>
-              <button 
-                onClick={() => setIsHotelsModalOpen(false)}
-                className="text-gray-500 hover:text-gray-700 transition-colors"
-              >
-                <X className="h-6 w-6" />
-              </button>
-            </div>
-            
-            <div className="p-6 overflow-y-auto">
-              <p className="text-center text-gray-600 font-lato mb-8 max-w-2xl mx-auto">
-                Selecionamos os melhores hotéis próximos ao evento para sua comodidade.
-              </p>
-              <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
-                {nearbyHotels.map((hotel, index) => (
-                  <div key={index} className="bg-gray-50 rounded-lg shadow-lg overflow-hidden">
-                    <div className="p-6">
-                      <div className="flex items-start justify-between mb-3">
-                        <h3 className="text-lg font-montserrat font-semibold text-gray-900 leading-tight">
-                          {hotel.name}
-                        </h3>
-                        <div className="flex items-center bg-yellow-100 px-2 py-1 rounded">
-                          <span className="text-yellow-600 text-sm font-semibold">★ {hotel.rating}</span>
-                        </div>
-                      </div>
-                      
-                      <div className="flex items-center text-gray-600 mb-3">
-                        <MapPin className="h-4 w-4 mr-2" />
-                        <span className="text-sm font-lato">{hotel.distance} do evento</span>
-                      </div>
-                      
-                      <div className="space-y-1">
-                        {hotel.amenities.map((amenity, idx) => (
-                          <span key={idx} className="inline-block bg-gray-100 text-gray-700 text-xs px-2 py-1 rounded mr-1 mb-1">
-                            {amenity}
-                          </span>
-                        ))}
-                      </div>
-                    </div>
-                  </div>
-                ))}
-              </div>
-            </div>
-          </div>
-        </div>
-      )}
+      <HotelsModal 
+        isOpen={isHotelsModalOpen} 
+        onClose={() => setIsHotelsModalOpen(false)} 
+      />
     </div>
   )
 }
