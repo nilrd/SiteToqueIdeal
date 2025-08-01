@@ -112,10 +112,10 @@ const Events = () => {
                         href="https://abcasafair.com.br/transporte-gratuito/"
                         target="_blank"
                         rel="noopener noreferrer"
-                        className="flex flex-col items-center justify-center bg-transparent border-2 border-white text-white px-8 py-4 rounded-xl font-montserrat hover:bg-white hover:text-teal-700 transition-all duration-300 transform hover:scale-105"
+                        className="flex flex-col items-center justify-center bg-white text-teal-700 px-8 py-4 rounded-xl font-montserrat hover:bg-gray-100 transition-all duration-300 transform hover:scale-105 shadow-lg"
                       >
                         <span className="font-semibold text-lg">Transporte Gratuito</span>
-                        <span className="text-sm opacity-80 mt-1">Consulte horários e pontos</span>
+                        <span className="text-sm text-gray-600 mt-1">Consulte horários e pontos</span>
                       </a>
                     </div>
                   </div>

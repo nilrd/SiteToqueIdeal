@@ -36,7 +36,7 @@ const Header = () => {
               <img 
                 src="/logo-toque-ideal-novo.png" 
                 alt="Toque Ideal" 
-                className="h-8 w-auto"
+                className="h-12 w-auto"
                 onError={(e) => {
                   e.target.src = '/retangularlogo.png'
                 }}
