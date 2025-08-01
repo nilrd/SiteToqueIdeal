@@ -8,15 +8,10 @@ const Footer = () => {
         <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
           {/* Logo and Company Info */}
           <div>
-            <div className="flex items-center space-x-3 mb-4">
-              <img 
-                src="/logo toque ideal (1).png" 
-                alt="Toque Ideal" 
-                className="h-12 w-auto"
-                onError={(e) => {
-                  e.target.src = '/retangularlogo.png'
-                }}
-              />
+            <div className="mb-4">
+              <h3 className="text-xl font-montserrat font-bold text-white">
+                TOQUE IDEAL
+              </h3>
             </div>
             <p className="text-sm text-teal-300 font-lato leading-relaxed">
               Há mais de 5 anos criando peças únicas em vidro que transformam ambientes 
