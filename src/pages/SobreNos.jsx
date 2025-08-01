@@ -13,8 +13,7 @@ const SobreNos = () => {
             Sobre a Toque Ideal
           </h1>
           <p className="text-xl text-gray-600 font-lato leading-relaxed max-w-3xl mx-auto">
-            Há mais de 5 anos criando peças únicas que vão além da decoração: 
-            são expressões de estilo, personalidade e sofisticação.
+            Há mais de 5 anos no mercado, a Toque Ideal é um projeto fruto da parceria entre Devid Bomfim e Luana Andrade, que uniram suas experiências para oferecer ao setor de decoração uma linha completa de produtos da mais alta qualidade.
           </p>
         </div>
 
@@ -27,17 +26,13 @@ const SobreNos = () => {
             <div className="grid md:grid-cols-2 gap-8 items-center">
               <div>
                 <p className="text-lg text-gray-600 font-lato leading-relaxed mb-6">
-                  A Toque Ideal nasceu da paixão por criar peças únicas em vidro que transformam 
-                  ambientes e expressam personalidade. Com mais de 5 anos de experiência no mercado, 
-                  nos especializamos em decoração em vidro de alta qualidade.
+                  É com grande satisfação que apresentamos nossas coleções, desenvolvidas com um padrão único de modernidade, qualidade e design. Buscamos constantemente evoluir na arte de moldar vidros, criando peças que vão muito além da decoração: são expressões de estilo, personalidade e sofisticação.
                 </p>
                 <p className="text-lg text-gray-600 font-lato leading-relaxed mb-6">
-                  Cada peça é cuidadosamente desenvolvida para atender às necessidades específicas 
-                  de nossos clientes, combinando funcionalidade, beleza e durabilidade.
+                  Nossa trajetória é marcada pela atenção aos detalhes e pelo compromisso com a excelência. Cada produto é tratado como único e exclusivo, para atender às expectativas dos clientes mais exigentes e transformar ambientes com beleza, elegância e funcionalidade.
                 </p>
                 <p className="text-lg text-gray-600 font-lato leading-relaxed">
-                  Participamos das principais feiras de decoração do país, sempre apresentando 
-                  nossas mais recentes criações e inovações.
+                  A Toque Ideal está presente nas principais feiras e eventos do setor, como a ABCasa Fair, levando ao público e parceiros as últimas tendências em design e decoração. Nosso propósito é claro: inovar sempre, criando produtos que encantam e transformam.
                 </p>
               </div>
               <div className="relative">
@@ -95,13 +90,6 @@ const SobreNos = () => {
               Nossa Co-Fundadora
             </h2>
             <div className="grid md:grid-cols-2 gap-12 items-center">
-              <div className="relative">
-                <img 
-                  src="/devid-bomfim.jpg" 
-                  alt="Luana Andrade - Co-Fundadora da Toque Ideal"
-                  className="w-full h-80 object-cover rounded-lg shadow-md"
-                />
-              </div>
               <div>
                 <h3 className="text-2xl font-montserrat font-bold text-gray-900 mb-4">
                   Luana Andrade
@@ -115,6 +103,13 @@ const SobreNos = () => {
                 <p className="text-gray-600 font-lato leading-relaxed">
                   Sua dedicação à estética e à funcionalidade é o que nos permite oferecer produtos que realmente transformam ambientes.
                 </p>
+              </div>
+              <div className="relative">
+                <img 
+                  src="/devid-bomfim.jpg" 
+                  alt="Luana Andrade - Co-Fundadora da Toque Ideal"
+                  className="w-full h-80 object-cover rounded-lg shadow-md"
+                />
               </div>
             </div>
           </div>
