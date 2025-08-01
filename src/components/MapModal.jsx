@@ -1,52 +1,60 @@
-import { X, MapPin, Navigation, Zap, ZoomIn, ZoomOut, Move } from 'lucide-react'
+import { X, MapPin, Navigation, Zap, ZoomIn, ZoomOut, RotateCcw } from 'lucide-react'
 import { useState, useRef, useEffect } from 'react'
 
 const MapModal = ({ isOpen, onClose }) => {
   const [selectedMap, setSelectedMap] = useState('completo')
-  const [zoom, setZoom] = useState(1)
+  const [scale, setScale] = useState(1)
   const [position, setPosition] = useState({ x: 0, y: 0 })
   const [isDragging, setIsDragging] = useState(false)
-  const [dragStart, setDragStart] = useState({ x: 0, y: 0 })
-  const mapRef = useRef(null)
-  const containerRef = useRef(null)
+  const [dragStart, setDragStart] = useState({ x: 0, y: 0, startX: 0, startY: 0 })
+  const mapContainerRef = useRef(null)
+  const mapImageRef = useRef(null)
 
-  // Reset zoom e posição quando trocar de mapa
+  // Reset quando trocar de mapa
   useEffect(() => {
-    setZoom(1)
+    setScale(1)
     setPosition({ x: 0, y: 0 })
   }, [selectedMap])
 
   // Funções de zoom
   const handleZoomIn = () => {
-    setZoom(prev => Math.min(prev + 0.5, 3))
+    setScale(prev => Math.min(prev * 1.5, 4))
   }
 
   const handleZoomOut = () => {
-    setZoom(prev => Math.max(prev - 0.5, 0.5))
+    setScale(prev => Math.max(prev / 1.5, 0.5))
+  }
+
+  const handleReset = () => {
+    setScale(1)
+    setPosition({ x: 0, y: 0 })
   }
 
   // Funções de arrastar
   const handleMouseDown = (e) => {
-    if (zoom > 1) {
+    if (scale > 1) {
       setIsDragging(true)
       setDragStart({
-        x: e.clientX - position.x,
-        y: e.clientY - position.y
+        x: e.clientX,
+        y: e.clientY,
+        startX: position.x,
+        startY: position.y
       })
+      e.preventDefault()
     }
   }
 
   const handleMouseMove = (e) => {
-    if (isDragging && zoom > 1) {
-      const newX = e.clientX - dragStart.x
-      const newY = e.clientY - dragStart.y
+    if (isDragging && scale > 1) {
+      const deltaX = e.clientX - dragStart.x
+      const deltaY = e.clientY - dragStart.y
       
-      // Limitar o movimento para não sair muito da área visível
-      const maxMove = 200 * (zoom - 1)
-      setPosition({
-        x: Math.max(-maxMove, Math.min(maxMove, newX)),
-        y: Math.max(-maxMove, Math.min(maxMove, newY))
-      })
+      // Limitar o movimento baseado no zoom
+      const maxMove = 300 * (scale - 1)
+      const newX = Math.max(-maxMove, Math.min(maxMove, dragStart.startX + deltaX))
+      const newY = Math.max(-maxMove, Math.min(maxMove, dragStart.startY + deltaY))
+      
+      setPosition({ x: newX, y: newY })
     }
   }
 
@@ -54,17 +62,56 @@ const MapModal = ({ isOpen, onClose }) => {
     setIsDragging(false)
   }
 
-  // Event listeners para mouse
+  // Touch events para mobile
+  const handleTouchStart = (e) => {
+    if (scale > 1 && e.touches.length === 1) {
+      const touch = e.touches[0]
+      setIsDragging(true)
+      setDragStart({
+        x: touch.clientX,
+        y: touch.clientY,
+        startX: position.x,
+        startY: position.y
+      })
+      e.preventDefault()
+    }
+  }
+
+  const handleTouchMove = (e) => {
+    if (isDragging && scale > 1 && e.touches.length === 1) {
+      const touch = e.touches[0]
+      const deltaX = touch.clientX - dragStart.x
+      const deltaY = touch.clientY - dragStart.y
+      
+      const maxMove = 300 * (scale - 1)
+      const newX = Math.max(-maxMove, Math.min(maxMove, dragStart.startX + deltaX))
+      const newY = Math.max(-maxMove, Math.min(maxMove, dragStart.startY + deltaY))
+      
+      setPosition({ x: newX, y: newY })
+      e.preventDefault()
+    }
+  }
+
+  const handleTouchEnd = () => {
+    setIsDragging(false)
+  }
+
+  // Event listeners
   useEffect(() => {
     if (isDragging) {
       document.addEventListener('mousemove', handleMouseMove)
       document.addEventListener('mouseup', handleMouseUp)
+      document.addEventListener('touchmove', handleTouchMove, { passive: false })
+      document.addEventListener('touchend', handleTouchEnd)
+      
       return () => {
         document.removeEventListener('mousemove', handleMouseMove)
         document.removeEventListener('mouseup', handleMouseUp)
+        document.removeEventListener('touchmove', handleTouchMove)
+        document.removeEventListener('touchend', handleTouchEnd)
       }
     }
-  }, [isDragging, dragStart, zoom])
+  }, [isDragging, dragStart, scale])
 
   if (!isOpen) return null
 
@@ -148,7 +195,7 @@ const MapModal = ({ isOpen, onClose }) => {
             <div className="flex items-center gap-2 bg-gray-100 rounded-lg p-2">
               <button
                 onClick={handleZoomOut}
-                disabled={zoom <= 0.5}
+                disabled={scale <= 0.5}
                 className="p-2 rounded-lg bg-white shadow-sm hover:bg-gray-50 disabled:opacity-50 disabled:cursor-not-allowed transition-all"
                 title="Diminuir zoom"
               >
@@ -156,67 +203,79 @@ const MapModal = ({ isOpen, onClose }) => {
               </button>
               
               <span className="text-sm font-montserrat font-semibold text-gray-700 min-w-[60px] text-center">
-                {Math.round(zoom * 100)}%
+                {Math.round(scale * 100)}%
               </span>
               
               <button
                 onClick={handleZoomIn}
-                disabled={zoom >= 3}
+                disabled={scale >= 4}
                 className="p-2 rounded-lg bg-white shadow-sm hover:bg-gray-50 disabled:opacity-50 disabled:cursor-not-allowed transition-all"
                 title="Aumentar zoom"
               >
                 <ZoomIn className="h-4 w-4 text-gray-600" />
               </button>
               
-              {zoom > 1 && (
-                <div className="flex items-center ml-2 text-xs text-gray-500">
-                  <Move className="h-3 w-3 mr-1" />
-                  <span>Arraste</span>
-                </div>
-              )}
+              <button
+                onClick={handleReset}
+                className="p-2 rounded-lg bg-white shadow-sm hover:bg-gray-50 transition-all ml-2"
+                title="Resetar zoom"
+              >
+                <RotateCcw className="h-4 w-4 text-gray-600" />
+              </button>
             </div>
           </div>
 
+          {/* Instruções de uso */}
+          {scale > 1 && (
+            <div className="mb-4 p-3 bg-blue-50 border border-blue-200 rounded-lg">
+              <p className="text-sm text-blue-800 font-lato">
+                💡 <strong>Dica:</strong> Arraste o mapa para navegar quando ampliado. Use os controles de zoom ou role o mouse para ajustar.
+              </p>
+            </div>
+          )}
+
           {/* Mapa da Feira */}
           <div 
-            ref={containerRef}
+            ref={mapContainerRef}
             className="relative bg-gray-100 rounded-xl overflow-hidden mb-4 sm:mb-6 border-2 border-gray-200"
-            style={{ height: '60vh', minHeight: '400px' }}
+            style={{ height: '70vh', minHeight: '500px' }}
           >
             <div 
-              ref={mapRef}
-              className={`relative w-full h-full flex items-center justify-center ${
-                zoom > 1 ? 'cursor-grab' : 'cursor-default'
+              className={`relative w-full h-full flex items-center justify-center overflow-hidden ${
+                scale > 1 ? 'cursor-grab' : 'cursor-default'
               } ${isDragging ? 'cursor-grabbing' : ''}`}
               onMouseDown={handleMouseDown}
+              onTouchStart={handleTouchStart}
               style={{
-                transform: `scale(${zoom}) translate(${position.x / zoom}px, ${position.y / zoom}px)`,
-                transition: isDragging ? 'none' : 'transform 0.3s ease'
+                transform: `scale(${scale}) translate(${position.x / scale}px, ${position.y / scale}px)`,
+                transition: isDragging ? 'none' : 'transform 0.3s ease',
+                transformOrigin: 'center center'
               }}
             >
               <img 
+                ref={mapImageRef}
                 src={selectedMap === 'completo' ? '/mapa-feira-completo.png' : '/mapa-feira-detalhado.png'}
                 alt={`Mapa da ABCasa Fair 2025 - ${selectedMap === 'completo' ? 'Visão Completa' : 'Área do Estande'}`}
                 className="max-w-full max-h-full object-contain select-none"
                 draggable={false}
+                style={{ 
+                  userSelect: 'none',
+                  pointerEvents: 'none'
+                }}
               />
               
-              {/* Marcador do Estande - posição corrigida para Rua 16 */}
+              {/* Marcador estático fixo para o estande - apenas no mapa completo */}
               {selectedMap === 'completo' && (
-                <div className="absolute top-[35%] left-[12%] transform -translate-x-1/2 -translate-y-1/2">
+                <div className="absolute top-[35%] left-[12%] transform -translate-x-1/2 -translate-y-1/2 pointer-events-none">
                   <div className="relative">
-                    {/* Pulso animado */}
-                    <div className="absolute inset-0 bg-red-500 rounded-full animate-ping opacity-75 w-6 h-6"></div>
-                    <div className="absolute inset-0 bg-red-500 rounded-full animate-pulse opacity-50 w-6 h-6"></div>
-                    
-                    {/* Marcador principal */}
-                    <div className="relative bg-red-600 text-white p-2 rounded-full shadow-lg border-4 border-white w-6 h-6 flex items-center justify-center">
-                      <MapPin className="h-3 w-3" />
+                    {/* Marcador estático simples */}
+                    <div className="bg-red-600 text-white p-2 rounded-full shadow-lg border-4 border-white w-8 h-8 flex items-center justify-center">
+                      <MapPin className="h-4 w-4" />
                     </div>
                     
                     {/* Label do estande */}
                     <div className="absolute top-full left-1/2 transform -translate-x-1/2 mt-2 bg-red-600 text-white px-3 py-1 rounded-lg text-sm font-montserrat font-semibold whitespace-nowrap shadow-lg">
-                      Estande 1643 - Rua 16
+                      Estande 1643
                       <div className="absolute bottom-full left-1/2 transform -translate-x-1/2 w-0 h-0 border-l-4 border-r-4 border-b-4 border-transparent border-b-red-600"></div>
                     </div>
                   </div>
@@ -255,7 +314,7 @@ const MapModal = ({ isOpen, onClose }) => {
                 <Navigation className="h-4 w-4 sm:h-5 sm:w-5 text-teal-600 mr-2 mt-0.5 flex-shrink-0" />
                 <div className="text-xs sm:text-sm text-teal-800">
                   <p className="font-semibold mb-1">Dica importante:</p>
-                  <p>Use os controles de zoom e arraste o mapa para navegar. Chegue cedo para aproveitar melhor a feira e evitar multidões. O evento acontece de <strong>13 a 16 de Agosto de 2025</strong>.</p>
+                  <p>Use os controles de zoom para ampliar o mapa até 400% e arraste para navegar. Chegue cedo para aproveitar melhor a feira e evitar multidões. O evento acontece de <strong>13 a 16 de Agosto de 2025</strong>.</p>
                 </div>
               </div>
             </div>
