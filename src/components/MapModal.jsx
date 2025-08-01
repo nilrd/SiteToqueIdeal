@@ -56,13 +56,13 @@ const MapModal = ({ isOpen, onClose }) => {
           {/* Mapa da Feira */}
           <div className="relative bg-gray-100 rounded-xl overflow-hidden">
             <img 
-              src="/planta_feira_abcasa.png" 
-              alt="Planta da Feira ABCasa Fair 2025"
+              src="/mapa-feira-novo.png" 
+              alt="ABCasa Fair 2025 - 13 a 16 de Agosto"
               className="w-full h-auto"
             />
             
             {/* Marcador do Estande */}
-            <div className="absolute top-[15%] right-[25%] transform -translate-x-1/2 -translate-y-1/2">
+            <div className="absolute top-[45%] left-[50%] transform -translate-x-1/2 -translate-y-1/2">
               <div className="relative">
                 {/* Pulso animado */}
                 <div className="absolute inset-0 bg-red-500 rounded-full animate-ping opacity-75"></div>
@@ -75,20 +75,9 @@ const MapModal = ({ isOpen, onClose }) => {
                 
                 {/* Label do estande */}
                 <div className="absolute top-full left-1/2 transform -translate-x-1/2 mt-2 bg-red-600 text-white px-3 py-1 rounded-lg text-sm font-montserrat font-semibold whitespace-nowrap shadow-lg">
-                  Estande 1643
+                  Estande 1643 - Rua 16
                   <div className="absolute bottom-full left-1/2 transform -translate-x-1/2 w-0 h-0 border-l-4 border-r-4 border-b-4 border-transparent border-b-red-600"></div>
                 </div>
-              </div>
-            </div>
-
-            {/* Marcador do Credenciamento */}
-            <div className="absolute top-[12%] right-[30%] transform -translate-x-1/2 -translate-y-1/2">
-              <div className="bg-blue-600 text-white p-2 rounded-full shadow-lg border-2 border-white">
-                <div className="w-3 h-3 bg-white rounded-full"></div>
-              </div>
-              <div className="absolute top-full left-1/2 transform -translate-x-1/2 mt-1 bg-blue-600 text-white px-2 py-1 rounded text-xs font-montserrat font-semibold whitespace-nowrap shadow-lg">
-                Credenciamento
-                <div className="absolute bottom-full left-1/2 transform -translate-x-1/2 w-0 h-0 border-l-3 border-r-3 border-b-3 border-transparent border-b-blue-600"></div>
               </div>
             </div>
           </div>
@@ -101,15 +90,19 @@ const MapModal = ({ isOpen, onClose }) => {
             <div className="space-y-2 text-gray-700 font-lato">
               <p className="flex items-start">
                 <span className="bg-teal-600 text-white rounded-full w-6 h-6 flex items-center justify-center text-sm font-bold mr-3 mt-0.5 flex-shrink-0">1</span>
-                Entre pela entrada principal da feira
+                A estação de metrô mais próxima do Expo Center Norte é a Portuguesa-Tietê (Linha 1-Azul)
               </p>
               <p className="flex items-start">
                 <span className="bg-teal-600 text-white rounded-full w-6 h-6 flex items-center justify-center text-sm font-bold mr-3 mt-0.5 flex-shrink-0">2</span>
-                Dirija-se ao balcão de credenciamento
+                Para chegar ao Expo Center Norte a partir da estação, você pode caminhar cerca de 850 metros
               </p>
               <p className="flex items-start">
                 <span className="bg-teal-600 text-white rounded-full w-6 h-6 flex items-center justify-center text-sm font-bold mr-3 mt-0.5 flex-shrink-0">3</span>
-                Nosso estande 1643 fica bem em frente, na Rua 16
+                Ou pegar um ônibus na Avenida Cruzeiro do Sul, 1701, que te deixará em frente ao local
+              </p>
+              <p className="flex items-start">
+                <span className="bg-teal-600 text-white rounded-full w-6 h-6 flex items-center justify-center text-sm font-bold mr-3 mt-0.5 flex-shrink-0">4</span>
+                Nosso estande 1643 fica na Rua 16, em frente ao credenciamento
               </p>
             </div>
           </div>

@@ -46,70 +46,63 @@ const SobreNos = () => {
           </div>
         </section>
 
-        {/* Fundador */}
+        {/* Fundadores */}
         <section className="mb-16">
           <div className="bg-white rounded-lg shadow-lg p-8 md:p-12">
             <h2 className="text-3xl font-montserrat font-bold text-gray-900 mb-8 text-center">
-              Nosso Fundador
+              Nossos Fundadores
             </h2>
-            <div className="grid md:grid-cols-2 gap-12 items-center">
-              <div>
+            <div className="grid md:grid-cols-2 gap-12">
+              {/* Deivid Bomfim */}
+              <div className="text-center">
+                <div className="relative mb-6">
+                  <img 
+                    src="/devid-bomfim.jpg" 
+                    alt="Deivid Bomfim - Fundador da Toque Ideal"
+                    className="w-64 h-64 object-cover rounded-full mx-auto shadow-lg"
+                  />
+                </div>
                 <h3 className="text-2xl font-montserrat font-bold text-gray-900 mb-4">
-                  Devid Bomfim
+                  Deivid Bomfim
                 </h3>
-                <p className="text-gray-600 font-lato mb-4 leading-relaxed">
-                  Fundador e CEO da Toque Ideal, Devid Bomfim é um empreendedor 
-                  visionário com mais de 5 anos de experiência no setor de decoração 
-                  em vidro.
+                <p className="text-teal-600 font-lato font-semibold mb-4">
+                  Fundador e CEO
                 </p>
                 <p className="text-gray-600 font-lato mb-4 leading-relaxed">
-                  Sua paixão por design e qualidade levou à criação de uma empresa 
-                  que se destaca pela inovação e excelência em cada produto 
-                  desenvolvido.
+                  Empreendedor visionário com mais de 5 anos de experiência no setor de decoração 
+                  em vidro. Sua paixão por design e qualidade levou à criação de uma empresa 
+                  que se destaca pela inovação e excelência.
                 </p>
                 <p className="text-gray-600 font-lato leading-relaxed">
-                  Sob sua liderança, a Toque Ideal se tornou referência no mercado de 
-                  decoração em vidro, participando das principais feiras do setor.
+                  Sob sua liderança, a Toque Ideal se tornou referência no mercado, 
+                  participando das principais feiras do setor.
                 </p>
               </div>
-              <div className="relative">
-                <img 
-                  src="/devid-bomfim.jpg" 
-                  alt="Devid Bomfim - Fundador da Toque Ideal"
-                  className="w-full h-80 object-cover rounded-lg shadow-md"
-                />
-              </div>
-            </div>
-          </div>
-        </section>
 
-        {/* Luana Andrade */}
-        <section className="mb-16">
-          <div className="bg-white rounded-lg shadow-lg p-8 md:p-12">
-            <h2 className="text-3xl font-montserrat font-bold text-gray-900 mb-8 text-center">
-              Nossa Co-Fundadora
-            </h2>
-            <div className="grid md:grid-cols-2 gap-12 items-center">
-              <div>
+              {/* Luana Andrade */}
+              <div className="text-center">
+                <div className="relative mb-6">
+                  <img 
+                    src="/luana-andrade.jpg" 
+                    alt="Luana Andrade - Co-Fundadora da Toque Ideal"
+                    className="w-64 h-64 object-cover rounded-full mx-auto shadow-lg"
+                  />
+                </div>
                 <h3 className="text-2xl font-montserrat font-bold text-gray-900 mb-4">
                   Luana Andrade
                 </h3>
-                <p className="text-gray-600 font-lato mb-4 leading-relaxed">
-                  Co-fundadora da Toque Ideal, Luana Andrade é a força criativa por trás de muitas de nossas coleções.
+                <p className="text-teal-600 font-lato font-semibold mb-4">
+                  Co-Fundadora e Diretora Criativa
                 </p>
                 <p className="text-gray-600 font-lato mb-4 leading-relaxed">
-                  Com um olhar apurado para as tendências e um talento inato para o design, Luana garante que cada peça da Toque Ideal seja uma obra de arte.
+                  A força criativa por trás de muitas de nossas coleções. Com um olhar apurado 
+                  para as tendências e um talento inato para o design, Luana garante que cada 
+                  peça seja uma obra de arte.
                 </p>
                 <p className="text-gray-600 font-lato leading-relaxed">
-                  Sua dedicação à estética e à funcionalidade é o que nos permite oferecer produtos que realmente transformam ambientes.
+                  Sua dedicação à estética e à funcionalidade é o que nos permite oferecer 
+                  produtos que realmente transformam ambientes.
                 </p>
-              </div>
-              <div className="relative">
-                <img 
-                  src="/devid-bomfim.jpg" 
-                  alt="Luana Andrade - Co-Fundadora da Toque Ideal"
-                  className="w-full h-80 object-cover rounded-lg shadow-md"
-                />
               </div>
             </div>
           </div>
@@ -158,9 +151,6 @@ const SobreNos = () => {
             </div>
           </div>
         </section>
-
-        {/* Instagram Section */}
-        <InstagramSection />
 
         {/* Gallery Section */}
         <GallerySection />

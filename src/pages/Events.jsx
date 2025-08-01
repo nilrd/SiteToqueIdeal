@@ -9,7 +9,7 @@ const Events = () => {
 
   const nextEvent = {
     name: "ABCasa Fair 2025",
-    date: "09 a 12 de Fevereiro de 2025",
+    date: "13 a 16 de Agosto de 2025",
     location: "R. José Bernardo Pinto, 333 - Vila Guilherme, São Paulo/SP",
     stand: "Estande 1643 (10x4m = 40,00m²)",
     description: "A maior feira de decoração da América Latina. Venha conhecer nossas novidades!"
@@ -103,29 +103,28 @@ const Events = () => {
                     <div className="flex flex-col sm:flex-row gap-4 pt-6">
                       <button 
                         onClick={() => setIsMapModalOpen(true)}
-                        className="flex items-center justify-center bg-white text-teal-700 px-8 py-4 rounded-full font-montserrat font-semibold hover:bg-gray-100 transition-all duration-300 transform hover:scale-105 shadow-lg"
+                        className="flex flex-col items-center justify-center bg-white text-teal-700 px-8 py-4 rounded-xl font-montserrat hover:bg-gray-100 transition-all duration-300 transform hover:scale-105 shadow-lg"
                       >
-                        <MapPin className="h-5 w-5 mr-2" />
-                        Ver no Mapa
+                        <span className="font-semibold text-lg">Ver no Mapa</span>
+                        <span className="text-sm text-gray-600 mt-1">Localização do estande na feira</span>
                       </button>
                       
                       <button 
                         onClick={() => setIsHotelsModalOpen(true)}
-                        className="flex items-center justify-center bg-white text-teal-700 px-8 py-4 rounded-full font-montserrat font-semibold hover:bg-gray-100 transition-all duration-300 transform hover:scale-105 shadow-lg"
+                        className="flex flex-col items-center justify-center bg-white text-teal-700 px-8 py-4 rounded-xl font-montserrat hover:bg-gray-100 transition-all duration-300 transform hover:scale-105 shadow-lg"
                       >
-                        <Hotel className="h-5 w-5 mr-2" />
-                        Hotéis Próximos
+                        <span className="font-semibold text-lg">Hotéis Próximos</span>
+                        <span className="text-sm text-gray-600 mt-1">Dicas de hospedagem</span>
                       </button>
                       
                       <a 
                         href="https://abcasafair.com.br/transporte-gratuito/"
                         target="_blank"
                         rel="noopener noreferrer"
-                        className="flex items-center justify-center bg-transparent border-2 border-white text-white px-8 py-4 rounded-full font-montserrat font-semibold hover:bg-white hover:text-teal-700 transition-all duration-300 transform hover:scale-105"
+                        className="flex flex-col items-center justify-center bg-transparent border-2 border-white text-white px-8 py-4 rounded-xl font-montserrat hover:bg-white hover:text-teal-700 transition-all duration-300 transform hover:scale-105"
                       >
-                        <Car className="h-5 w-5 mr-2" />
-                        Transporte Gratuito
-                        <ExternalLink className="h-4 w-4 ml-2" />
+                        <span className="font-semibold text-lg">Transporte Gratuito</span>
+                        <span className="text-sm opacity-80 mt-1">Consulte horários e pontos</span>
                       </a>
                     </div>
                   </div>
@@ -134,16 +133,13 @@ const Events = () => {
                   <div className="relative">
                     <div className="bg-white bg-opacity-10 backdrop-blur-sm rounded-2xl p-6 border border-white border-opacity-20">
                       <img 
-                        src="/convite-feira.jpg" 
-                        alt="ABCasa Fair 2025 - Convite"
+                        src="/convite-feira.png" 
+                        alt="ABCasa Fair 2025 - 13 a 16 de Agosto"
                         className="w-full h-80 object-contain rounded-xl shadow-2xl bg-white"
                         onError={(e) => {
                           e.target.src = '/placeholder-event.jpg'
                         }}
                       />
-                      <div className="absolute -bottom-4 -right-4 bg-white text-teal-700 p-4 rounded-full shadow-lg">
-                        <MapPin className="h-6 w-6" />
-                      </div>
                     </div>
                   </div>
                 </div>
