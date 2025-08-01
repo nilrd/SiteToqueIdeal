@@ -75,22 +75,13 @@ const Events = () => {
                     </h3>
                     
                     <div className="space-y-4">
-                      <div className="flex items-center text-white">
-                        <div className="bg-white bg-opacity-20 p-2 rounded-full mr-4">
-                          <Calendar className="h-5 w-5" />
-                        </div>
+                      <div className="text-white">
                         <span className="font-lato text-lg">{nextEvent.date}</span>
                       </div>
-                      <div className="flex items-start text-white">
-                        <div className="bg-white bg-opacity-20 p-2 rounded-full mr-4 mt-1">
-                          <MapPin className="h-5 w-5" />
-                        </div>
+                      <div className="text-white">
                         <span className="font-lato text-lg">{nextEvent.location}</span>
                       </div>
-                      <div className="flex items-center text-white">
-                        <div className="bg-white bg-opacity-20 p-2 rounded-full mr-4">
-                          <Users className="h-5 w-5" />
-                        </div>
+                      <div className="text-white">
                         <span className="font-lato text-lg">{nextEvent.stand}</span>
                       </div>
                     </div>
@@ -131,11 +122,11 @@ const Events = () => {
                   
                   {/* Event Image */}
                   <div className="relative">
-                    <div className="bg-white bg-opacity-10 backdrop-blur-sm rounded-2xl p-6 border border-white border-opacity-20">
+                    <div className="rounded-2xl overflow-hidden shadow-2xl">
                       <img 
                         src="/convite-feira.png" 
                         alt="ABCasa Fair 2025 - 13 a 16 de Agosto"
-                        className="w-full h-80 object-contain rounded-xl shadow-2xl bg-white"
+                        className="w-full h-96 object-cover rounded-2xl"
                         onError={(e) => {
                           e.target.src = '/placeholder-event.jpg'
                         }}
@@ -162,14 +153,9 @@ const Events = () => {
           <div className="grid md:grid-cols-3 gap-8">
             {eventInfo.map((info, index) => (
               <div key={index} className="bg-white rounded-2xl p-8 shadow-lg hover:shadow-xl transition-all duration-300 transform hover:-translate-y-2 border border-gray-100">
-                <div className="flex items-center mb-6">
-                  <div className="bg-gradient-to-br from-teal-500 to-blue-600 p-4 rounded-full mr-4">
-                    <info.icon className="h-6 w-6 text-white" />
-                  </div>
-                  <h3 className="text-xl font-montserrat font-bold text-gray-900">
-                    {info.title}
-                  </h3>
-                </div>
+                <h3 className="text-xl font-montserrat font-bold text-gray-900 mb-4">
+                  {info.title}
+                </h3>
                 <p className="text-gray-600 font-lato leading-relaxed">
                   {info.description}
                 </p>

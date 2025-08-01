@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react'
+import { useState, useEffect, useRef } from 'react'
 import { useQuote } from '../context/QuoteContext'
 import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
@@ -94,13 +94,40 @@ const Catalog = () => {
     })
   }
 
-  // Componente de imagem com lazy loading otimizado
+   // Componente otimizado para carregamento lazy de imagens
   const LazyImage = ({ src, alt, code }) => {
     const [imageSrc, setImageSrc] = useState(null)
     const [imageLoaded, setImageLoaded] = useState(false)
     const [imageError, setImageError] = useState(false)
+    const [isInView, setIsInView] = useState(false)
+    const imgRef = useRef()
 
+    // Intersection Observer para lazy loading
     useEffect(() => {
+      const observer = new IntersectionObserver(
+        ([entry]) => {
+          if (entry.isIntersecting) {
+            setIsInView(true)
+            observer.disconnect()
+          }
+        },
+        { 
+          threshold: 0.1,
+          rootMargin: '50px' // Carrega 50px antes de entrar na viewport
+        }
+      )
+
+      if (imgRef.current) {
+        observer.observe(imgRef.current)
+      }
+
+      return () => observer.disconnect()
+    }, [])
+
+    // Carrega a imagem apenas quando está na viewport
+    useEffect(() => {
+      if (!isInView) return
+
       const img = new Image()
       
       img.onload = () => {
@@ -116,16 +143,11 @@ const Catalog = () => {
         setImageError(true)
       }
       
-      // Preload apenas quando necessário
-      const timer = setTimeout(() => {
-        img.src = src
-      }, 100)
-
-      return () => clearTimeout(timer)
-    }, [src])
+      img.src = src
+    }, [src, isInView])
 
     return (
-      <div className="relative w-full h-48 bg-gray-100 overflow-hidden">
+      <div ref={imgRef} className="relative w-full h-48 bg-gray-100 overflow-hidden">
         {imageSrc ? (
           <img 
             src={imageSrc}
@@ -135,6 +157,10 @@ const Catalog = () => {
             }`}
             loading="lazy"
             decoding="async"
+            style={{ 
+              imageRendering: 'auto',
+              transform: 'translateZ(0)' // Hardware acceleration
+            }}
           />
         ) : (
           <div className="w-full h-full flex items-center justify-center bg-gray-100">
@@ -144,9 +170,9 @@ const Catalog = () => {
           </div>
         )}
         
-        {!imageLoaded && imageSrc && (
+        {isInView && !imageLoaded && imageSrc && (
           <div className="absolute inset-0 flex items-center justify-center bg-gray-100">
-            <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-teal-600"></div>
+            <div className="animate-spin rounded-full h-6 w-6 border-b-2 border-teal-600"></div>
           </div>
         )}
       </div>
