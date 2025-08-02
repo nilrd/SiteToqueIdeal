@@ -132,7 +132,7 @@ const ProductHighlights = () => {
             Conheça mais dos nossos produtos no catálogo
           </p>
           
-          <Link to="/orcamento#catalogo">
+          <Link to="/catalogo">
             <Button 
               size="lg"
               className="btn-primary font-montserrat font-semibold text-lg px-8 py-4 hover:scale-105 transition-transform duration-200"

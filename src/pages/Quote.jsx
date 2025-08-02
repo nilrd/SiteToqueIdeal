@@ -56,7 +56,7 @@ const Quote = () => {
               Adicione produtos do nosso catálogo para solicitar um orçamento.
             </p>
             <Button 
-              onClick={() => window.location.href = '#catalogo'}
+              onClick={() => window.location.href = '/catalogo'}
               className="btn-primary font-montserrat font-semibold"
               size="lg"
             >
