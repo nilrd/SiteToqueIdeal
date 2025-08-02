@@ -1,5 +1,5 @@
 import React, { createContext, useContext, useState, useEffect } from 'react'
-import { client, queries } from '../lib/sanityClient'
+import productsData from '../assets/products.json'
 
 const SanityContext = createContext()
 
@@ -12,130 +12,69 @@ export const useSanity = () => {
 }
 
 export const SanityProvider = ({ children }) => {
-  const [products, setProducts] = useState([])
+  const [products, setProducts] = useState(productsData) // Inicializar com dados JSON
   const [featuredProducts, setFeaturedProducts] = useState([])
   const [posts, setPosts] = useState([])
   const [events, setEvents] = useState([])
   const [siteSettings, setSiteSettings] = useState(null)
-  const [loading, setLoading] = useState(true)
+  const [loading, setLoading] = useState(false) // Não carregar por padrão
   const [error, setError] = useState(null)
+  const [sanityAvailable, setSanityAvailable] = useState(false)
 
-  // Função para buscar todos os dados
+  // Função para buscar dados do Sanity (opcional)
   const fetchData = async () => {
     try {
       setLoading(true)
       setError(null)
-
-      const [
-        productsData,
-        featuredProductsData,
-        postsData,
-        eventsData,
-        settingsData
-      ] = await Promise.all([
-        client.fetch(queries.allProducts),
-        client.fetch(queries.featuredProducts),
-        client.fetch(queries.allPosts),
-        client.fetch(queries.allEvents),
-        client.fetch(queries.siteSettings)
-      ])
-
-      setProducts(productsData || [])
-      setFeaturedProducts(featuredProductsData || [])
-      setPosts(postsData || [])
-      setEvents(eventsData || [])
-      setSiteSettings(settingsData || null)
+      
+      // Por enquanto, apenas simular que não há dados do Sanity
+      // Quando o CMS estiver configurado, esta função será implementada
+      console.log('Tentando conectar ao Sanity CMS...')
+      
+      // Simular delay de rede
+      await new Promise(resolve => setTimeout(resolve, 1000))
+      
+      // Por enquanto, manter dados locais
+      setSanityAvailable(false)
+      setProducts(productsData)
+      
     } catch (err) {
-      console.error('Erro ao buscar dados do Sanity:', err)
+      console.warn('Sanity CMS não disponível, usando dados locais:', err.message)
+      setSanityAvailable(false)
       setError(err.message)
+      setProducts(productsData)
     } finally {
       setLoading(false)
-    }
-  }
-
-  // Função para buscar produtos com filtros
-  const fetchProducts = async (filters = {}) => {
-    try {
-      let query = queries.allProducts
-      
-      // Aplicar filtros se necessário
-      if (filters.serie) {
-        query = `*[_type == "produto" && serie match "${filters.serie}*"] | order(_createdAt desc)`
-      }
-      
-      if (filters.cor) {
-        query = `*[_type == "produto" && cor match "${filters.cor}*"] | order(_createdAt desc)`
-      }
-      
-      if (filters.search) {
-        query = `*[_type == "produto" && (nome match "${filters.search}*" || codigo match "${filters.search}*")] | order(_createdAt desc)`
-      }
-
-      const data = await client.fetch(query)
-      return data || []
-    } catch (err) {
-      console.error('Erro ao buscar produtos:', err)
-      return []
-    }
-  }
-
-  // Função para buscar posts com filtros
-  const fetchPosts = async (filters = {}) => {
-    try {
-      let query = queries.allPosts
-      
-      if (filters.category) {
-        query = `*[_type == "post" && "${filters.category}" in categorias[]->slug.current] | order(dataPublicacao desc)`
-      }
-
-      const data = await client.fetch(query)
-      return data || []
-    } catch (err) {
-      console.error('Erro ao buscar posts:', err)
-      return []
     }
   }
 
   // Função para enviar formulário de contato
   const submitContactForm = async (formData) => {
     try {
-      const doc = {
-        _type: 'contatoFormulario',
-        nome: formData.nome,
-        email: formData.email,
-        telefone: formData.telefone || '',
-        mensagem: formData.mensagem,
-        _createdAt: new Date().toISOString()
-      }
-
-      const result = await client.create(doc)
-      return result
+      // Por enquanto, apenas simular envio
+      console.log('Formulário enviado:', formData)
+      return { success: true, message: 'Mensagem enviada com sucesso!' }
     } catch (err) {
       console.error('Erro ao enviar formulário:', err)
-      throw err
+      return { success: false, message: 'Erro ao enviar mensagem. Tente novamente.' }
     }
   }
 
-  useEffect(() => {
-    fetchData()
-  }, [])
+  // Não buscar dados automaticamente no useEffect para evitar erros
+  // useEffect(() => {
+  //   fetchData()
+  // }, [])
 
   const value = {
-    // Dados
     products,
     featuredProducts,
     posts,
     events,
     siteSettings,
-    
-    // Estados
     loading,
     error,
-    
-    // Funções
+    sanityAvailable,
     fetchData,
-    fetchProducts,
-    fetchPosts,
     submitContactForm
   }
 

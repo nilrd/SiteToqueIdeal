@@ -2,15 +2,10 @@ import React, { useState, useEffect } from 'react'
 import { Search, Filter, Grid, List, ShoppingCart, Eye } from 'lucide-react'
 import { useSanity } from '../contexts/SanityContext'
 import { useQuote } from '../context/QuoteContext'
-import SanityImage from '../components/SanityImage'
-import productsData from '../assets/products.json'
 
 const CatalogCMS = () => {
-  const { products: sanityProducts, loading, error, fetchProducts } = useSanity()
+  const { products, loading, error, sanityAvailable } = useSanity()
   const { addToQuote } = useQuote()
-  
-  // Usar produtos do Sanity se disponíveis, senão usar produtos do JSON
-  const products = sanityProducts && sanityProducts.length > 0 ? sanityProducts : productsData
   
   const [filteredProducts, setFilteredProducts] = useState([])
   const [searchTerm, setSearchTerm] = useState('')
@@ -24,7 +19,7 @@ const CatalogCMS = () => {
 
   // Atualizar produtos filtrados quando os dados mudarem
   useEffect(() => {
-    if (products) {
+    if (products && products.length > 0) {
       setFilteredProducts(products)
     }
   }, [products])
@@ -74,44 +69,21 @@ const CatalogCMS = () => {
 
   const handleAddToQuote = (product) => {
     addToQuote({
-      id: product._id,
-      name: product.nome,
-      code: product.codigo,
-      image: product.fotos?.[0],
-      color: product.cor,
-      dimensions: product.dimensoes,
-      series: product.serie
+      id: product.codigo || product.id,
+      name: product.nome || product.name,
+      code: product.codigo || product.code,
+      dimensions: product.dimensoes || product.dimensions,
+      series: product.serie || product.series,
+      image: product.fotos?.[0] || product.image
     })
-  }
-
-  const clearFilters = () => {
-    setSearchTerm('')
-    setSelectedSeries('')
-    setSelectedColor('')
   }
 
   if (loading) {
     return (
       <div className="min-h-screen bg-gray-50 flex items-center justify-center">
         <div className="text-center">
-          <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-teal-600 mx-auto"></div>
-          <p className="mt-4 text-gray-600">Carregando catálogo...</p>
-        </div>
-      </div>
-    )
-  }
-
-  if (error) {
-    return (
-      <div className="min-h-screen bg-gray-50 flex items-center justify-center">
-        <div className="text-center">
-          <p className="text-red-600 mb-4">Erro ao carregar o catálogo: {error}</p>
-          <button 
-            onClick={() => window.location.reload()} 
-            className="bg-teal-600 text-white px-4 py-2 rounded hover:bg-teal-700"
-          >
-            Tentar novamente
-          </button>
+          <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-teal-600 mx-auto mb-4"></div>
+          <p className="text-gray-600">Carregando catálogo...</p>
         </div>
       </div>
     )
@@ -119,237 +91,188 @@ const CatalogCMS = () => {
 
   return (
     <div className="min-h-screen bg-gray-50">
-      {/* Header */}
-      <div className="bg-white shadow-sm border-b">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6">
-          <div className="flex flex-col lg:flex-row lg:items-center lg:justify-between">
-            <div>
-              <h1 className="text-3xl font-bold text-gray-900">Catálogo de Produtos</h1>
-              <p className="mt-2 text-gray-600">
-                {filteredProducts.length} produtos encontrados
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+        {/* Header */}
+        <div className="text-center mb-8">
+          <h1 className="text-3xl font-bold text-gray-900 mb-4">Catálogo de Produtos</h1>
+          <p className="text-gray-600 max-w-2xl mx-auto">
+            Explore nossa coleção completa de peças em vidro. Use os filtros para encontrar exatamente o que procura.
+          </p>
+          {!sanityAvailable && (
+            <div className="mt-4 p-3 bg-blue-50 border border-blue-200 rounded-lg">
+              <p className="text-blue-800 text-sm">
+                📦 Exibindo catálogo local. O CMS será integrado em breve para atualizações em tempo real.
               </p>
             </div>
-            
-            {/* Controles de visualização */}
-            <div className="mt-4 lg:mt-0 flex items-center space-x-4">
-              <div className="flex bg-gray-100 rounded-lg p-1">
-                <button
-                  onClick={() => setViewMode('grid')}
-                  className={`p-2 rounded ${viewMode === 'grid' ? 'bg-white shadow' : ''}`}
-                >
-                  <Grid size={20} />
-                </button>
-                <button
-                  onClick={() => setViewMode('list')}
-                  className={`p-2 rounded ${viewMode === 'list' ? 'bg-white shadow' : ''}`}
-                >
-                  <List size={20} />
-                </button>
+          )}
+        </div>
+
+        {/* Filtros */}
+        <div className="bg-white rounded-lg shadow-sm p-6 mb-6">
+          <div className="flex flex-col lg:flex-row gap-4">
+            {/* Busca */}
+            <div className="flex-1">
+              <div className="relative">
+                <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 h-5 w-5" />
+                <input
+                  type="text"
+                  placeholder="Buscar por código ou dimensões..."
+                  value={searchTerm}
+                  onChange={(e) => setSearchTerm(e.target.value)}
+                  className="w-full pl-10 pr-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-teal-500 focus:border-transparent"
+                />
               </div>
-              
-              <button
-                onClick={() => setIsFilterOpen(!isFilterOpen)}
-                className="lg:hidden bg-teal-600 text-white px-4 py-2 rounded-lg hover:bg-teal-700 flex items-center"
+            </div>
+
+            {/* Filtro por Série */}
+            <div className="lg:w-48">
+              <select
+                value={selectedSeries}
+                onChange={(e) => setSelectedSeries(e.target.value)}
+                className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-teal-500 focus:border-transparent"
               >
-                <Filter size={20} className="mr-2" />
-                Filtros
+                <option value="">Todas as Séries</option>
+                {uniqueSeries.map(serie => (
+                  <option key={serie} value={serie}>{serie}</option>
+                ))}
+              </select>
+            </div>
+
+            {/* Filtro por Cor */}
+            {uniqueColors.length > 0 && (
+              <div className="lg:w-48">
+                <select
+                  value={selectedColor}
+                  onChange={(e) => setSelectedColor(e.target.value)}
+                  className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-teal-500 focus:border-transparent"
+                >
+                  <option value="">Todas as Cores</option>
+                  {uniqueColors.map(cor => (
+                    <option key={cor} value={cor}>{cor}</option>
+                  ))}
+                </select>
+              </div>
+            )}
+
+            {/* Modo de visualização */}
+            <div className="flex border border-gray-300 rounded-lg overflow-hidden">
+              <button
+                onClick={() => setViewMode('grid')}
+                className={`p-2 ${viewMode === 'grid' ? 'bg-teal-600 text-white' : 'bg-white text-gray-600'}`}
+              >
+                <Grid className="h-5 w-5" />
+              </button>
+              <button
+                onClick={() => setViewMode('list')}
+                className={`p-2 ${viewMode === 'list' ? 'bg-teal-600 text-white' : 'bg-white text-gray-600'}`}
+              >
+                <List className="h-5 w-5" />
               </button>
             </div>
           </div>
         </div>
-      </div>
 
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
-        <div className="flex flex-col lg:flex-row gap-8">
-          {/* Sidebar de filtros */}
-          <div className={`lg:w-64 ${isFilterOpen ? 'block' : 'hidden lg:block'}`}>
-            <div className="bg-white rounded-lg shadow-sm p-6 sticky top-4">
-              <h3 className="text-lg font-semibold text-gray-900 mb-4">Filtros</h3>
-              
-              {/* Busca */}
-              <div className="mb-6">
-                <label className="block text-sm font-medium text-gray-700 mb-2">
-                  Buscar
-                </label>
-                <div className="relative">
-                  <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400" size={20} />
-                  <input
-                    type="text"
-                    placeholder="Nome, código ou dimensões..."
-                    value={searchTerm}
-                    onChange={(e) => setSearchTerm(e.target.value)}
-                    className="w-full pl-10 pr-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-teal-500 focus:border-transparent"
-                  />
+        {/* Contador de resultados */}
+        <div className="mb-6">
+          <p className="text-gray-600">
+            Mostrando {indexOfFirstProduct + 1}-{Math.min(indexOfLastProduct, filteredProducts.length)} de {filteredProducts.length} produtos
+          </p>
+        </div>
+
+        {/* Grid de produtos */}
+        {currentProducts.length > 0 ? (
+          <div className={viewMode === 'grid' 
+            ? "grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6 mb-8"
+            : "space-y-4 mb-8"
+          }>
+            {currentProducts.map((product) => (
+              <div key={product.codigo || product.id} className={viewMode === 'grid' 
+                ? "bg-white rounded-lg shadow-sm overflow-hidden hover:shadow-md transition-shadow"
+                : "bg-white rounded-lg shadow-sm p-4 flex items-center space-x-4"
+              }>
+                {/* Imagem do produto */}
+                <div className={viewMode === 'grid' ? "aspect-square bg-gray-100" : "w-24 h-24 bg-gray-100 rounded-lg flex-shrink-0"}>
+                  {product.fotos?.[0] || product.image ? (
+                    <img
+                      src={product.fotos?.[0] || product.image}
+                      alt={product.nome || product.name}
+                      className="w-full h-full object-cover"
+                    />
+                  ) : (
+                    <div className="w-full h-full flex items-center justify-center text-gray-400">
+                      <Eye className="h-8 w-8" />
+                    </div>
+                  )}
+                </div>
+
+                {/* Informações do produto */}
+                <div className={viewMode === 'grid' ? "p-4" : "flex-1"}>
+                  <h3 className="font-semibold text-gray-900 mb-1">
+                    {product.codigo || product.code}
+                  </h3>
+                  <p className="text-gray-600 text-sm mb-2">
+                    {product.dimensoes || product.dimensions}
+                  </p>
+                  {(product.serie || product.series) && (
+                    <p className="text-xs text-gray-500 mb-3">
+                      {product.serie || product.series}
+                    </p>
+                  )}
+                  
+                  <button
+                    onClick={() => handleAddToQuote(product)}
+                    className="w-full bg-teal-600 text-white px-4 py-2 rounded-lg hover:bg-teal-700 transition-colors flex items-center justify-center space-x-2"
+                  >
+                    <ShoppingCart className="h-4 w-4" />
+                    <span>Adicionar ao orçamento</span>
+                  </button>
                 </div>
               </div>
-
-              {/* Filtro por série */}
-              <div className="mb-6">
-                <label className="block text-sm font-medium text-gray-700 mb-2">
-                  Série
-                </label>
-                <select
-                  value={selectedSeries}
-                  onChange={(e) => setSelectedSeries(e.target.value)}
-                  className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-teal-500 focus:border-transparent"
-                >
-                  <option value="">Todas as séries</option>
-                  {uniqueSeries.map(series => (
-                    <option key={series} value={series}>{series}</option>
-                  ))}
-                </select>
-              </div>
-
-              {/* Filtro por cor */}
-              <div className="mb-6">
-                <label className="block text-sm font-medium text-gray-700 mb-2">
-                  Cor
-                </label>
-                <select
-                  value={selectedColor}
-                  onChange={(e) => setSelectedColor(e.target.value)}
-                  className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-teal-500 focus:border-transparent"
-                >
-                  <option value="">Todas as cores</option>
-                  {uniqueColors.map(color => (
-                    <option key={color} value={color}>{color}</option>
-                  ))}
-                </select>
-              </div>
-
-              {/* Limpar filtros */}
-              <button
-                onClick={clearFilters}
-                className="w-full bg-gray-100 text-gray-700 px-4 py-2 rounded-lg hover:bg-gray-200 transition-colors"
-              >
-                Limpar filtros
-              </button>
+            ))}
+          </div>
+        ) : (
+          <div className="text-center py-12">
+            <div className="text-gray-400 mb-4">
+              <Search className="h-12 w-12 mx-auto" />
             </div>
+            <h3 className="text-lg font-medium text-gray-900 mb-2">Nenhum produto encontrado</h3>
+            <p className="text-gray-600">Tente ajustar os filtros de busca</p>
           </div>
+        )}
 
-          {/* Lista de produtos */}
-          <div className="flex-1">
-            {currentProducts.length === 0 ? (
-              <div className="text-center py-12">
-                <p className="text-gray-500 text-lg">Nenhum produto encontrado</p>
-                <button
-                  onClick={clearFilters}
-                  className="mt-4 bg-teal-600 text-white px-6 py-2 rounded-lg hover:bg-teal-700"
-                >
-                  Ver todos os produtos
-                </button>
-              </div>
-            ) : (
-              <>
-                {/* Grid de produtos */}
-                <div className={`grid gap-6 ${
-                  viewMode === 'grid' 
-                    ? 'grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4' 
-                    : 'grid-cols-1'
-                }`}>
-                  {currentProducts.map((product) => (
-                    <div
-                      key={product._id}
-                      className={`bg-white rounded-lg shadow-sm hover:shadow-md transition-shadow ${
-                        viewMode === 'list' ? 'flex' : ''
-                      }`}
-                    >
-                      {/* Imagem do produto */}
-                      <div className={`${viewMode === 'list' ? 'w-48 flex-shrink-0' : 'aspect-square'}`}>
-                        <SanityImage
-                          image={product.fotos?.[0]}
-                          alt={product.nome}
-                          className="w-full h-full object-cover rounded-t-lg"
-                          width={300}
-                          height={300}
-                        />
-                      </div>
-
-                      {/* Informações do produto */}
-                      <div className={`p-4 ${viewMode === 'list' ? 'flex-1 flex flex-col justify-between' : ''}`}>
-                        <div>
-                          <h3 className="font-semibold text-gray-900 mb-1">{product.nome}</h3>
-                          <p className="text-sm text-gray-600 mb-2">Código: {product.codigo}</p>
-                          
-                          {product.dimensoes && (
-                            <p className="text-sm text-gray-600 mb-2">
-                              Dimensões: {product.dimensoes}
-                            </p>
-                          )}
-                          
-                          {product.cor && (
-                            <p className="text-sm text-gray-600 mb-2">
-                              Cor: {product.cor}
-                            </p>
-                          )}
-                          
-                          {product.serie && (
-                            <p className="text-sm text-teal-600 mb-3">
-                              {product.serie}
-                            </p>
-                          )}
-
-                          {product.descricao && (
-                            <p className="text-sm text-gray-600 mb-3 line-clamp-2">
-                              {product.descricao}
-                            </p>
-                          )}
-                        </div>
-
-                        {/* Botões de ação */}
-                        <div className={`flex gap-2 ${viewMode === 'list' ? 'mt-auto' : ''}`}>
-                          <button
-                            onClick={() => handleAddToQuote(product)}
-                            className="flex-1 bg-teal-600 text-white px-4 py-2 rounded-lg hover:bg-teal-700 transition-colors flex items-center justify-center"
-                          >
-                            <ShoppingCart size={16} className="mr-2" />
-                            Adicionar ao Orçamento
-                          </button>
-                        </div>
-                      </div>
-                    </div>
-                  ))}
-                </div>
-
-                {/* Paginação */}
-                {totalPages > 1 && (
-                  <div className="mt-8 flex justify-center">
-                    <div className="flex space-x-2">
-                      <button
-                        onClick={() => setCurrentPage(prev => Math.max(prev - 1, 1))}
-                        disabled={currentPage === 1}
-                        className="px-4 py-2 border border-gray-300 rounded-lg disabled:opacity-50 disabled:cursor-not-allowed hover:bg-gray-50"
-                      >
-                        Anterior
-                      </button>
-                      
-                      {[...Array(totalPages)].map((_, index) => (
-                        <button
-                          key={index + 1}
-                          onClick={() => setCurrentPage(index + 1)}
-                          className={`px-4 py-2 rounded-lg ${
-                            currentPage === index + 1
-                              ? 'bg-teal-600 text-white'
-                              : 'border border-gray-300 hover:bg-gray-50'
-                          }`}
-                        >
-                          {index + 1}
-                        </button>
-                      ))}
-                      
-                      <button
-                        onClick={() => setCurrentPage(prev => Math.min(prev + 1, totalPages))}
-                        disabled={currentPage === totalPages}
-                        className="px-4 py-2 border border-gray-300 rounded-lg disabled:opacity-50 disabled:cursor-not-allowed hover:bg-gray-50"
-                      >
-                        Próxima
-                      </button>
-                    </div>
-                  </div>
-                )}
-              </>
-            )}
+        {/* Paginação */}
+        {totalPages > 1 && (
+          <div className="flex justify-center space-x-2">
+            {Array.from({ length: totalPages }, (_, i) => i + 1).map((page) => (
+              <button
+                key={page}
+                onClick={() => setCurrentPage(page)}
+                className={`px-4 py-2 rounded-lg ${
+                  currentPage === page
+                    ? 'bg-teal-600 text-white'
+                    : 'bg-white text-gray-600 hover:bg-gray-50'
+                }`}
+              >
+                {page}
+              </button>
+            ))}
           </div>
+        )}
+
+        {/* Call to action */}
+        <div className="bg-white rounded-lg shadow-sm p-8 text-center mt-12">
+          <h2 className="text-2xl font-bold text-gray-900 mb-4">Não encontrou o que procura?</h2>
+          <p className="text-gray-600 mb-6">
+            Entre em contato conosco para produtos personalizados ou mais informações
+          </p>
+          <a
+            href="https://wa.me/5511999999999"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="inline-flex items-center px-6 py-3 bg-green-600 text-white rounded-lg hover:bg-green-700 transition-colors"
+          >
+            Falar no WhatsApp
+          </a>
         </div>
       </div>
     </div>
