@@ -1,0 +1,410 @@
+/* Flipbook Catalog Styles */
+.flipbook-container {
+  min-height: 100vh;
+  background: linear-gradient(135deg, #1e3c72 0%, #2a5298 100%);
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  position: relative;
+}
+
+.flipbook-loading {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 50vh;
+  color: white;
+}
+
+.loading-spinner {
+  width: 40px;
+  height: 40px;
+  border: 4px solid rgba(255, 255, 255, 0.3);
+  border-top: 4px solid white;
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+  margin-bottom: 20px;
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+/* Controles do Flipbook */
+.flipbook-controls {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  max-width: 800px;
+  margin-bottom: 20px;
+  padding: 0 20px;
+}
+
+.controls-left,
+.controls-right {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.control-btn {
+  background: rgba(255, 255, 255, 0.9);
+  border: none;
+  border-radius: 8px;
+  padding: 10px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.control-btn:hover {
+  background: white;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+}
+
+.control-btn:active {
+  transform: translateY(0);
+}
+
+.page-counter {
+  background: rgba(255, 255, 255, 0.9);
+  padding: 8px 16px;
+  border-radius: 20px;
+  font-weight: 600;
+  color: #333;
+  min-width: 80px;
+  text-align: center;
+}
+
+/* Wrapper do Flipbook */
+.flipbook-wrapper {
+  transition: transform 0.3s ease;
+  transform-origin: center;
+}
+
+/* Estilos das Páginas */
+.flipbook-page {
+  width: 100%;
+  height: 100%;
+  position: relative;
+  overflow: hidden;
+  border-radius: 8px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+}
+
+.page-background {
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  top: 0;
+  left: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Página de Capa */
+.cover-page .page-background {
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+}
+
+.cover-content {
+  text-align: center;
+  color: white;
+  padding: 40px;
+}
+
+.cover-logo {
+  margin-bottom: 30px;
+}
+
+.logo-image {
+  max-width: 200px;
+  height: auto;
+  filter: brightness(1.1);
+}
+
+.cover-title {
+  font-size: 3rem;
+  font-weight: 700;
+  margin-bottom: 15px;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+}
+
+.cover-subtitle {
+  font-size: 1.2rem;
+  margin-bottom: 30px;
+  opacity: 0.9;
+}
+
+.cover-year {
+  font-size: 2rem;
+  font-weight: 300;
+  opacity: 0.8;
+}
+
+/* Página de Produtos */
+.products-page .page-background {
+  background: linear-gradient(45deg, #f0f2f5 0%, #e8ecf0 100%);
+  padding: 30px;
+}
+
+.products-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 20px;
+  width: 100%;
+  height: 100%;
+}
+
+.product-card {
+  background: white;
+  border-radius: 12px;
+  padding: 15px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s ease;
+  display: flex;
+  flex-direction: column;
+}
+
+.product-card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.15);
+}
+
+.product-image-container {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 10px;
+  background: #f8f9fa;
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+.product-image {
+  width: 100%;
+  height: 120px;
+  object-fit: cover;
+  border-radius: 8px;
+}
+
+.product-info {
+  text-align: center;
+}
+
+.product-code {
+  font-size: 1.1rem;
+  font-weight: 600;
+  color: #333;
+  margin-bottom: 5px;
+}
+
+.product-dimensions {
+  font-size: 0.9rem;
+  color: #666;
+  margin-bottom: 3px;
+}
+
+.product-series {
+  font-size: 0.8rem;
+  color: #888;
+  font-style: italic;
+}
+
+/* Página de Contato */
+.contact-page .page-background {
+  background: linear-gradient(135deg, #2c3e50 0%, #34495e 100%);
+  padding: 40px;
+}
+
+.contact-content {
+  text-align: center;
+  color: white;
+  width: 100%;
+}
+
+.contact-title {
+  font-size: 2.5rem;
+  font-weight: 700;
+  margin-bottom: 30px;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+}
+
+.contact-info {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 20px;
+  margin-bottom: 30px;
+}
+
+.contact-item h3 {
+  font-size: 1.2rem;
+  margin-bottom: 8px;
+  color: #3498db;
+}
+
+.contact-item p {
+  font-size: 1rem;
+  opacity: 0.9;
+  line-height: 1.4;
+}
+
+.contact-cta {
+  margin-top: 30px;
+}
+
+.contact-cta p {
+  font-size: 1.1rem;
+  margin-bottom: 20px;
+  opacity: 0.9;
+}
+
+.contact-button {
+  display: inline-block;
+  background: #3498db;
+  color: white;
+  padding: 12px 30px;
+  border-radius: 25px;
+  text-decoration: none;
+  font-weight: 600;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 12px rgba(52, 152, 219, 0.3);
+}
+
+.contact-button:hover {
+  background: #2980b9;
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(52, 152, 219, 0.4);
+}
+
+/* Instruções */
+.flipbook-instructions {
+  margin-top: 20px;
+  text-align: center;
+  color: rgba(255, 255, 255, 0.8);
+  font-size: 0.9rem;
+}
+
+/* Responsividade */
+@media (max-width: 768px) {
+  .flipbook-container {
+    padding: 10px;
+  }
+  
+  .flipbook-controls {
+    flex-direction: column;
+    gap: 15px;
+    margin-bottom: 15px;
+  }
+  
+  .controls-left,
+  .controls-right {
+    gap: 8px;
+  }
+  
+  .control-btn {
+    padding: 8px;
+  }
+  
+  .cover-title {
+    font-size: 2rem;
+  }
+  
+  .cover-subtitle {
+    font-size: 1rem;
+  }
+  
+  .products-grid {
+    grid-template-columns: 1fr;
+    gap: 15px;
+  }
+  
+  .product-image {
+    height: 100px;
+  }
+  
+  .contact-title {
+    font-size: 2rem;
+  }
+  
+  .flipbook-instructions {
+    font-size: 0.8rem;
+    padding: 0 20px;
+  }
+}
+
+@media (max-width: 480px) {
+  .products-page .page-background {
+    padding: 20px;
+  }
+  
+  .contact-page .page-background {
+    padding: 30px;
+  }
+  
+  .cover-content {
+    padding: 30px;
+  }
+  
+  .logo-image {
+    max-width: 150px;
+  }
+  
+  .cover-title {
+    font-size: 1.8rem;
+  }
+  
+  .contact-title {
+    font-size: 1.8rem;
+  }
+}
+
+/* Animações */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.flipbook-page {
+  animation: fadeIn 0.5s ease-out;
+}
+
+/* Estilos para tela cheia */
+.flipbook-container:fullscreen {
+  background: #000;
+}
+
+.flipbook-container:fullscreen .flipbook-wrapper {
+  transform: scale(1.2);
+}
+
+/* Customização do react-pageflip */
+.stf__parent {
+  margin: 0 auto;
+}
+
+.stf__block {
+  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.2);
+}
+
+.stf__item {
+  border-radius: 8px;
+  overflow: hidden;
+}
+

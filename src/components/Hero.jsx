@@ -28,15 +28,28 @@ const Hero = () => {
           são expressões de estilo, personalidade e sofisticação.
         </p>
         
-        <Link to="/orcamento#catalogo">
-          <Button 
-            size="lg" 
-            className="btn-primary font-montserrat font-semibold text-lg px-8 py-4 hover:scale-105 transition-transform duration-200"
-          >
-            Veja o Catálogo
-            <ChevronRight className="ml-2 h-5 w-5" />
-          </Button>
-        </Link>
+        <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
+          <Link to="/catalogo">
+            <Button 
+              size="lg" 
+              className="btn-primary font-montserrat font-semibold text-lg px-8 py-4 hover:scale-105 transition-transform duration-200"
+            >
+              Veja o Catálogo
+              <ChevronRight className="ml-2 h-5 w-5" />
+            </Button>
+          </Link>
+          
+          <Link to="/catalogo-virtual">
+            <Button 
+              size="lg" 
+              variant="outline"
+              className="bg-white/10 border-white text-white hover:bg-white hover:text-gray-900 font-montserrat font-semibold text-lg px-8 py-4 hover:scale-105 transition-all duration-200"
+            >
+              Catálogo Virtual
+              <ChevronRight className="ml-2 h-5 w-5" />
+            </Button>
+          </Link>
+        </div>
       </div>
       
       {/* Scroll Indicator */}
