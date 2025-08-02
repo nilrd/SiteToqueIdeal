@@ -29,9 +29,9 @@ const Header = () => {
   return (
     <header className="bg-white shadow-sm sticky top-0 z-50">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="flex items-center h-16">
+        <div className="flex justify-between items-center h-16">
           {/* Logo */}
-          <div className="flex-shrink-0 mr-12">
+          <div className="flex-shrink-0 mr-8">
             <Link to="/">
               <img 
                 src="/logo-toque-ideal-novo.png" 
@@ -45,7 +45,7 @@ const Header = () => {
           </div>
 
           {/* Desktop Navigation */}
-          <nav className="hidden md:flex space-x-8 flex-1 justify-center">
+          <nav className="hidden md:flex space-x-6 flex-1">
             {menuItems.map((item) => (
               <Link
                 key={item.name}
@@ -62,7 +62,7 @@ const Header = () => {
           </nav>
 
           {/* Search and CTA Button */}
-          <div className="hidden md:flex items-center space-x-4 ml-auto">
+          <div className="hidden md:flex items-center space-x-4">
             <Button variant="ghost" size="icon">
               <Search className="h-5 w-5" />
             </Button>
@@ -81,7 +81,7 @@ const Header = () => {
           </div>
 
           {/* Mobile menu button */}
-          <div className="md:hidden ml-auto">
+          <div className="md:hidden">
             <Button
               variant="ghost"
               size="icon"
