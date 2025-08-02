@@ -1,57 +1,59 @@
+import { useState, useEffect } from 'react'
 import { Link } from 'react-router-dom'
-import { useQuote } from '../context/QuoteContext'
 import { Button } from '@/components/ui/button'
-import { Plus } from 'lucide-react'
+import { ChevronLeft, ChevronRight } from 'lucide-react'
 
 const ProductHighlights = () => {
-  const { addItem } = useQuote()
+  const [currentSlide, setCurrentSlide] = useState(0)
 
-  // Produtos em destaque com imagens reais
-  const highlightedProducts = [
+  // Imagens do carrossel
+  const carouselImages = [
     {
-      id: '2680-32',
-      code: '2680-32',
-      dimensions: '25x25cm',
-      color: 'Turquesa',
-      image: '/fotos1/fotos1/2680 TURQUESA.jpg'
+      id: 1,
+      src: '/carousel-1.png',
+      alt: 'Decoração em vidro - Ambiente sala de estar'
     },
     {
-      id: '1300-32',
-      code: '1300-32', 
-      dimensions: '30x30cm',
-      color: 'Bronze',
-      image: '/fotos1/fotos1/1300 BRONZE COM AMBAR.jpg'
+      id: 2,
+      src: '/carousel-2.png',
+      alt: 'Peças decorativas em vidro - Showroom'
     },
     {
-      id: '1704-32',
-      code: '1704-32',
-      dimensions: '40x22cm',
-      color: 'Verde',
-      image: '/fotos1/fotos1/1704- VERDE.jpg'
+      id: 3,
+      src: '/carousel-3.png',
+      alt: 'Peça decorativa em vidro dourado'
     },
     {
-      id: '215-32',
-      code: '215-32',
-      dimensions: '35x35cm',
-      color: 'Branco',
-      image: '/fotos1/fotos1/215 BRANCO.jpg'
+      id: 4,
+      src: '/carousel-4.png',
+      alt: 'Folha decorativa em vidro verde'
+    },
+    {
+      id: 5,
+      src: '/carousel-5.png',
+      alt: 'Ambiente decorado com peças em vidro'
     }
   ]
 
-  const handleAddToQuote = (product) => {
-    addItem(product)
-    // Feedback visual melhorado
-    const button = event.target.closest('button')
-    const originalText = button.textContent
-    button.textContent = '✓ Adicionado!'
-    button.classList.add('bg-green-600')
-    
-    setTimeout(() => {
-      button.textContent = originalText
-      button.classList.remove('bg-green-600')
-    }, 2000)
-    
-    console.log('Produto adicionado ao orçamento:', product.code)
+  // Auto-play do carrossel
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setCurrentSlide((prev) => (prev + 1) % carouselImages.length)
+    }, 5000) // Troca a cada 5 segundos
+
+    return () => clearInterval(interval)
+  }, [carouselImages.length])
+
+  const nextSlide = () => {
+    setCurrentSlide((prev) => (prev + 1) % carouselImages.length)
+  }
+
+  const prevSlide = () => {
+    setCurrentSlide((prev) => (prev - 1 + carouselImages.length) % carouselImages.length)
+  }
+
+  const goToSlide = (index) => {
+    setCurrentSlide(index)
   }
 
   return (
@@ -61,63 +63,81 @@ const ProductHighlights = () => {
           <h2 className="text-3xl md:text-4xl font-montserrat font-bold text-gray-900 mb-4">
             Destaques
           </h2>
-          <p className="text-lg text-gray-600 font-lato max-w-2xl mx-auto">
-            Conheça alguns dos nossos produtos mais procurados, 
-            criados com a qualidade e design únicos da Toque Ideal.
+          <p className="text-lg text-gray-600 font-lato max-w-2xl mx-auto mb-8">
+            Conheça mais dos nossos produtos únicos, criados com a qualidade e design exclusivos da Toque Ideal.
           </p>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
-          {highlightedProducts.map((product) => (
-            <div 
-              key={product.id}
-              className="bg-white rounded-lg shadow-md overflow-hidden hover:shadow-xl transition-shadow duration-300 group"
-            >
-              {/* Product Image */}
-              <div className="relative h-48 bg-gray-100 overflow-hidden">
-                <img 
-                  src={product.image} 
-                  alt={product.code}
-                  className="w-full h-full object-contain hover:scale-105 transition-transform duration-300"
+        {/* Carrossel */}
+        <div className="relative max-w-4xl mx-auto mb-8">
+          <div className="relative h-96 md:h-[500px] rounded-2xl overflow-hidden shadow-2xl">
+            {/* Imagens do carrossel */}
+            {carouselImages.map((image, index) => (
+              <div
+                key={image.id}
+                className={`absolute inset-0 transition-opacity duration-500 ease-in-out ${
+                  index === currentSlide ? 'opacity-100' : 'opacity-0'
+                }`}
+              >
+                <img
+                  src={image.src}
+                  alt={image.alt}
+                  className="w-full h-full object-cover"
                   loading="lazy"
-                  decoding="async"
-                  onError={(e) => {
-                    e.target.src = '/fotosinstagram/fotosinstagram/post_insta (2).jpg'
-                  }}
                 />
               </div>
+            ))}
 
-              {/* Product Info */}
-              <div className="p-6">
-                <h3 className="text-xl font-montserrat font-semibold text-gray-900 mb-2">
-                  {product.code}
-                </h3>
-                <p className="text-gray-600 font-lato mb-4">
-                  {product.dimensions}
-                </p>
-                
-                <Button 
-                  onClick={(e) => handleAddToQuote(product, e)}
-                  className="w-full btn-primary font-montserrat font-medium group-hover:scale-105 transition-transform duration-200"
-                  size="sm"
-                >
-                  <Plus className="mr-2 h-4 w-4" />
-                  Adicionar ao orçamento
-                </Button>
-              </div>
+            {/* Overlay gradiente */}
+            <div className="absolute inset-0 bg-gradient-to-t from-black/30 to-transparent"></div>
+
+            {/* Botões de navegação */}
+            <button
+              onClick={prevSlide}
+              className="absolute left-4 top-1/2 transform -translate-y-1/2 bg-white/20 backdrop-blur-sm text-white p-3 rounded-full hover:bg-white/30 transition-all duration-200 group"
+              aria-label="Imagem anterior"
+            >
+              <ChevronLeft className="h-6 w-6 group-hover:scale-110 transition-transform" />
+            </button>
+
+            <button
+              onClick={nextSlide}
+              className="absolute right-4 top-1/2 transform -translate-y-1/2 bg-white/20 backdrop-blur-sm text-white p-3 rounded-full hover:bg-white/30 transition-all duration-200 group"
+              aria-label="Próxima imagem"
+            >
+              <ChevronRight className="h-6 w-6 group-hover:scale-110 transition-transform" />
+            </button>
+
+            {/* Indicadores */}
+            <div className="absolute bottom-4 left-1/2 transform -translate-x-1/2 flex space-x-2">
+              {carouselImages.map((_, index) => (
+                <button
+                  key={index}
+                  onClick={() => goToSlide(index)}
+                  className={`w-3 h-3 rounded-full transition-all duration-200 ${
+                    index === currentSlide 
+                      ? 'bg-white scale-110' 
+                      : 'bg-white/50 hover:bg-white/75'
+                  }`}
+                  aria-label={`Ir para imagem ${index + 1}`}
+                />
+              ))}
             </div>
-          ))}
+          </div>
         </div>
 
-        {/* View All Products Button */}
-        <div className="text-center mt-12">
-          <Link to="/catalogo">
+        {/* Texto e botão */}
+        <div className="text-center">
+          <p className="text-lg text-gray-700 font-lato mb-8 max-w-2xl mx-auto">
+            Conheça mais dos nossos produtos no catálogo
+          </p>
+          
+          <Link to="/orcamento#catalogo">
             <Button 
-              variant="outline" 
               size="lg"
-              className="font-montserrat font-semibold border-2 border-primary text-primary hover:bg-primary hover:text-white transition-colors duration-200"
+              className="btn-primary font-montserrat font-semibold text-lg px-8 py-4 hover:scale-105 transition-transform duration-200"
             >
-              Ver todos os produtos
+              Ver Catálogo Completo
             </Button>
           </Link>
         </div>

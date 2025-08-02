@@ -28,7 +28,7 @@ const Hero = () => {
           são expressões de estilo, personalidade e sofisticação.
         </p>
         
-        <Link to="/catalogo">
+        <Link to="/orcamento#catalogo">
           <Button 
             size="lg" 
             className="btn-primary font-montserrat font-semibold text-lg px-8 py-4 hover:scale-105 transition-transform duration-200"
