@@ -1,8 +1,10 @@
-import { useState } from 'react'
+import React, { useState } from 'react'
 import { Button } from '@/components/ui/button'
 import { MapPin, Phone, Mail, Clock, Send, MessageCircle, Instagram, Facebook } from 'lucide-react'
+import { useSanity } from '../contexts/SanityContext'
 
 const Contato = () => {
+  const { submitContactForm } = useSanity()
   const [formData, setFormData] = useState({
     nome: '',
     email: '',
@@ -10,6 +12,8 @@ const Contato = () => {
     assunto: '',
     mensagem: ''
   })
+  const [isSubmitting, setIsSubmitting] = useState(false)
+  const [submitStatus, setSubmitStatus] = useState(null)
 
   const handleInputChange = (e) => {
     const { name, value } = e.target
@@ -19,11 +23,34 @@ const Contato = () => {
     }))
   }
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault()
-    // Aqui seria implementada a lógica de envio do formulário
-    console.log('Dados do formulário:', formData)
-    alert('Mensagem enviada com sucesso! Entraremos em contato em breve.')
+    setIsSubmitting(true)
+    setSubmitStatus(null)
+
+    try {
+      // Enviar para o Sanity CMS
+      await submitContactForm({
+        nome: formData.nome,
+        email: formData.email,
+        telefone: formData.telefone,
+        mensagem: `Assunto: ${formData.assunto}\n\n${formData.mensagem}`
+      })
+
+      setSubmitStatus('success')
+      setFormData({
+        nome: '',
+        email: '',
+        telefone: '',
+        assunto: '',
+        mensagem: ''
+      })
+    } catch (error) {
+      console.error('Erro ao enviar formulário:', error)
+      setSubmitStatus('error')
+    } finally {
+      setIsSubmitting(false)
+    }
   }
 
   const handleWhatsApp = () => {
