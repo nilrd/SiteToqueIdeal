@@ -2,6 +2,7 @@ import React, { useState } from 'react'
 import { Button } from '@/components/ui/button'
 import { MapPin, Phone, Mail, Clock, Send, MessageCircle, Instagram, Facebook } from 'lucide-react'
 import { useSanity } from '../contexts/SanityContext'
+import { contactInfo, generateWhatsAppLink, generateEmailLink } from '../data/contacts'
 
 const Contato = () => {
   const { submitContactForm } = useSanity()
@@ -51,12 +52,6 @@ const Contato = () => {
     } finally {
       setIsSubmitting(false)
     }
-  }
-
-  const handleWhatsApp = () => {
-    const message = `Olá! Gostaria de mais informações sobre os produtos da Toque Ideal.`
-    const whatsappUrl = `https://api.whatsapp.com/message/XZPATWYC6F2BA1?autoload=1&app_absent=0`
-    window.open(whatsappUrl, '_blank')
   }
 
   return (
@@ -168,10 +163,34 @@ const Contato = () => {
                 type="submit" 
                 className="w-full btn-primary font-montserrat font-semibold"
                 size="lg"
+                disabled={isSubmitting}
               >
                 <Send className="mr-2 h-4 w-4" />
-                Enviar Mensagem
+                {isSubmitting ? 'Enviando...' : 'Enviar Mensagem'}
               </Button>
+
+              {/* Status Messages */}
+              {submitStatus === 'success' && (
+                <div className="mt-4 p-4 bg-green-50 border border-green-200 rounded-lg">
+                  <p className="text-green-800 font-montserrat font-semibold">
+                    ✅ Mensagem enviada com sucesso!
+                  </p>
+                  <p className="text-green-600 text-sm mt-1">
+                    Entraremos em contato em breve.
+                  </p>
+                </div>
+              )}
+
+              {submitStatus === 'error' && (
+                <div className="mt-4 p-4 bg-red-50 border border-red-200 rounded-lg">
+                  <p className="text-red-800 font-montserrat font-semibold">
+                    ❌ Erro ao enviar mensagem
+                  </p>
+                  <p className="text-red-600 text-sm mt-1">
+                    Tente novamente ou entre em contato pelo WhatsApp.
+                  </p>
+                </div>
+              )}
             </form>
 
             {/* WhatsApp CTA */}
@@ -186,7 +205,7 @@ const Contato = () => {
                   </p>
                 </div>
                 <Button 
-                  onClick={handleWhatsApp}
+                  onClick={() => window.open(generateWhatsAppLink('Olá! Gostaria de mais informações sobre os produtos da Toque Ideal.'), '_blank')}
                   className="bg-green-600 hover:bg-green-700 text-white font-montserrat font-semibold"
                 >
                   <MessageCircle className="mr-2 h-4 w-4" />
@@ -211,9 +230,14 @@ const Contato = () => {
                   </div>
                   <div>
                     <h3 className="font-montserrat font-semibold text-gray-900 mb-1">Telefone</h3>
-                    <p className="text-gray-600 font-lato">
-                      +55 11 96776-7364 (WhatsApp)
-                    </p>
+                    <a 
+                      href={generateWhatsAppLink('Olá! Gostaria de falar sobre o telefone.')}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="text-gray-600 font-lato hover:underline"
+                    >
+                      {contactInfo.phoneFormatted} (WhatsApp)
+                    </a>
                   </div>
                 </div>
 
@@ -223,9 +247,12 @@ const Contato = () => {
                   </div>
                   <div>
                     <h3 className="font-montserrat font-semibold text-gray-900 mb-1">E-mail</h3>
-                    <p className="text-gray-600 font-lato">
-                      comercial@toqueideal.com
-                    </p>
+                    <a 
+                      href={generateEmailLink('Contato via Site Toque Ideal')}
+                      className="text-gray-600 font-lato hover:underline"
+                    >
+                      {contactInfo.email}
+                    </a>
                   </div>
                 </div>
 
@@ -253,16 +280,31 @@ const Contato = () => {
 
               <div className="flex space-x-4">
                 <a 
-                  href="#" 
+                  href={contactInfo.socialMedia.instagram.url} 
+                  target="_blank"
+                  rel="noopener noreferrer"
                   className="w-12 h-12 bg-pink-600 rounded-lg flex items-center justify-center hover:bg-pink-700 transition-colors"
+                  aria-label="Instagram"
                 >
                   <Instagram className="h-6 w-6 text-white" />
                 </a>
                 <a 
-                  href="#" 
+                  href={contactInfo.socialMedia.facebook.url} 
+                  target="_blank"
+                  rel="noopener noreferrer"
                   className="w-12 h-12 bg-blue-600 rounded-lg flex items-center justify-center hover:bg-blue-700 transition-colors"
+                  aria-label="Facebook"
                 >
                   <Facebook className="h-6 w-6 text-white" />
+                </a>
+                <a 
+                  href={contactInfo.whatsapp.url} 
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="w-12 h-12 bg-green-600 rounded-lg flex items-center justify-center hover:bg-green-700 transition-colors"
+                  aria-label="WhatsApp"
+                >
+                  <MessageCircle className="h-6 w-6 text-white" />
                 </a>
               </div>
 

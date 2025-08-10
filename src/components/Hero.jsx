@@ -24,7 +24,7 @@ const Hero = () => {
         </h1>
         
         <p className="text-xl md:text-2xl font-lato mb-8 opacity-90 max-w-2xl mx-auto">
-          Há mais de 5 anos criando peças únicas que vão além da decoração: 
+          Há mais de 10 anos criando peças únicas que vão além da decoração: 
           são expressões de estilo, personalidade e sofisticação.
         </p>
         
@@ -35,17 +35,6 @@ const Hero = () => {
               className="btn-primary font-montserrat font-semibold text-lg px-8 py-4 hover:scale-105 transition-transform duration-200"
             >
               Veja o Catálogo
-              <ChevronRight className="ml-2 h-5 w-5" />
-            </Button>
-          </Link>
-          
-          <Link to="/catalogo-virtual">
-            <Button 
-              size="lg" 
-              variant="outline"
-              className="bg-white/10 border-white text-white hover:bg-white hover:text-gray-900 font-montserrat font-semibold text-lg px-8 py-4 hover:scale-105 transition-all duration-200"
-            >
-              Catálogo Virtual
               <ChevronRight className="ml-2 h-5 w-5" />
             </Button>
           </Link>

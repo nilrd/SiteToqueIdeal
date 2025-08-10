@@ -5,7 +5,7 @@ export const contactInfo = {
   email: 'comercial@toqueideal.com',
   whatsapp: {
     number: '5511967767364',
-    url: 'https://api.whatsapp.com/message/XZPATWYC6F2BA1?autoload=1&app_absent=0'
+    url: 'https://api.whatsapp.com/send?phone=5511967767364'
   },
   socialMedia: {
     instagram: {

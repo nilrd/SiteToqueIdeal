@@ -1,5 +1,6 @@
-import { Phone, Mail, MapPin, Facebook, Instagram, Linkedin, MessageCircle } from 'lucide-react'
+import { Phone, Mail, MapPin, Facebook, Instagram, MessageCircle } from 'lucide-react'
 import { Link } from 'react-router-dom'
+import { contactInfo, generateWhatsAppLink, generateEmailLink } from '../data/contacts'
 
 const Footer = () => {
   return (
@@ -32,16 +33,28 @@ const Footer = () => {
             <div className="space-y-3">
               <div className="flex items-center space-x-3">
                 <Phone className="h-5 w-5 text-teal-300" />
-                <span className="font-lato">+55 11 96776-7364</span>
+                <a 
+                  href={generateWhatsAppLink("Olá! Gostaria de falar sobre o telefone.")}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="font-lato hover:text-teal-300 transition-colors"
+                >
+                  {contactInfo.phoneFormatted}
+                </a>
               </div>
               <div className="flex items-center space-x-3">
                 <Mail className="h-5 w-5 text-teal-300" />
-                <span className="font-lato">comercial@toqueideal.com</span>
+                <a 
+                  href={generateEmailLink("Contato via Site Toque Ideal")}
+                  className="font-lato hover:text-teal-300 transition-colors"
+                >
+                  {contactInfo.email}
+                </a>
               </div>
               <div className="flex items-center space-x-3">
                 <MessageCircle className="h-5 w-5 text-green-400" />
                 <a 
-                  href="https://api.whatsapp.com/message/XZPATWYC6F2BA1?autoload=1&app_absent=0"
+                  href={contactInfo.whatsapp.url}
                   target="_blank"
                   rel="noopener noreferrer"
                   className="font-lato hover:text-teal-300 transition-colors"
@@ -86,7 +99,7 @@ const Footer = () => {
             </h3>
             <div className="flex space-x-4 mb-4">
               <a 
-                href="https://www.instagram.com/toque.ideal?igsh=cnhzZGNzeGIya2F5" 
+                href={contactInfo.socialMedia.instagram.url} 
                 target="_blank"
                 rel="noopener noreferrer"
                 className="w-10 h-10 bg-teal-700 rounded-full flex items-center justify-center hover:bg-pink-600 transition-colors"
@@ -95,7 +108,7 @@ const Footer = () => {
                 <Instagram className="h-5 w-5" />
               </a>
               <a 
-                href="https://www.facebook.com/toqueideall" 
+                href={contactInfo.socialMedia.facebook.url} 
                 target="_blank"
                 rel="noopener noreferrer"
                 className="w-10 h-10 bg-teal-700 rounded-full flex items-center justify-center hover:bg-blue-600 transition-colors"
@@ -104,7 +117,7 @@ const Footer = () => {
                 <Facebook className="h-5 w-5" />
               </a>
               <a 
-                href="https://api.whatsapp.com/message/XZPATWYC6F2BA1?autoload=1&app_absent=0" 
+                href={contactInfo.whatsapp.url} 
                 target="_blank"
                 rel="noopener noreferrer"
                 className="w-10 h-10 bg-teal-700 rounded-full flex items-center justify-center hover:bg-green-600 transition-colors"
@@ -118,22 +131,22 @@ const Footer = () => {
             </p>
             <p className="text-sm text-teal-300 font-lato">
               Instagram: <a 
-                href="https://www.instagram.com/toque.ideal?igsh=cnhzZGNzeGIya2F5" 
+                href={contactInfo.socialMedia.instagram.url} 
                 target="_blank"
                 rel="noopener noreferrer"
                 className="hover:text-white underline"
               >
-                @toque.ideal
+                {contactInfo.socialMedia.instagram.handle}
               </a>
             </p>
             <p className="text-sm text-teal-300 font-lato">
               Facebook: <a 
-                href="https://www.facebook.com/toqueideall" 
+                href={contactInfo.socialMedia.facebook.url} 
                 target="_blank"
                 rel="noopener noreferrer"
                 className="hover:text-white underline"
               >
-                toqueideall
+                {contactInfo.socialMedia.facebook.handle}
               </a>
             </p>
           </div>

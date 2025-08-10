@@ -60,24 +60,33 @@ const CatalogCMS = () => {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
         
         {/* Aviso de Catálogo em Construção */}
-        <div className="bg-yellow-50 border border-yellow-200 rounded-lg p-6 mb-8">
+        <div className="bg-amber-50 border border-amber-200 rounded-lg p-6 mb-8">
           <div className="flex items-start space-x-3">
-            <AlertTriangle className="h-6 w-6 text-yellow-600 flex-shrink-0 mt-1" />
+            <AlertTriangle className="h-6 w-6 text-amber-600 flex-shrink-0 mt-1" />
             <div>
-              <h3 className="text-lg font-montserrat font-semibold text-yellow-800 mb-2">
-                Catálogo de Apresentação
+              <h3 className="text-lg font-montserrat font-semibold text-amber-800 mb-2">
+                🚧 Catálogo em Construção
               </h3>
-              <p className="text-yellow-700 font-lato mb-3">
-                Este é nosso catálogo de apresentação com produtos selecionados. 
-                Todas as peças podem ser personalizadas conforme sua necessidade.
+              <p className="text-amber-700 font-lato mb-3">
+                <strong>Este catálogo está atualmente em desenvolvimento.</strong> As imagens apresentadas são meramente ilustrativas 
+                e servem como referência visual enquanto finalizamos nossa galeria completa de produtos.
               </p>
-              <div className="bg-blue-50 border border-blue-200 rounded-md p-3">
+              <div className="bg-blue-50 border border-blue-200 rounded-md p-3 mb-3">
                 <div className="flex items-start space-x-2">
                   <Info className="h-5 w-5 text-blue-600 flex-shrink-0 mt-0.5" />
                   <div className="text-sm text-blue-700">
                     <p className="font-semibold mb-1">Personalização Total:</p>
-                    <p>Cores, tamanhos e acabamentos podem ser adaptados para seu projeto. 
-                    Clique nos produtos para ver detalhes e solicitar orçamento.</p>
+                    <p>Todas as peças podem ser personalizadas em cores, tamanhos e acabamentos conforme sua necessidade. 
+                    Entre em contato para solicitar orçamento personalizado.</p>
+                  </div>
+                </div>
+              </div>
+              <div className="bg-green-50 border border-green-200 rounded-md p-3">
+                <div className="flex items-center space-x-2">
+                  <MessageCircle className="h-5 w-5 text-green-600 flex-shrink-0" />
+                  <div className="text-sm text-green-700">
+                    <p><strong>Catálogo Completo:</strong> Para ver nossa linha completa de produtos e receber atendimento personalizado, 
+                    entre em contato via WhatsApp.</p>
                   </div>
                 </div>
               </div>
