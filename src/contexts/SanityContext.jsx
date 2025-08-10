@@ -60,6 +60,18 @@ export const SanityProvider = ({ children }) => {
     }
   }
 
+  // Função para enviar candidatura de trabalho
+  const submitJobApplication = async (formData) => {
+    try {
+      // Por enquanto, apenas simular envio
+      console.log('Candidatura enviada:', formData)
+      return { success: true, message: 'Candidatura enviada com sucesso! Entraremos em contato em breve.' }
+    } catch (err) {
+      console.error('Erro ao enviar candidatura:', err)
+      return { success: false, message: 'Erro ao enviar candidatura. Tente novamente.' }
+    }
+  }
+
   // Não buscar dados automaticamente no useEffect para evitar erros
   // useEffect(() => {
   //   fetchData()
@@ -75,7 +87,8 @@ export const SanityProvider = ({ children }) => {
     error,
     sanityAvailable,
     fetchData,
-    submitContactForm
+    submitContactForm,
+    submitJobApplication
   }
 
   return (

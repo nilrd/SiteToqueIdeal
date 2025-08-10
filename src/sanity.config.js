@@ -96,6 +96,15 @@ export default defineConfig({
               .title('Formulários de Contato')
               .filter('_type == "contatoFormulario"')
           ),
+        
+        S.listItem()
+          .title('Trabalhe Conosco')
+          .icon(() => '💼')
+          .child(
+            S.documentTypeList('trabalheConoscoFormulario')
+              .title('Candidaturas')
+              .filter('_type == "trabalheConoscoFormulario"')
+          ),
       ]),
 })
 

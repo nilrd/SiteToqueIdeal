@@ -19,7 +19,7 @@ const Footer = () => {
               </h3>
             </div>
             <p className="text-sm text-teal-300 font-lato leading-relaxed">
-              Há mais de 5 anos criando peças únicas em vidro que transformam ambientes 
+              Há mais de 10 anos criando peças únicas em vidro que transformam ambientes 
               e expressam personalidade com qualidade e sofisticação.
             </p>
           </div>
@@ -32,18 +32,11 @@ const Footer = () => {
             <div className="space-y-3">
               <div className="flex items-center space-x-3">
                 <Phone className="h-5 w-5 text-teal-300" />
-                <span className="font-lato">(11) 98999-9999</span>
+                <span className="font-lato">+55 11 96776-7364</span>
               </div>
               <div className="flex items-center space-x-3">
                 <Mail className="h-5 w-5 text-teal-300" />
-                <span className="font-lato">contato@toqueideal.com</span>
-              </div>
-              <div className="flex items-start space-x-3">
-                <MapPin className="h-5 w-5 text-teal-300 mt-1" />
-                <div className="font-lato">
-                  <p>R. José Bernardo Pinto, 333</p>
-                  <p>Vila Guilherme, São Paulo - SP</p>
-                </div>
+                <span className="font-lato">comercial@toqueideal.com</span>
               </div>
             </div>
           </div>
@@ -65,9 +58,6 @@ const Footer = () => {
               </Link>
               <Link to="/eventos" className="block font-lato hover:text-teal-300 transition-colors">
                 Feiras & Eventos
-              </Link>
-              <Link to="/blog" className="block font-lato hover:text-teal-300 transition-colors">
-                Blog
               </Link>
               <Link to="/trabalhe-conosco" className="block font-lato hover:text-teal-300 transition-colors">
                 Trabalhe Conosco

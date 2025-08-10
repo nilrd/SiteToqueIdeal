@@ -14,7 +14,6 @@ const Header = () => {
     { name: 'Catálogo', href: '/catalogo' },
     { name: 'Sobre Nós', href: '/sobre-nos' },
     { name: 'Feiras & Eventos', href: '/eventos' },
-    { name: 'Blog', href: '/blog' },
     { name: 'Trabalhe Conosco', href: '/trabalhe-conosco' },
     { name: 'Contato', href: '/contato' }
   ]

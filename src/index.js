@@ -5,6 +5,7 @@ import categoria from './categoria'
 import configuracoesGerais from './configuracoesGerais'
 import evento from './evento'
 import contatoFormulario from './contatoFormulario'
+import trabalheConoscoFormulario from './trabalheConoscoFormulario'
 
 export const schemaTypes = [
   produto,
@@ -14,5 +15,6 @@ export const schemaTypes = [
   configuracoesGerais,
   evento,
   contatoFormulario,
+  trabalheConoscoFormulario,
 ]
 

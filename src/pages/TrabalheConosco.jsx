@@ -1,8 +1,10 @@
 import { useState } from 'react'
 import { Button } from '@/components/ui/button'
 import { Upload, Linkedin, Mail, Phone, User, FileText, Send } from 'lucide-react'
+import { useSanity } from '../contexts/SanityContext'
 
 const TrabalheConosco = () => {
+  const { submitJobApplication } = useSanity()
   const [formData, setFormData] = useState({
     nome: '',
     email: '',
@@ -12,6 +14,8 @@ const TrabalheConosco = () => {
     experiencia: '',
     mensagem: ''
   })
+  const [isSubmitting, setIsSubmitting] = useState(false)
+  const [submitStatus, setSubmitStatus] = useState(null)
 
   const handleInputChange = (e) => {
     const { name, value } = e.target
@@ -21,11 +25,39 @@ const TrabalheConosco = () => {
     }))
   }
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault()
-    // Aqui seria implementada a lógica de envio do formulário
-    console.log('Dados do formulário:', formData)
-    alert('Currículo enviado com sucesso! Entraremos em contato em breve.')
+    setIsSubmitting(true)
+    setSubmitStatus(null)
+
+    try {
+      // Enviar para o Sanity CMS
+      await submitJobApplication({
+        nome: formData.nome,
+        email: formData.email,
+        telefone: formData.telefone,
+        linkedin: formData.linkedin,
+        area: formData.area,
+        experiencia: formData.experiencia,
+        mensagem: formData.mensagem
+      })
+
+      setSubmitStatus('success')
+      setFormData({
+        nome: '',
+        email: '',
+        telefone: '',
+        linkedin: '',
+        area: '',
+        experiencia: '',
+        mensagem: ''
+      })
+    } catch (error) {
+      console.error('Erro ao enviar formulário:', error)
+      setSubmitStatus('error')
+    } finally {
+      setIsSubmitting(false)
+    }
   }
 
   const areas = [

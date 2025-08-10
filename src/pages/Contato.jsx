@@ -55,7 +55,7 @@ const Contato = () => {
 
   const handleWhatsApp = () => {
     const message = `Olá! Gostaria de mais informações sobre os produtos da Toque Ideal.`
-    const whatsappUrl = `https://wa.me/5511999999999?text=${encodeURIComponent(message)}`
+    const whatsappUrl = `https://api.whatsapp.com/message/XZPATWYC6F2BA1?autoload=1&app_absent=0`
     window.open(whatsappUrl, '_blank')
   }
 
@@ -207,27 +207,12 @@ const Contato = () => {
               <div className="space-y-6">
                 <div className="flex items-start space-x-4">
                   <div className="w-12 h-12 bg-primary rounded-lg flex items-center justify-center flex-shrink-0">
-                    <MapPin className="h-6 w-6 text-white" />
-                  </div>
-                  <div>
-                    <h3 className="font-montserrat font-semibold text-gray-900 mb-1">Endereço</h3>
-                    <p className="text-gray-600 font-lato">
-                      Rua das Flores, 123<br />
-                      Centro - São Paulo - SP<br />
-                      CEP: 01234-567
-                    </p>
-                  </div>
-                </div>
-
-                <div className="flex items-start space-x-4">
-                  <div className="w-12 h-12 bg-primary rounded-lg flex items-center justify-center flex-shrink-0">
                     <Phone className="h-6 w-6 text-white" />
                   </div>
                   <div>
-                    <h3 className="font-montserrat font-semibold text-gray-900 mb-1">Telefones</h3>
+                    <h3 className="font-montserrat font-semibold text-gray-900 mb-1">Telefone</h3>
                     <p className="text-gray-600 font-lato">
-                      (11) 3456-7890<br />
-                      (11) 99999-9999 (WhatsApp)
+                      +55 11 96776-7364 (WhatsApp)
                     </p>
                   </div>
                 </div>
@@ -237,10 +222,9 @@ const Contato = () => {
                     <Mail className="h-6 w-6 text-white" />
                   </div>
                   <div>
-                    <h3 className="font-montserrat font-semibold text-gray-900 mb-1">E-mails</h3>
+                    <h3 className="font-montserrat font-semibold text-gray-900 mb-1">E-mail</h3>
                     <p className="text-gray-600 font-lato">
-                      contato@toqueideal.com.br<br />
-                      vendas@toqueideal.com.br
+                      comercial@toqueideal.com
                     </p>
                   </div>
                 </div>

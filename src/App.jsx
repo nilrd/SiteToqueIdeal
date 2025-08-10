@@ -8,13 +8,11 @@ import Catalog from './pages/Catalog'
 import CatalogCMS from './pages/CatalogCMS'
 import Quote from './pages/Quote'
 import Events from './pages/Events'
-import Blog from './pages/Blog'
 import TrabalheConosco from './pages/TrabalheConosco'
 import Contato from './pages/Contato'
 import SobreNos from './pages/SobreNos'
 import Admin from './pages/Admin'
 import SanityStudio from './pages/SanityStudio'
-import CatalogoVirtual from './pages/CatalogoVirtual'
 import './App.css'
 
 function App() {
@@ -30,10 +28,8 @@ function App() {
                 <Route path="/catalogo" element={<CatalogCMS />} />
                 <Route path="/catalogo-antigo" element={<Catalog />} />
                 <Route path="/catalogo-cms" element={<CatalogCMS />} />
-                <Route path="/catalogo-virtual" element={<CatalogoVirtual />} />
                 <Route path="/orcamento" element={<Quote />} />
                 <Route path="/eventos" element={<Events />} />
-                <Route path="/blog" element={<Blog />} />
                 <Route path="/trabalhe-conosco" element={<TrabalheConosco />} />
                 <Route path="/contato" element={<Contato />} />
                 <Route path="/sobre-nos" element={<SobreNos />} />
