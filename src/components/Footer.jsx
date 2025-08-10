@@ -1,4 +1,4 @@
-import { Phone, Mail, MapPin, Facebook, Instagram, Linkedin } from 'lucide-react'
+import { Phone, Mail, MapPin, Facebook, Instagram, Linkedin, MessageCircle } from 'lucide-react'
 import { Link } from 'react-router-dom'
 
 const Footer = () => {
@@ -37,6 +37,17 @@ const Footer = () => {
               <div className="flex items-center space-x-3">
                 <Mail className="h-5 w-5 text-teal-300" />
                 <span className="font-lato">comercial@toqueideal.com</span>
+              </div>
+              <div className="flex items-center space-x-3">
+                <MessageCircle className="h-5 w-5 text-green-400" />
+                <a 
+                  href="https://api.whatsapp.com/message/XZPATWYC6F2BA1?autoload=1&app_absent=0"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="font-lato hover:text-teal-300 transition-colors"
+                >
+                  WhatsApp
+                </a>
               </div>
             </div>
           </div>
@@ -78,35 +89,52 @@ const Footer = () => {
                 href="https://www.instagram.com/toque.ideal?igsh=cnhzZGNzeGIya2F5" 
                 target="_blank"
                 rel="noopener noreferrer"
-                className="w-10 h-10 bg-teal-700 rounded-full flex items-center justify-center hover:bg-teal-600 transition-colors"
+                className="w-10 h-10 bg-teal-700 rounded-full flex items-center justify-center hover:bg-pink-600 transition-colors"
                 aria-label="Instagram"
               >
                 <Instagram className="h-5 w-5" />
               </a>
               <a 
-                href="#" 
-                className="w-10 h-10 bg-teal-700 rounded-full flex items-center justify-center hover:bg-teal-600 transition-colors"
+                href="https://www.facebook.com/toqueideall" 
+                target="_blank"
+                rel="noopener noreferrer"
+                className="w-10 h-10 bg-teal-700 rounded-full flex items-center justify-center hover:bg-blue-600 transition-colors"
                 aria-label="Facebook"
               >
                 <Facebook className="h-5 w-5" />
               </a>
               <a 
-                href="#" 
-                className="w-10 h-10 bg-teal-700 rounded-full flex items-center justify-center hover:bg-teal-600 transition-colors"
-                aria-label="LinkedIn"
+                href="https://api.whatsapp.com/message/XZPATWYC6F2BA1?autoload=1&app_absent=0" 
+                target="_blank"
+                rel="noopener noreferrer"
+                className="w-10 h-10 bg-teal-700 rounded-full flex items-center justify-center hover:bg-green-600 transition-colors"
+                aria-label="WhatsApp"
               >
-                <Linkedin className="h-5 w-5" />
+                <MessageCircle className="h-5 w-5" />
               </a>
             </div>
             <p className="text-sm text-teal-300 font-lato">
-              Siga-nos <a 
+              Siga-nos nas redes sociais:
+            </p>
+            <p className="text-sm text-teal-300 font-lato">
+              Instagram: <a 
                 href="https://www.instagram.com/toque.ideal?igsh=cnhzZGNzeGIya2F5" 
                 target="_blank"
                 rel="noopener noreferrer"
                 className="hover:text-white underline"
               >
                 @toque.ideal
-              </a> para acompanhar nossas novidades e participações em eventos.
+              </a>
+            </p>
+            <p className="text-sm text-teal-300 font-lato">
+              Facebook: <a 
+                href="https://www.facebook.com/toqueideall" 
+                target="_blank"
+                rel="noopener noreferrer"
+                className="hover:text-white underline"
+              >
+                toqueideall
+              </a>
             </p>
           </div>
         </div>

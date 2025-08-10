@@ -2,7 +2,7 @@ import { useState } from 'react'
 import { Link, useLocation } from 'react-router-dom'
 import { useQuote } from '../context/QuoteContext'
 import { Button } from '@/components/ui/button'
-import { Menu, X, Search, ShoppingCart } from 'lucide-react'
+import { Menu, X, Search, ShoppingCart, MessageCircle } from 'lucide-react'
 
 const Header = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false)
@@ -23,6 +23,12 @@ const Header = () => {
       return location.pathname === '/'
     }
     return location.pathname === href
+  }
+
+  const handleWhatsAppContact = () => {
+    const message = `Olá! Gostaria de solicitar um orçamento para produtos do catálogo Toque Ideal.`
+    const whatsappUrl = `https://api.whatsapp.com/send?phone=5511967767364&text=${encodeURIComponent(message)}`
+    window.open(whatsappUrl, '_blank')
   }
 
   return (
@@ -60,23 +66,16 @@ const Header = () => {
             ))}
           </nav>
 
-          {/* Search and CTA Button */}
+          {/* Desktop Actions */}
           <div className="hidden md:flex items-center space-x-4">
-            <Button variant="ghost" size="icon">
-              <Search className="h-5 w-5" />
+            <Button
+              onClick={handleWhatsAppContact}
+              className="bg-green-600 hover:bg-green-700 text-white font-montserrat font-semibold"
+              size="sm"
+            >
+              <MessageCircle className="mr-2 h-4 w-4" />
+              ORÇAMENTO
             </Button>
-            
-            <Link to="/orcamento">
-              <Button className="btn-primary font-montserrat font-semibold relative">
-                <ShoppingCart className="mr-2 h-4 w-4" />
-                Monte seu Orçamento
-                {getTotalItems() > 0 && (
-                  <span className="absolute -top-2 -right-2 bg-red-500 text-white text-xs rounded-full h-5 w-5 flex items-center justify-center">
-                    {getTotalItems()}
-                  </span>
-                )}
-              </Button>
-            </Link>
           </div>
 
           {/* Mobile menu button */}
@@ -114,17 +113,13 @@ const Header = () => {
                 </Link>
               ))}
               <div className="px-3 py-2">
-                <Link to="/orcamento">
-                  <Button className="btn-primary w-full font-montserrat font-semibold relative">
-                    <ShoppingCart className="mr-2 h-4 w-4" />
-                    Monte seu Orçamento
-                    {getTotalItems() > 0 && (
-                      <span className="absolute -top-2 -right-2 bg-red-500 text-white text-xs rounded-full h-5 w-5 flex items-center justify-center">
-                        {getTotalItems()}
-                      </span>
-                    )}
-                  </Button>
-                </Link>
+                <Button
+                  onClick={handleWhatsAppContact}
+                  className="bg-green-600 hover:bg-green-700 text-white w-full font-montserrat font-semibold"
+                >
+                  <MessageCircle className="mr-2 h-4 w-4" />
+                  ORÇAMENTO
+                </Button>
               </div>
             </div>
           </div>
