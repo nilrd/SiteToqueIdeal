@@ -225,7 +225,7 @@ const Footer = () => {
                 style={{
                   width: '40px',
                   height: '40px',
-                  backgroundColor: '#004d47',
+                  backgroundColor: '#C8A882',
                   borderRadius: '50%',
                   display: 'flex',
                   alignItems: 'center',
@@ -233,10 +233,10 @@ const Footer = () => {
                   transition: 'background-color 0.3s ease'
                 }}
                 onMouseEnter={(e) => e.target.style.backgroundColor = '#e1306c'}
-                onMouseLeave={(e) => e.target.style.backgroundColor = '#004d47'}
+                onMouseLeave={(e) => e.target.style.backgroundColor = '#C8A882'}
                 aria-label="Instagram"
               >
-                <Instagram style={{ width: '20px', height: '20px' }} />
+                <Instagram style={{ width: '20px', height: '20px', color: 'white' }} />
               </a>
               <a 
                 href={contactInfo.socialMedia.facebook.url} 
@@ -245,7 +245,7 @@ const Footer = () => {
                 style={{
                   width: '40px',
                   height: '40px',
-                  backgroundColor: '#004d47',
+                  backgroundColor: '#C8A882',
                   borderRadius: '50%',
                   display: 'flex',
                   alignItems: 'center',
@@ -253,10 +253,10 @@ const Footer = () => {
                   transition: 'background-color 0.3s ease'
                 }}
                 onMouseEnter={(e) => e.target.style.backgroundColor = '#1877f2'}
-                onMouseLeave={(e) => e.target.style.backgroundColor = '#004d47'}
+                onMouseLeave={(e) => e.target.style.backgroundColor = '#C8A882'}
                 aria-label="Facebook"
               >
-                <Facebook style={{ width: '20px', height: '20px' }} />
+                <Facebook style={{ width: '20px', height: '20px', color: 'white' }} />
               </a>
               <a 
                 href={contactInfo.whatsapp.url} 
@@ -265,7 +265,7 @@ const Footer = () => {
                 style={{
                   width: '40px',
                   height: '40px',
-                  backgroundColor: '#004d47',
+                  backgroundColor: '#6B8E5A',
                   borderRadius: '50%',
                   display: 'flex',
                   alignItems: 'center',
@@ -273,10 +273,10 @@ const Footer = () => {
                   transition: 'background-color 0.3s ease'
                 }}
                 onMouseEnter={(e) => e.target.style.backgroundColor = '#25d366'}
-                onMouseLeave={(e) => e.target.style.backgroundColor = '#004d47'}
+                onMouseLeave={(e) => e.target.style.backgroundColor = '#6B8E5A'}
                 aria-label="WhatsApp"
               >
-                <MessageCircle style={{ width: '20px', height: '20px' }} />
+                <MessageCircle style={{ width: '20px', height: '20px', color: 'white' }} />
               </a>
             </div>
             <div style={{ fontSize: '0.875rem', color: '#cccccc', fontFamily: 'Lato, sans-serif' }}>
@@ -341,7 +341,7 @@ const Footer = () => {
       <style jsx>{`
         @media (max-width: 768px) {
           footer {
-            padding: 1.5rem 1rem !important;
+            padding: 1.25rem 1rem !important;
           }
           
           footer > div > div {
@@ -351,6 +351,38 @@ const Footer = () => {
           
           footer > div > div > div {
             text-align: center !important;
+          }
+          
+          footer img {
+            height: 28px !important;
+            margin-right: 8px !important;
+          }
+          
+          footer h3 {
+            font-size: 1rem !important;
+          }
+          
+          footer p, footer a {
+            font-size: 0.85rem !important;
+          }
+        }
+        
+        @media (max-width: 480px) {
+          footer {
+            padding: 1rem 0.75rem !important;
+          }
+          
+          footer img {
+            height: 24px !important;
+            margin-right: 6px !important;
+          }
+          
+          footer h3 {
+            font-size: 0.9rem !important;
+          }
+          
+          footer p, footer a {
+            font-size: 0.8rem !important;
           }
         }
       `}</style>

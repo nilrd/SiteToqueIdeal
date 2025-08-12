@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import { Link, useLocation } from 'react-router-dom'
 import { useQuote } from '../context/QuoteContext'
 import { Button } from '@/components/ui/button'
@@ -31,6 +31,40 @@ const Header = () => {
     setIsMenuOpen(false)
   }
 
+  const handleMenuItemClick = () => {
+    setIsMenuOpen(false)
+    // Scroll para o topo da página
+    window.scrollTo({ top: 0, behavior: 'smooth' })
+  }
+
+  // Fechar menu ao clicar fora
+  useEffect(() => {
+    const handleClickOutside = (event) => {
+      if (isMenuOpen && !event.target.closest('.mobile-menu') && !event.target.closest('.mobile-menu-button')) {
+        setIsMenuOpen(false)
+      }
+    }
+
+    document.addEventListener('mousedown', handleClickOutside)
+    return () => {
+      document.removeEventListener('mousedown', handleClickOutside)
+    }
+  }, [isMenuOpen])
+
+  // Fechar menu ao redimensionar a tela
+  useEffect(() => {
+    const handleResize = () => {
+      if (window.innerWidth > 768) {
+        setIsMenuOpen(false)
+      }
+    }
+
+    window.addEventListener('resize', handleResize)
+    return () => {
+      window.removeEventListener('resize', handleResize)
+    }
+  }, [])
+
   return (
     <>
       <header 
@@ -49,7 +83,11 @@ const Header = () => {
       >
         {/* Logo - Responsivo */}
         <div style={{ display: 'flex', alignItems: 'center', flex: '0 0 auto' }}>
-          <Link to="/" style={{ display: 'flex', alignItems: 'center', textDecoration: 'none', color: 'white' }}>
+          <Link 
+            to="/" 
+            style={{ display: 'flex', alignItems: 'center', textDecoration: 'none', color: 'white' }}
+            onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
+          >
             <img 
               src="/LOGO_BRANCA.png" 
               alt="Toque Ideal Logo" 
@@ -78,8 +116,7 @@ const Header = () => {
         <nav style={{ 
           display: 'flex', 
           flex: 1, 
-          justifyContent: 'center',
-          '@media (max-width: 768px)': { display: 'none' }
+          justifyContent: 'center'
         }} className="hidden md:flex">
           <div style={{ display: 'flex', gap: '2rem' }}>
             {menuItems.map((item) => (
@@ -97,6 +134,7 @@ const Header = () => {
                   transition: 'all 0.3s ease',
                   whiteSpace: 'nowrap'
                 }}
+                onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
                 onMouseEnter={(e) => {
                   if (!isActive(item.href)) {
                     e.target.style.color = '#ffffff'
@@ -161,6 +199,7 @@ const Header = () => {
         {/* Mobile menu button */}
         <div className="md:hidden" style={{ flex: '0 0 auto' }}>
           <Button
+            className="mobile-menu-button"
             onClick={() => setIsMenuOpen(!isMenuOpen)}
             style={{
               background: 'transparent',
@@ -199,80 +238,79 @@ const Header = () => {
       )}
 
       {/* Mobile Navigation */}
-      {isMenuOpen && (
-        <div 
-          style={{
-            position: 'fixed',
-            top: '0',
-            right: '0',
-            width: '280px',
-            height: '100vh',
-            backgroundColor: '#214567',
-            padding: '5rem 1.5rem 2rem 1.5rem',
-            display: 'flex',
-            flexDirection: 'column',
-            gap: '1rem',
-            zIndex: 999,
-            boxShadow: '-4px 0 8px rgba(0,0,0,0.1)',
-            overflowY: 'auto'
-          }}
-          className="md:hidden"
-        >
-          {menuItems.map((item) => (
-            <Link
-              key={item.name}
-              to={item.href}
-              style={{
-                color: isActive(item.href) ? '#ffffff' : '#cccccc',
-                textDecoration: 'none',
-                fontFamily: 'Montserrat, sans-serif',
-                fontWeight: '500',
-                fontSize: '1rem',
-                padding: '0.75rem 0',
-                borderBottom: '1px solid rgba(255,255,255,0.1)',
-                transition: 'color 0.3s ease'
-              }}
-              onClick={() => setIsMenuOpen(false)}
-              onMouseEnter={(e) => e.target.style.color = '#ffffff'}
-              onMouseLeave={(e) => {
-                if (!isActive(item.href)) {
-                  e.target.style.color = '#cccccc'
-                }
-              }}
-            >
-              {item.name}
-            </Link>
-          ))}
-          
-          <div style={{ marginTop: '2rem', paddingTop: '1rem', borderTop: '1px solid rgba(255,255,255,0.1)' }}>
-            <Button
-              onClick={handleWhatsAppContact}
-              style={{
-                background: '#006d67',
-                color: 'white',
-                padding: '0.8rem 1.5rem',
-                borderRadius: '6px',
-                border: 'none',
-                fontFamily: 'Montserrat, sans-serif',
-                fontWeight: '600',
-                fontSize: '0.9rem',
-                cursor: 'pointer',
-                width: '100%',
-                display: 'flex',
-                alignItems: 'center',
-                justifyContent: 'center',
-                gap: '0.5rem',
-                transition: 'background-color 0.3s ease'
-              }}
-              onMouseEnter={(e) => e.target.style.backgroundColor = '#005a55'}
-              onMouseLeave={(e) => e.target.style.backgroundColor = '#006d67'}
-            >
-              <MessageCircle style={{ width: '16px', height: '16px' }} />
-              ORÇAMENTO
-            </Button>
-          </div>
+      <div 
+        className={`mobile-menu ${isMenuOpen ? 'mobile-menu-open' : 'mobile-menu-closed'}`}
+        style={{
+          position: 'fixed',
+          top: '0',
+          right: isMenuOpen ? '0' : '-300px',
+          width: '280px',
+          height: '100vh',
+          backgroundColor: '#214567',
+          padding: '5rem 1.5rem 2rem 1.5rem',
+          display: 'flex',
+          flexDirection: 'column',
+          gap: '1rem',
+          zIndex: 999,
+          boxShadow: '-4px 0 8px rgba(0,0,0,0.1)',
+          overflowY: 'auto',
+          transition: 'right 0.3s ease-in-out'
+        }}
+      >
+        {menuItems.map((item) => (
+          <Link
+            key={item.name}
+            to={item.href}
+            style={{
+              color: isActive(item.href) ? '#ffffff' : '#cccccc',
+              textDecoration: 'none',
+              fontFamily: 'Montserrat, sans-serif',
+              fontWeight: '500',
+              fontSize: '1rem',
+              padding: '0.75rem 0',
+              borderBottom: '1px solid rgba(255,255,255,0.1)',
+              transition: 'color 0.3s ease'
+            }}
+            onClick={handleMenuItemClick}
+            onMouseEnter={(e) => e.target.style.color = '#ffffff'}
+            onMouseLeave={(e) => {
+              if (!isActive(item.href)) {
+                e.target.style.color = '#cccccc'
+              }
+            }}
+          >
+            {item.name}
+          </Link>
+        ))}
+        
+        <div style={{ marginTop: '2rem', paddingTop: '1rem', borderTop: '1px solid rgba(255,255,255,0.1)' }}>
+          <Button
+            onClick={handleWhatsAppContact}
+            style={{
+              background: '#006d67',
+              color: 'white',
+              padding: '0.8rem 1.5rem',
+              borderRadius: '6px',
+              border: 'none',
+              fontFamily: 'Montserrat, sans-serif',
+              fontWeight: '600',
+              fontSize: '0.9rem',
+              cursor: 'pointer',
+              width: '100%',
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'center',
+              gap: '0.5rem',
+              transition: 'background-color 0.3s ease'
+            }}
+            onMouseEnter={(e) => e.target.style.backgroundColor = '#005a55'}
+            onMouseLeave={(e) => e.target.style.backgroundColor = '#006d67'}
+          >
+            <MessageCircle style={{ width: '16px', height: '16px' }} />
+            ORÇAMENTO
+          </Button>
         </div>
-      )}
+      </div>
 
       {/* CSS para responsividade */}
       <style jsx>{`

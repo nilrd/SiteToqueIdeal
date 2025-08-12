@@ -6,6 +6,7 @@ import Footer from './components/Footer'
 import Home from './pages/Home'
 import Catalog from './pages/Catalog'
 import CatalogCMS from './pages/CatalogCMS'
+import CatalogCMSImproved from './pages/CatalogCMSImproved'
 import Quote from './pages/Quote'
 import Events from './pages/Events'
 import TrabalheConosco from './pages/TrabalheConosco'
@@ -26,7 +27,7 @@ function App() {
             <main>
               <Routes>
                 <Route path="/" element={<Home />} />
-                <Route path="/catalogo" element={<CatalogCMS />} />
+                <Route path="/catalogo" element={<CatalogCMSImproved />} />
                 <Route path="/catalogo-antigo" element={<Catalog />} />
                 <Route path="/catalogo-cms" element={<CatalogCMS />} />
                 <Route path="/orcamento" element={<Quote />} />

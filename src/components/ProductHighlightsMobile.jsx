@@ -72,7 +72,7 @@ const ProductHighlightsMobile = () => {
         <div 
           style={{
             display: 'grid',
-            gridTemplateColumns: 'repeat(auto-fit, minmax(160px, 1fr))',
+            gridTemplateColumns: 'repeat(auto-fit, minmax(180px, 1fr))',
             gap: '1rem',
             padding: '0',
             maxWidth: '100%'
@@ -93,7 +93,7 @@ const ProductHighlightsMobile = () => {
                 display: 'flex',
                 flexDirection: 'column',
                 height: '100%',
-                minHeight: '280px'
+                minHeight: '300px'
               }}
               onClick={() => openModal(product)}
               onMouseEnter={(e) => {
@@ -119,7 +119,7 @@ const ProductHighlightsMobile = () => {
               {/* Container da imagem com aspect ratio fixo */}
               <div style={{
                 width: '100%',
-                height: '120px',
+                height: '140px',
                 marginBottom: '0.75rem',
                 borderRadius: '8px',
                 overflow: 'hidden',
@@ -201,10 +201,10 @@ const ProductHighlightsMobile = () => {
                 ))}
               </div>
 
-              {/* Botão */}
+              {/* Botão com nova cor */}
               <button
                 style={{
-                  background: '#006d67',
+                  background: '#C8A882',
                   color: 'white',
                   padding: '0.6rem 1rem',
                   borderRadius: '8px',
@@ -217,8 +217,8 @@ const ProductHighlightsMobile = () => {
                   marginTop: 'auto',
                   fontFamily: 'Montserrat, sans-serif'
                 }}
-                onMouseEnter={(e) => e.target.style.backgroundColor = '#004d47'}
-                onMouseLeave={(e) => e.target.style.backgroundColor = '#006d67'}
+                onMouseEnter={(e) => e.target.style.backgroundColor = '#8B7355'}
+                onMouseLeave={(e) => e.target.style.backgroundColor = '#C8A882'}
               >
                 Ver Detalhes
               </button>
@@ -476,18 +476,44 @@ const ProductHighlightsMobile = () => {
             grid-template-columns: repeat(2, 1fr) !important;
             gap: 0.75rem !important;
           }
+          
+          div[style*="minHeight: '300px'"] {
+            min-height: 280px !important;
+          }
+          
+          div[style*="height: '140px'"] {
+            height: 120px !important;
+          }
         }
         
         @media (max-width: 480px) {
           div[style*="grid-template-columns"] {
-            grid-template-columns: 1fr !important;
+            grid-template-columns: repeat(2, 1fr) !important;
             gap: 0.5rem !important;
+          }
+          
+          div[style*="minHeight: '300px'"] {
+            min-height: 260px !important;
+            padding: 0.75rem !important;
+          }
+          
+          div[style*="height: '140px'"] {
+            height: 100px !important;
+          }
+          
+          div[style*="fontSize: '2rem'"] {
+            font-size: 1.5rem !important;
           }
         }
         
         @media (max-width: 360px) {
-          div[style*="minHeight: '280px'"] {
-            min-height: 260px !important;
+          div[style*="minHeight: '300px'"] {
+            min-height: 240px !important;
+            padding: 0.5rem !important;
+          }
+          
+          div[style*="height: '140px'"] {
+            height: 90px !important;
           }
         }
       `}</style>
