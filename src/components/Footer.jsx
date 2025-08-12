@@ -5,7 +5,7 @@ import { contactInfo, generateWhatsAppLink, generateEmailLink } from '../data/co
 const Footer = () => {
   return (
     <footer style={{
-      background: '#002b29',
+      background: '#214567',
       color: 'white',
       padding: '2rem',
       textAlign: 'center'

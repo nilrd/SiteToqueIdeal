@@ -1,19 +1,30 @@
-/* Responsividade Global */
+/* Responsividade Global - Versão Otimizada */
 
 /* Reset e base */
 * {
   box-sizing: border-box;
 }
 
+html, body {
+  overflow-x: hidden;
+  width: 100%;
+}
+
 /* Header responsivo */
 @media (max-width: 768px) {
   header {
-    padding: 1rem !important;
-    flex-wrap: wrap;
+    padding: 0.75rem 1rem !important;
+    flex-wrap: nowrap !important;
   }
   
-  header .logo-text {
-    font-size: 1.25rem !important;
+  header img {
+    height: 28px !important;
+    margin-right: 6px !important;
+  }
+  
+  header span {
+    font-size: 1rem !important;
+    letter-spacing: 0.25px !important;
   }
   
   .hidden {
@@ -29,23 +40,23 @@
   }
 }
 
-/* Hero responsivo */
-@media (max-width: 768px) {
-  .hero-section {
-    padding: 3rem 1rem !important;
-    min-height: 60vh !important;
+@media (max-width: 480px) {
+  header {
+    padding: 0.5rem 0.75rem !important;
   }
   
-  .hero-title {
-    font-size: 2rem !important;
+  header img {
+    height: 24px !important;
+    margin-right: 4px !important;
   }
   
-  .hero-subtitle {
-    font-size: 1rem !important;
+  header span {
+    font-size: 0.9rem !important;
   }
 }
 
-@media (max-width: 480px) {
+/* Hero responsivo */
+@media (max-width: 768px) {
   .hero-section {
     padding: 2rem 1rem !important;
     min-height: 50vh !important;
@@ -53,46 +64,75 @@
   
   .hero-title {
     font-size: 1.75rem !important;
+    line-height: 1.2 !important;
+  }
+  
+  .hero-subtitle {
+    font-size: 0.9rem !important;
+    line-height: 1.4 !important;
+  }
+  
+  .hero-button {
+    padding: 0.75rem 1.5rem !important;
+    font-size: 0.9rem !important;
   }
 }
 
-/* Produtos em destaque responsivo */
+@media (max-width: 480px) {
+  .hero-section {
+    padding: 1.5rem 0.75rem !important;
+    min-height: 45vh !important;
+  }
+  
+  .hero-title {
+    font-size: 1.5rem !important;
+  }
+  
+  .hero-subtitle {
+    font-size: 0.85rem !important;
+  }
+}
+
+/* Produtos em destaque - Otimizado para mobile */
 @media (max-width: 1200px) {
   .produtos-grid {
     grid-template-columns: repeat(4, 1fr) !important;
-    gap: 1.25rem !important;
+    gap: 1rem !important;
   }
 }
 
 @media (max-width: 992px) {
   .produtos-grid {
     grid-template-columns: repeat(3, 1fr) !important;
-    gap: 1rem !important;
+    gap: 0.875rem !important;
   }
 }
 
 @media (max-width: 768px) {
   .produtos-grid {
     grid-template-columns: repeat(2, 1fr) !important;
-    gap: 0.8rem !important;
-    padding: 1rem !important;
+    gap: 0.75rem !important;
+    padding: 0 !important;
   }
   
   .product-card {
-    padding: 0.8rem !important;
+    padding: 0.75rem !important;
+    min-height: 260px !important;
   }
   
   .product-card img {
-    height: 150px !important;
+    height: 120px !important;
+    object-fit: contain !important;
   }
   
   .product-card h3 {
-    font-size: 1rem !important;
+    font-size: 0.9rem !important;
+    line-height: 1.2 !important;
   }
   
   .product-card button {
     padding: 0.6rem 1rem !important;
-    font-size: 0.8rem !important;
+    font-size: 0.75rem !important;
   }
 }
 
@@ -102,8 +142,24 @@
     gap: 0.5rem !important;
   }
   
+  .product-card {
+    max-width: 300px !important;
+    margin: 0 auto !important;
+  }
+  
   .product-card img {
-    height: 200px !important;
+    height: 140px !important;
+  }
+}
+
+@media (max-width: 360px) {
+  .product-card {
+    min-height: 240px !important;
+    padding: 0.5rem !important;
+  }
+  
+  .product-card img {
+    height: 100px !important;
   }
 }
 
@@ -111,32 +167,34 @@
 @media (max-width: 768px) {
   .modal-content {
     flex-direction: column !important;
-    margin: 1rem !important;
+    margin: 0.75rem !important;
     max-height: 95vh !important;
     overflow-y: auto !important;
+    border-radius: 16px !important;
   }
   
   .modal-image {
-    height: 300px !important;
-    border-radius: 12px 12px 0 0 !important;
+    height: 250px !important;
+    border-radius: 16px 16px 0 0 !important;
   }
   
   .modal-info {
-    padding: 1.5rem !important;
+    padding: 1.25rem !important;
   }
   
   .modal-info h2 {
-    font-size: 1.5rem !important;
+    font-size: 1.25rem !important;
   }
   
   .modal-info p {
-    font-size: 0.9rem !important;
+    font-size: 0.85rem !important;
   }
 }
 
 @media (max-width: 480px) {
   .modal-content {
     margin: 0.5rem !important;
+    max-width: 95vw !important;
   }
   
   .modal-info {
@@ -144,7 +202,7 @@
   }
   
   .modal-image {
-    height: 250px !important;
+    height: 220px !important;
   }
 }
 
@@ -155,33 +213,37 @@
   }
   
   .events-section {
-    padding: 2rem 1rem !important;
+    padding: 1.5rem 1rem !important;
   }
   
-  .events-title {
-    font-size: 2rem !important;
-  }
-  
-  .invitation-title {
-    font-size: 1.5rem !important;
-  }
-  
-  .form-container {
-    padding: 1.5rem !important;
-  }
-  
-  .form-title {
-    font-size: 1.25rem !important;
-  }
-}
-
-@media (max-width: 480px) {
   .events-title {
     font-size: 1.75rem !important;
   }
   
   .invitation-title {
     font-size: 1.25rem !important;
+  }
+  
+  .form-container {
+    padding: 1.25rem !important;
+  }
+  
+  .form-title {
+    font-size: 1.125rem !important;
+  }
+}
+
+@media (max-width: 480px) {
+  .events-section {
+    padding: 1rem 0.75rem !important;
+  }
+  
+  .events-title {
+    font-size: 1.5rem !important;
+  }
+  
+  .invitation-title {
+    font-size: 1.125rem !important;
   }
   
   .form-container {
@@ -194,7 +256,7 @@
   .footer-grid {
     grid-template-columns: 1fr !important;
     text-align: center !important;
-    gap: 1.5rem !important;
+    gap: 1rem !important;
   }
   
   .footer-section {
@@ -202,7 +264,13 @@
   }
   
   footer {
-    padding: 1.5rem 1rem !important;
+    padding: 1.25rem 1rem !important;
+  }
+}
+
+@media (max-width: 480px) {
+  footer {
+    padding: 1rem 0.75rem !important;
   }
 }
 
@@ -210,19 +278,33 @@
 @media (max-width: 768px) {
   .form-grid {
     grid-template-columns: 1fr !important;
-    gap: 1rem !important;
+    gap: 0.75rem !important;
   }
   
   .form-input {
     font-size: 16px !important; /* Previne zoom no iOS */
+    padding: 0.75rem !important;
+  }
+  
+  .form-textarea {
+    font-size: 16px !important;
+    padding: 0.75rem !important;
   }
 }
 
 /* Botões responsivos */
 @media (max-width: 768px) {
   .btn-responsive {
-    padding: 0.7rem 1.25rem !important;
-    font-size: 0.9rem !important;
+    padding: 0.75rem 1.25rem !important;
+    font-size: 0.875rem !important;
+    min-height: 44px !important;
+  }
+}
+
+@media (max-width: 480px) {
+  .btn-responsive {
+    padding: 0.6rem 1rem !important;
+    font-size: 0.8rem !important;
   }
 }
 
@@ -248,14 +330,14 @@
 /* Grid responsivo padrão */
 .responsive-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
   gap: 1rem;
 }
 
 @media (max-width: 768px) {
   .responsive-grid {
     grid-template-columns: 1fr;
-    gap: 0.8rem;
+    gap: 0.75rem;
   }
 }
 
@@ -269,6 +351,12 @@
 @media (max-width: 768px) {
   .container-responsive {
     padding: 0 1rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .container-responsive {
+    padding: 0 0.75rem;
   }
 }
 
@@ -287,7 +375,7 @@
 
 @media (max-width: 768px) {
   .text-responsive-xl {
-    font-size: 2rem;
+    font-size: 1.75rem;
   }
   
   .text-responsive-lg {
@@ -301,7 +389,7 @@
 
 @media (max-width: 480px) {
   .text-responsive-xl {
-    font-size: 1.75rem;
+    font-size: 1.5rem;
   }
   
   .text-responsive-lg {
@@ -339,12 +427,13 @@
 @media (max-width: 768px) {
   /* Previne overflow horizontal */
   body {
-    overflow-x: hidden;
+    overflow-x: hidden !important;
+    width: 100% !important;
   }
   
   /* Melhora a legibilidade em telas pequenas */
   p, span, div {
-    line-height: 1.6 !important;
+    line-height: 1.5 !important;
   }
   
   /* Garante que imagens não quebrem o layout */
@@ -357,6 +446,11 @@
   button, a {
     min-height: 44px !important;
     min-width: 44px !important;
+  }
+  
+  /* Melhora a área de toque */
+  .touchable {
+    padding: 0.5rem !important;
   }
 }
 
@@ -371,11 +465,41 @@
   }
   
   .text-responsive-xl {
-    font-size: 1.5rem;
+    font-size: 1.25rem;
   }
   
   .text-responsive-lg {
     font-size: 1.125rem;
+  }
+  
+  .text-responsive-md {
+    font-size: 1rem;
+  }
+}
+
+/* Melhorias específicas para iOS */
+@supports (-webkit-touch-callout: none) {
+  input, textarea, select {
+    font-size: 16px !important;
+  }
+}
+
+/* Melhorias para Android */
+@media screen and (-webkit-min-device-pixel-ratio: 0) {
+  select {
+    background-image: none;
+  }
+}
+
+/* Correções para landscape em mobile */
+@media (max-width: 768px) and (orientation: landscape) {
+  .hero-section {
+    min-height: 40vh !important;
+    padding: 1rem !important;
+  }
+  
+  .modal-content {
+    max-height: 90vh !important;
   }
 }
 
