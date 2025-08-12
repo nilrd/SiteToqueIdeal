@@ -14,6 +14,7 @@ import SobreNos from './pages/SobreNos'
 import Admin from './pages/Admin'
 import SanityStudio from './pages/SanityStudio'
 import './App.css'
+import './styles/responsive.css'
 
 function App() {
   return (

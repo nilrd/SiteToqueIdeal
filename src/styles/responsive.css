@@ -1,0 +1,212 @@
+/* Responsividade Global */
+@media (max-width: 768px) {
+  /* Header responsivo */
+  header {
+    padding: 1rem !important;
+  }
+  
+  header .logo-text {
+    font-size: 1.25rem !important;
+  }
+  
+  /* Hero responsivo */
+  .hero-section {
+    padding: 3rem 1rem !important;
+    min-height: 60vh !important;
+  }
+  
+  .hero-title {
+    font-size: 2rem !important;
+  }
+  
+  .hero-subtitle {
+    font-size: 1rem !important;
+  }
+  
+  /* Produtos em destaque responsivo */
+  .produtos-grid {
+    grid-template-columns: repeat(2, 1fr) !important;
+    gap: 0.8rem !important;
+    padding: 1rem !important;
+  }
+  
+  .product-card {
+    padding: 0.8rem !important;
+  }
+  
+  .product-card img {
+    height: 150px !important;
+  }
+  
+  /* Modal responsivo */
+  .modal-content {
+    flex-direction: column !important;
+    margin: 1rem !important;
+    max-height: 95vh !important;
+  }
+  
+  .modal-image {
+    height: 300px !important;
+    border-radius: 12px 12px 0 0 !important;
+  }
+  
+  .modal-info {
+    padding: 1.5rem !important;
+  }
+  
+  /* Eventos e formulários responsivos */
+  .flex-container {
+    flex-direction: column !important;
+  }
+  
+  .events-section {
+    padding: 2rem 1rem !important;
+  }
+  
+  .events-title {
+    font-size: 2rem !important;
+  }
+  
+  .invitation-title {
+    font-size: 1.5rem !important;
+  }
+  
+  /* Footer responsivo */
+  .footer-grid {
+    grid-template-columns: 1fr !important;
+    text-align: center !important;
+  }
+  
+  .footer-section {
+    text-align: center !important;
+  }
+  
+  /* Formulários responsivos */
+  .form-container {
+    padding: 1.5rem !important;
+  }
+  
+  .form-title {
+    font-size: 1.25rem !important;
+  }
+  
+  /* Botões responsivos */
+  .btn-responsive {
+    padding: 0.7rem 1.25rem !important;
+    font-size: 0.9rem !important;
+  }
+}
+
+@media (max-width: 480px) {
+  /* Ajustes para telas muito pequenas */
+  .produtos-grid {
+    grid-template-columns: 1fr !important;
+    gap: 0.5rem !important;
+  }
+  
+  .hero-title {
+    font-size: 1.75rem !important;
+  }
+  
+  .modal-content {
+    margin: 0.5rem !important;
+  }
+  
+  .modal-info {
+    padding: 1rem !important;
+  }
+  
+  .form-container {
+    padding: 1rem !important;
+  }
+}
+
+/* Utilitários para responsividade */
+.hidden-mobile {
+  display: block;
+}
+
+.visible-mobile {
+  display: none;
+}
+
+@media (max-width: 768px) {
+  .hidden-mobile {
+    display: none !important;
+  }
+  
+  .visible-mobile {
+    display: block !important;
+  }
+}
+
+/* Transições suaves */
+* {
+  transition: all 0.3s ease;
+}
+
+/* Grid responsivo padrão */
+.responsive-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 1rem;
+}
+
+@media (max-width: 768px) {
+  .responsive-grid {
+    grid-template-columns: 1fr;
+    gap: 0.8rem;
+  }
+}
+
+/* Container responsivo */
+.container-responsive {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 2rem;
+}
+
+@media (max-width: 768px) {
+  .container-responsive {
+    padding: 0 1rem;
+  }
+}
+
+/* Texto responsivo */
+.text-responsive-xl {
+  font-size: 2.5rem;
+}
+
+.text-responsive-lg {
+  font-size: 2rem;
+}
+
+.text-responsive-md {
+  font-size: 1.5rem;
+}
+
+@media (max-width: 768px) {
+  .text-responsive-xl {
+    font-size: 2rem;
+  }
+  
+  .text-responsive-lg {
+    font-size: 1.5rem;
+  }
+  
+  .text-responsive-md {
+    font-size: 1.25rem;
+  }
+}
+
+/* Espaçamento responsivo */
+.spacing-responsive {
+  padding: 4rem 2rem;
+}
+
+@media (max-width: 768px) {
+  .spacing-responsive {
+    padding: 2rem 1rem;
+  }
+}
+

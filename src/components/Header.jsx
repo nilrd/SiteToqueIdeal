@@ -2,7 +2,7 @@ import { useState } from 'react'
 import { Link, useLocation } from 'react-router-dom'
 import { useQuote } from '../context/QuoteContext'
 import { Button } from '@/components/ui/button'
-import { Menu, X, Search, ShoppingCart, MessageCircle } from 'lucide-react'
+import { Menu, X, Search, MessageCircle } from 'lucide-react'
 
 const Header = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false)
@@ -31,104 +31,198 @@ const Header = () => {
   }
 
   return (
-    <header className="bg-[#214567] shadow-sm sticky top-0 z-50">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="flex justify-between items-center h-16">
-          {/* Logo */}
-          <div className="flex-shrink-0">
-            <Link to="/">
-              <img 
-                src="/logo-toque-ideal-novo.png" 
-                alt="Toque Ideal" 
-                className="h-12 w-auto"
-                onError={(e) => {
-                  e.target.src = 
-'/retangularlogo.png'
-                }}
-              />
+    <header 
+      style={{
+        backgroundColor: '#002b29',
+        color: 'white',
+        display: 'flex',
+        justifyContent: 'space-between',
+        alignItems: 'center',
+        padding: '1rem 2rem',
+        position: 'sticky',
+        top: 0,
+        zIndex: 50,
+        boxShadow: '0 2px 4px rgba(0,0,0,0.1)'
+      }}
+    >
+      {/* Logo */}
+      <div style={{ display: 'flex', alignItems: 'center' }}>
+        <Link to="/" style={{ display: 'flex', alignItems: 'center', textDecoration: 'none', color: 'white' }}>
+          <img 
+            src="/retangularlogo.png" 
+            alt="Toque Ideal Logo" 
+            style={{ height: '40px', width: 'auto', marginRight: '12px' }}
+            onError={(e) => {
+              e.target.src = '/LOGO_BRANCA.png'
+            }}
+          />
+          <span style={{ 
+            fontSize: '1.5rem', 
+            fontWeight: 'bold', 
+            fontFamily: 'Montserrat, sans-serif',
+            letterSpacing: '1px'
+          }}>
+            TOQUE IDEAL
+          </span>
+        </Link>
+      </div>
+
+      {/* Desktop Navigation - Centralizado */}
+      <nav style={{ display: 'flex', flex: 1, justifyContent: 'center' }} className="hidden md:flex">
+        <div style={{ display: 'flex', gap: '2rem' }}>
+          {menuItems.map((item) => (
+            <Link
+              key={item.name}
+              to={item.href}
+              style={{
+                color: isActive(item.href) ? '#ffffff' : '#cccccc',
+                textDecoration: 'none',
+                fontFamily: 'Montserrat, sans-serif',
+                fontWeight: '500',
+                fontSize: '1rem',
+                padding: '0.5rem 0',
+                borderBottom: isActive(item.href) ? '2px solid white' : '2px solid transparent',
+                transition: 'all 0.3s ease'
+              }}
+              onMouseEnter={(e) => {
+                if (!isActive(item.href)) {
+                  e.target.style.color = '#ffffff'
+                }
+              }}
+              onMouseLeave={(e) => {
+                if (!isActive(item.href)) {
+                  e.target.style.color = '#cccccc'
+                }
+              }}
+            >
+              {item.name}
             </Link>
-          </div>
+          ))}
+        </div>
+      </nav>
 
-          {/* Desktop Navigation */}
-          <nav className="hidden md:flex flex-1 justify-center">
-            <div className="flex space-x-6">
-              {menuItems.map((item) => (
-                <Link
-                  key={item.name}
-                  to={item.href}
-                  className={`transition-colors duration-200 font-montserrat font-medium ${
-                    isActive(item.href) 
-                      ? 'text-white border-b-2 border-white' 
-                      : 'text-gray-200 hover:text-white'
-                  }`}
-                >
-                  {item.name}
-                </Link>
-              ))}
-            </div>
-          </nav>
+      {/* Desktop Actions - Direita */}
+      <div style={{ display: 'flex', alignItems: 'center', gap: '1rem' }} className="hidden md:flex">
+        <Search 
+          style={{ 
+            width: '24px', 
+            height: '24px', 
+            color: '#cccccc', 
+            cursor: 'pointer',
+            transition: 'color 0.3s ease'
+          }}
+          onMouseEnter={(e) => e.target.style.color = '#ffffff'}
+          onMouseLeave={(e) => e.target.style.color = '#cccccc'}
+        />
+        <Button
+          onClick={handleWhatsAppContact}
+          style={{
+            background: '#006d67',
+            color: 'white',
+            padding: '0.8rem 1.5rem',
+            borderRadius: '6px',
+            border: 'none',
+            fontFamily: 'Montserrat, sans-serif',
+            fontWeight: '600',
+            fontSize: '0.9rem',
+            cursor: 'pointer',
+            transition: 'background-color 0.3s ease',
+            display: 'flex',
+            alignItems: 'center',
+            gap: '0.5rem'
+          }}
+          onMouseEnter={(e) => e.target.style.backgroundColor = '#005a55'}
+          onMouseLeave={(e) => e.target.style.backgroundColor = '#006d67'}
+        >
+          <MessageCircle style={{ width: '16px', height: '16px' }} />
+          ORÇAMENTO
+        </Button>
+      </div>
 
-          {/* Desktop Actions */}
-          <div className="hidden md:flex items-center space-x-4">
+      {/* Mobile menu button */}
+      <div className="md:hidden">
+        <Button
+          onClick={() => setIsMenuOpen(!isMenuOpen)}
+          style={{
+            background: 'transparent',
+            border: 'none',
+            color: 'white',
+            cursor: 'pointer',
+            padding: '0.5rem'
+          }}
+        >
+          {isMenuOpen ? (
+            <X style={{ width: '24px', height: '24px' }} />
+          ) : (
+            <Menu style={{ width: '24px', height: '24px' }} />
+          )}
+        </Button>
+      </div>
+
+      {/* Mobile Navigation */}
+      {isMenuOpen && (
+        <div 
+          style={{
+            position: 'absolute',
+            top: '100%',
+            left: 0,
+            right: 0,
+            backgroundColor: '#002b29',
+            borderTop: '1px solid #004d47',
+            padding: '1rem 2rem',
+            display: 'flex',
+            flexDirection: 'column',
+            gap: '1rem'
+          }}
+          className="md:hidden"
+        >
+          {menuItems.map((item) => (
+            <Link
+              key={item.name}
+              to={item.href}
+              style={{
+                color: isActive(item.href) ? '#ffffff' : '#cccccc',
+                textDecoration: 'none',
+                fontFamily: 'Montserrat, sans-serif',
+                fontWeight: '500',
+                fontSize: '1rem',
+                padding: '0.75rem 0',
+                borderBottom: '1px solid #004d47'
+              }}
+              onClick={() => setIsMenuOpen(false)}
+            >
+              {item.name}
+            </Link>
+          ))}
+          <div style={{ paddingTop: '1rem' }}>
             <Button
               onClick={handleWhatsAppContact}
-              className="bg-green-600 hover:bg-green-700 text-white font-montserrat font-semibold"
-              size="sm"
+              style={{
+                background: '#006d67',
+                color: 'white',
+                padding: '0.8rem 1.5rem',
+                borderRadius: '6px',
+                border: 'none',
+                fontFamily: 'Montserrat, sans-serif',
+                fontWeight: '600',
+                fontSize: '0.9rem',
+                cursor: 'pointer',
+                width: '100%',
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'center',
+                gap: '0.5rem'
+              }}
             >
-              <MessageCircle className="mr-2 h-4 w-4" />
+              <MessageCircle style={{ width: '16px', height: '16px' }} />
               ORÇAMENTO
             </Button>
           </div>
-
-          {/* Mobile menu button */}
-          <div className="md:hidden">
-            <Button
-              variant="ghost"
-              size="icon"
-              onClick={() => setIsMenuOpen(!isMenuOpen)}
-            >
-              {isMenuOpen ? (
-                <X className="h-6 w-6 text-white" />
-              ) : (
-                <Menu className="h-6 w-6 text-white" />
-              )}
-            </Button>
-          </div>
         </div>
-
-        {/* Mobile Navigation */}
-        {isMenuOpen && (
-          <div className="md:hidden">
-            <div className="px-2 pt-2 pb-3 space-y-1 sm:px-3 bg-[#214567] border-t border-gray-400">
-              {menuItems.map((item) => (
-                <Link
-                  key={item.name}
-                  to={item.href}
-                  className={`block px-3 py-2 transition-colors duration-200 font-montserrat font-medium ${
-                    isActive(item.href) 
-                      ? 'text-white bg-[#1a3a52]' 
-                      : 'text-gray-200 hover:text-white'
-                  }`}
-                  onClick={() => setIsMenuOpen(false)}
-                >
-                  {item.name}
-                </Link>
-              ))}
-              <div className="px-3 py-2">
-                <Button
-                  onClick={handleWhatsAppContact}
-                  className="bg-green-600 hover:bg-green-700 text-white w-full font-montserrat font-semibold"
-                >
-                  <MessageCircle className="mr-2 h-4 w-4" />
-                  ORÇAMENTO
-                </Button>
-              </div>
-            </div>
-          </div>
-        )}
-      </div>
+      )}
     </header>
   )
 }
 
 export default Header
+

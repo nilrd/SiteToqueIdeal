@@ -4,18 +4,32 @@ import { ChevronRight } from 'lucide-react'
 
 const Hero = () => {
   return (
-    <section className="relative h-screen flex items-center justify-center overflow-hidden">
-      {/* Background Image */}
-      <div 
-        className="absolute inset-0 bg-cover bg-center bg-no-repeat"
-        style={{
-          backgroundImage: `linear-gradient(rgba(31, 76, 85, 0.7), rgba(31, 76, 85, 0.7)), url("/fotosinstagram/fotosinstagram/post_insta (2).jpg")`
-        }}
-      />
-      
+    <section 
+      style={{
+        background: 'linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), url("/banner.jpg") center/cover',
+        padding: '4rem 2rem',
+        color: 'white',
+        minHeight: '70vh',
+        display: 'flex',
+        alignItems: 'center',
+        justifyContent: 'center',
+        position: 'relative'
+      }}
+    >
       {/* Content */}
-      <div className="relative z-10 text-center text-white max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
-        <h1 className="text-4xl md:text-6xl lg:text-7xl font-montserrat font-bold mb-6 leading-tight">
+      <div style={{ 
+        textAlign: 'center', 
+        maxWidth: '600px',
+        margin: '0 auto'
+      }}>
+        <h1 style={{
+          fontSize: '2.5rem',
+          fontFamily: 'Montserrat, sans-serif',
+          fontWeight: 'bold',
+          marginBottom: '1.5rem',
+          lineHeight: '1.2',
+          textShadow: '2px 2px 4px rgba(0,0,0,0.5)'
+        }}>
           Decoração em vidro
           <br />
           que transforma
@@ -23,30 +37,114 @@ const Hero = () => {
           ambientes
         </h1>
         
-        <p className="text-xl md:text-2xl font-lato mb-8 opacity-90 max-w-2xl mx-auto">
+        <p style={{
+          fontSize: '1.2rem',
+          fontFamily: 'Lato, sans-serif',
+          marginBottom: '2rem',
+          opacity: '0.9',
+          lineHeight: '1.6',
+          textShadow: '1px 1px 2px rgba(0,0,0,0.5)'
+        }}>
           Há mais de 10 anos criando peças únicas que vão além da decoração: 
           são expressões de estilo, personalidade e sofisticação.
         </p>
         
-        <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
-          <Link to="/catalogo">
+        <div style={{ display: 'flex', justifyContent: 'center', gap: '1rem', flexWrap: 'wrap' }}>
+          <Link to="/catalogo" style={{ textDecoration: 'none' }}>
             <Button 
-              size="lg" 
-              className="btn-primary font-montserrat font-semibold text-lg px-8 py-4 hover:scale-105 transition-transform duration-200"
+              style={{
+                background: '#006d67',
+                color: 'white',
+                padding: '0.8rem 1.5rem',
+                borderRadius: '6px',
+                border: 'none',
+                fontFamily: 'Montserrat, sans-serif',
+                fontWeight: '600',
+                fontSize: '1rem',
+                cursor: 'pointer',
+                transition: 'all 0.3s ease',
+                display: 'flex',
+                alignItems: 'center',
+                gap: '0.5rem',
+                textDecoration: 'none'
+              }}
+              onMouseEnter={(e) => {
+                e.target.style.backgroundColor = '#005a55'
+                e.target.style.transform = 'translateY(-2px)'
+                e.target.style.boxShadow = '0 4px 12px rgba(0,0,0,0.3)'
+              }}
+              onMouseLeave={(e) => {
+                e.target.style.backgroundColor = '#006d67'
+                e.target.style.transform = 'translateY(0)'
+                e.target.style.boxShadow = 'none'
+              }}
             >
               Veja o Catálogo
-              <ChevronRight className="ml-2 h-5 w-5" />
+              <ChevronRight style={{ width: '20px', height: '20px' }} />
             </Button>
           </Link>
         </div>
       </div>
       
       {/* Scroll Indicator */}
-      <div className="absolute bottom-8 left-1/2 transform -translate-x-1/2 animate-bounce">
-        <div className="w-6 h-10 border-2 border-white rounded-full flex justify-center">
-          <div className="w-1 h-3 bg-white rounded-full mt-2 animate-pulse"></div>
+      <div style={{
+        position: 'absolute',
+        bottom: '2rem',
+        left: '50%',
+        transform: 'translateX(-50%)',
+        animation: 'bounce 2s infinite'
+      }}>
+        <div style={{
+          width: '24px',
+          height: '40px',
+          border: '2px solid white',
+          borderRadius: '20px',
+          display: 'flex',
+          justifyContent: 'center',
+          alignItems: 'flex-start',
+          paddingTop: '8px'
+        }}>
+          <div style={{
+            width: '4px',
+            height: '12px',
+            backgroundColor: 'white',
+            borderRadius: '2px',
+            animation: 'pulse 2s infinite'
+          }}></div>
         </div>
       </div>
+
+      <style jsx>{`
+        @keyframes bounce {
+          0%, 20%, 50%, 80%, 100% {
+            transform: translateX(-50%) translateY(0);
+          }
+          40% {
+            transform: translateX(-50%) translateY(-10px);
+          }
+          60% {
+            transform: translateX(-50%) translateY(-5px);
+          }
+        }
+        
+        @keyframes pulse {
+          0%, 100% {
+            opacity: 1;
+          }
+          50% {
+            opacity: 0.5;
+          }
+        }
+
+        @media (max-width: 768px) {
+          h1 {
+            font-size: 2rem !important;
+          }
+          p {
+            font-size: 1rem !important;
+          }
+        }
+      `}</style>
     </section>
   )
 }
