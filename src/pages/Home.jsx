@@ -1,12 +1,12 @@
 import Hero from '../components/Hero'
-import NewProductHighlights from '../components/NewProductHighlights'
+import ProductHighlights from '../components/ProductHighlights'
 import EventsSection from '../components/EventsSection'
 
 const Home = () => {
   return (
     <div>
       <Hero />
-      <NewProductHighlights />
+      <ProductHighlights />
       <EventsSection />
     </div>
   )
