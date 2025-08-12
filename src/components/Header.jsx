@@ -173,7 +173,7 @@ const Header = () => {
           <Button
             onClick={handleWhatsAppContact}
             style={{
-              background: '#006d67',
+              background: '#1a3a52',
               color: 'white',
               padding: '0.6rem 1.2rem',
               borderRadius: '6px',
@@ -188,8 +188,8 @@ const Header = () => {
               gap: '0.4rem',
               whiteSpace: 'nowrap'
             }}
-            onMouseEnter={(e) => e.target.style.backgroundColor = '#005a55'}
-            onMouseLeave={(e) => e.target.style.backgroundColor = '#006d67'}
+            onMouseEnter={(e) => e.target.style.backgroundColor = '#214567'}
+            onMouseLeave={(e) => e.target.style.backgroundColor = '#1a3a52'}
           >
             <MessageCircle style={{ width: '14px', height: '14px' }} />
             ORÇAMENTO
@@ -287,7 +287,7 @@ const Header = () => {
           <Button
             onClick={handleWhatsAppContact}
             style={{
-              background: '#006d67',
+              background: '#1a3a52',
               color: 'white',
               padding: '0.8rem 1.5rem',
               borderRadius: '6px',
@@ -303,8 +303,8 @@ const Header = () => {
               gap: '0.5rem',
               transition: 'background-color 0.3s ease'
             }}
-            onMouseEnter={(e) => e.target.style.backgroundColor = '#005a55'}
-            onMouseLeave={(e) => e.target.style.backgroundColor = '#006d67'}
+            onMouseEnter={(e) => e.target.style.backgroundColor = '#214567'}
+            onMouseLeave={(e) => e.target.style.backgroundColor = '#1a3a52'}
           >
             <MessageCircle style={{ width: '16px', height: '16px' }} />
             ORÇAMENTO

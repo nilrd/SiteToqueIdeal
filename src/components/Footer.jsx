@@ -341,16 +341,18 @@ const Footer = () => {
       <style jsx>{`
         @media (max-width: 768px) {
           footer {
-            padding: 1.25rem 1rem !important;
+            padding: 1.5rem 1rem !important;
           }
           
           footer > div > div {
             grid-template-columns: 1fr !important;
-            text-align: center !important;
+            gap: 2.5rem !important;
+            text-align: left !important;
           }
           
           footer > div > div > div {
-            text-align: center !important;
+            text-align: left !important;
+            margin-bottom: 1rem;
           }
           
           footer img {
@@ -359,17 +361,36 @@ const Footer = () => {
           }
           
           footer h3 {
-            font-size: 1rem !important;
+            font-size: 1.125rem !important;
+            margin-bottom: 1rem !important;
+            border-bottom: 1px solid #666;
+            padding-bottom: 0.5rem;
           }
           
           footer p, footer a {
-            font-size: 0.85rem !important;
+            font-size: 0.875rem !important;
+            line-height: 1.6 !important;
+          }
+          
+          /* Melhor organização dos links */
+          footer div[style*="display: flex; flexDirection: column"] {
+            gap: 0.75rem !important;
+          }
+          
+          /* Melhor espaçamento dos ícones sociais */
+          footer div[style*="display: inline-flex"] {
+            justify-content: flex-start !important;
+            margin-bottom: 1.5rem !important;
           }
         }
         
         @media (max-width: 480px) {
           footer {
-            padding: 1rem 0.75rem !important;
+            padding: 1.25rem 0.75rem !important;
+          }
+          
+          footer > div > div {
+            gap: 2rem !important;
           }
           
           footer img {
@@ -378,11 +399,17 @@ const Footer = () => {
           }
           
           footer h3 {
-            font-size: 0.9rem !important;
+            font-size: 1rem !important;
           }
           
           footer p, footer a {
             font-size: 0.8rem !important;
+          }
+          
+          /* Ajuste específico para telas muito pequenas */
+          footer div[style*="display: flex; alignItems: center"] {
+            flex-wrap: wrap !important;
+            gap: 0.5rem !important;
           }
         }
       `}</style>

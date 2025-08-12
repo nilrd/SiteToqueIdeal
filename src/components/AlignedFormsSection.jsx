@@ -85,9 +85,9 @@ Aguardo retorno. Obrigado!`
         maxWidth: '1200px',
         margin: '0 auto',
         display: 'grid',
-        gridTemplateColumns: 'repeat(auto-fit, minmax(350px, 1fr))',
+        gridTemplateColumns: 'repeat(auto-fit, minmax(400px, 1fr))',
         gap: '2rem',
-        alignItems: 'stretch'
+        alignItems: 'start'
       }}>
         {/* Newsletter Form */}
         <div style={{
@@ -98,7 +98,7 @@ Aguardo retorno. Obrigado!`
           boxShadow: '0 2px 8px rgba(0,0,0,0.1)',
           display: 'flex',
           flexDirection: 'column',
-          height: '100%'
+          minHeight: '500px'
         }}>
           <h3 style={{
             fontSize: '1.5rem',
@@ -215,7 +215,7 @@ Aguardo retorno. Obrigado!`
           boxShadow: '0 2px 8px rgba(0,0,0,0.1)',
           display: 'flex',
           flexDirection: 'column',
-          height: '100%'
+          minHeight: '500px'
         }}>
           <h3 style={{
             fontSize: '1.5rem',
@@ -402,12 +402,18 @@ Aguardo retorno. Obrigado!`
 
       {/* CSS responsivo específico */}
       <style jsx>{`
-        @media (max-width: 768px) {
+        @media (max-width: 900px) {
           div[style*="gridTemplateColumns"] {
             grid-template-columns: 1fr !important;
             gap: 1.5rem !important;
           }
           
+          div[style*="minHeight: '500px'"] {
+            min-height: auto !important;
+          }
+        }
+        
+        @media (max-width: 768px) {
           div[style*="padding: '3rem 1rem'"] {
             padding: 2rem 1rem !important;
           }
