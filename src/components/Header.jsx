@@ -14,7 +14,6 @@ const Header = () => {
     { name: 'Catálogo', href: '/catalogo' },
     { name: 'Sobre Nós', href: '/sobre-nos' },
     { name: 'Feiras & Eventos', href: '/eventos' },
-    { name: 'Trabalhe Conosco', href: '/trabalhe-conosco' },
     { name: 'Contato', href: '/contato' }
   ]
 
@@ -36,34 +35,37 @@ const Header = () => {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex justify-between items-center h-16">
           {/* Logo */}
-          <div className="flex-shrink-0 mr-8">
+          <div className="flex-shrink-0">
             <Link to="/">
               <img 
                 src="/logo-toque-ideal-novo.png" 
                 alt="Toque Ideal" 
                 className="h-12 w-auto"
                 onError={(e) => {
-                  e.target.src = '/retangularlogo.png'
+                  e.target.src = 
+'/retangularlogo.png'
                 }}
               />
             </Link>
           </div>
 
           {/* Desktop Navigation */}
-          <nav className="hidden md:flex space-x-6 flex-1">
-            {menuItems.map((item) => (
-              <Link
-                key={item.name}
-                to={item.href}
-                className={`transition-colors duration-200 font-montserrat font-medium ${
-                  isActive(item.href) 
-                    ? 'text-primary border-b-2 border-primary' 
-                    : 'text-gray-700 hover:text-primary'
-                }`}
-              >
-                {item.name}
-              </Link>
-            ))}
+          <nav className="hidden md:flex flex-1 justify-center">
+            <div className="flex space-x-6">
+              {menuItems.map((item) => (
+                <Link
+                  key={item.name}
+                  to={item.href}
+                  className={`transition-colors duration-200 font-montserrat font-medium ${
+                    isActive(item.href) 
+                      ? 'text-primary border-b-2 border-primary' 
+                      : 'text-gray-700 hover:text-primary'
+                  }`}
+                >
+                  {item.name}
+                </Link>
+              ))}
+            </div>
           </nav>
 
           {/* Desktop Actions */}
@@ -130,4 +132,3 @@ const Header = () => {
 }
 
 export default Header
-

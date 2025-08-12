@@ -53,6 +53,27 @@ export default {
       description: 'Descreva sua experiência profissional'
     },
     {
+      name: 'curriculo',
+      title: 'Currículo',
+      type: 'file',
+      options: {
+        accept: 'application/pdf'
+      },
+      description: 'Anexe o currículo em formato PDF (máx. 5MB)',
+      validation: Rule => Rule.custom(file => {
+        if (!file) return true; // Campo opcional
+        if (file.asset && file.asset._ref) {
+          // Se já tem um asset, não precisa validar o tamanho aqui
+          return true;
+        }
+        // Se for um novo arquivo, verificar o tamanho (em bytes)
+        if (file.size && file.size > 5 * 1024 * 1024) {
+          return 'O arquivo deve ter no máximo 5MB.';
+        }
+        return true;
+      })
+    },
+    {
       name: 'mensagem',
       title: 'Mensagem',
       type: 'text',

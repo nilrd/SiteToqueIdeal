@@ -1,7 +1,15 @@
 import React, { createContext, useContext, useState, useEffect } from 'react'
 import productsData from '../assets/products.json'
+import { createClient } from '@sanity/client'
 
 const SanityContext = createContext()
+
+const client = createClient({
+  projectId: '0i2zof35',
+  dataset: 'production',
+  useCdn: true,
+  apiVersion: '2023-05-03',
+});
 
 export const useSanity = () => {
   const context = useContext(SanityContext)
@@ -63,12 +71,44 @@ export const SanityProvider = ({ children }) => {
   // Função para enviar candidatura de trabalho
   const submitJobApplication = async (formData) => {
     try {
-      // Por enquanto, apenas simular envio
-      console.log('Candidatura enviada:', formData)
-      return { success: true, message: 'Candidatura enviada com sucesso! Entraremos em contato em breve.' }
+      let assetRef = null;
+      if (formData.curriculo) {
+        // Upload do arquivo para o Sanity
+        const asset = await client.assets.upload(
+          'file',
+          formData.curriculo,
+          { contentType: formData.curriculo.type, filename: formData.curriculo.name }
+        );
+        assetRef = {
+          _type: 'file',
+          asset: {
+            _type: 'reference',
+            _ref: asset._id,
+          },
+        };
+      }
+
+      const doc = {
+        _type: 'trabalheConoscoFormulario',
+        nome: formData.nome,
+        email: formData.email,
+        telefone: formData.telefone,
+        linkedin: formData.linkedin,
+        area: formData.area,
+        experiencia: formData.experiencia,
+        mensagem: formData.mensagem,
+        curriculo: assetRef, // Adicionar a referência do arquivo
+        dataEnvio: new Date().toISOString(),
+        status: 'novo',
+      };
+
+      await client.create(doc);
+
+      console.log('Candidatura enviada:', doc);
+      return { success: true, message: 'Candidatura enviada com sucesso! Entraremos em contato em breve.' };
     } catch (err) {
-      console.error('Erro ao enviar candidatura:', err)
-      return { success: false, message: 'Erro ao enviar candidatura. Tente novamente.' }
+      console.error('Erro ao enviar candidatura:', err);
+      return { success: false, message: 'Erro ao enviar candidatura. Tente novamente.' };
     }
   }
 
