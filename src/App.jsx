@@ -1,4 +1,5 @@
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom'
+import { BrowserRouter as Router, Routes, Route, useLocation } from 'react-router-dom'
+import { useEffect } from 'react'
 import { QuoteProvider } from './context/QuoteContext'
 import { SanityProvider } from './contexts/SanityContext'
 import Header from './components/Header'
@@ -17,12 +18,24 @@ import SanityStudio from './pages/SanityStudio'
 import './App.css'
 import './styles/responsive.css'
 
+// Componente para scroll automático para o topo
+function ScrollToTop() {
+  const { pathname } = useLocation()
+
+  useEffect(() => {
+    window.scrollTo(0, 0)
+  }, [pathname])
+
+  return null
+}
+
 function App() {
   return (
     <SanityProvider>
       <QuoteProvider>
         <Router>
           <div className="min-h-screen">
+            <ScrollToTop />
             <Header />
             <main>
               <Routes>

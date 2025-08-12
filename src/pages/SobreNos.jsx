@@ -23,15 +23,15 @@ const SobreNos = () => {
             <h2 className="text-3xl font-montserrat font-bold text-gray-900 mb-6">
               Nossa História
             </h2>
-            <div className="grid md:grid-cols-2 gap-8 items-center">
-              <div>
-                <p className="text-lg text-gray-600 font-lato leading-relaxed mb-6">
+            <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 gap-6 md:gap-8 items-start">
+              <div className="space-y-4 md:space-y-6">
+                <p className="text-base md:text-lg text-gray-600 font-lato leading-relaxed">
                   É com grande satisfação que apresentamos nossas coleções, desenvolvidas com um padrão único de modernidade, qualidade e design. Buscamos constantemente evoluir na arte de moldar vidros, criando peças que vão muito além da decoração: são expressões de estilo, personalidade e sofisticação.
                 </p>
-                <p className="text-lg text-gray-600 font-lato leading-relaxed mb-6">
+                <p className="text-base md:text-lg text-gray-600 font-lato leading-relaxed">
                   Nossa trajetória é marcada pela atenção aos detalhes e pelo compromisso com a excelência. Cada produto é tratado como único e exclusivo, para atender às expectativas dos clientes mais exigentes e transformar ambientes com beleza, elegância e funcionalidade.
                 </p>
-                <p className="text-lg text-gray-600 font-lato leading-relaxed">
+                <p className="text-base md:text-lg text-gray-600 font-lato leading-relaxed">
                   A Toque Ideal está presente nas principais feiras e eventos do setor, como a ABCasa Fair, levando ao público e parceiros as últimas tendências em design e decoração. Nosso propósito é claro: inovar sempre, criando produtos que encantam e transformam.
                 </p>
               </div>
@@ -39,7 +39,7 @@ const SobreNos = () => {
                 <img 
                   src="/fotosinstagram/post_insta_2.jpg" 
                   alt="Produtos Toque Ideal"
-                  className="w-full h-80 object-cover rounded-lg shadow-md"
+                  className="w-full h-64 md:h-80 object-cover rounded-lg shadow-md"
                 />
               </div>
             </div>
