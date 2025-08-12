@@ -1,326 +1,225 @@
-import React, { useState, useEffect } from 'react'
-import { Search, Grid, List, MessageCircle, AlertTriangle, Info } from 'lucide-react'
-import { Button } from '@/components/ui/button'
-import ProductModal from '../components/ProductModal'
-import { products, availableColors } from '../data/products'
+import React, { useState } from 'react'
+import { getAllProducts, getPrimaryColor } from '../data/newProducts'
+import NewProductModal from '../components/NewProductModal'
+import { Search } from 'lucide-react'
 
 const CatalogCMS = () => {
-  const [filteredProducts, setFilteredProducts] = useState(products)
-  const [searchTerm, setSearchTerm] = useState('')
-  const [selectedColor, setSelectedColor] = useState('')
-  const [viewMode, setViewMode] = useState('grid')
-  const [currentPage, setCurrentPage] = useState(1)
   const [selectedProduct, setSelectedProduct] = useState(null)
   const [isModalOpen, setIsModalOpen] = useState(false)
+  const [searchTerm, setSearchTerm] = useState('')
+  const [selectedColor, setSelectedColor] = useState('all')
   
-  const productsPerPage = 12
+  const allProducts = getAllProducts()
 
-  // Aplicar filtros
-  useEffect(() => {
-    let filtered = products
+  // Filtrar produtos baseado na busca e cor
+  const filteredProducts = allProducts.filter(product => {
+    const matchesSearch = product.code.toLowerCase().includes(searchTerm.toLowerCase()) ||
+                         product.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
+                         product.dimensions.toLowerCase().includes(searchTerm.toLowerCase())
+    
+    const matchesColor = selectedColor === 'all' || 
+                        product.colors.some(color => 
+                          color.name.toLowerCase().includes(selectedColor.toLowerCase())
+                        )
+    
+    return matchesSearch && matchesColor
+  })
 
-    // Filtro de busca
-    if (searchTerm) {
-      filtered = filtered.filter(product =>
-        product.nome?.toLowerCase().includes(searchTerm.toLowerCase()) ||
-        product.codigo?.toLowerCase().includes(searchTerm.toLowerCase())
-      )
-    }
-
-    // Filtro por cor
-    if (selectedColor) {
-      filtered = filtered.filter(product =>
-        product.cores?.includes(selectedColor)
-      )
-    }
-
-    setFilteredProducts(filtered)
-    setCurrentPage(1)
-  }, [searchTerm, selectedColor])
+  // Obter todas as cores únicas para o filtro
+  const allColors = [...new Set(allProducts.flatMap(product => 
+    product.colors.map(color => color.name)
+  ))].sort()
 
   const handleProductClick = (product) => {
     setSelectedProduct(product)
     setIsModalOpen(true)
   }
 
-  const handleWhatsAppContact = () => {
-    const message = `Olá! Gostaria de solicitar um orçamento para produtos do catálogo Toque Ideal.`
-    const whatsappUrl = `https://api.whatsapp.com/send?phone=5511967767364&text=${encodeURIComponent(message)}`
-    window.open(whatsappUrl, '_blank')
+  const closeModal = () => {
+    setIsModalOpen(false)
+    setSelectedProduct(null)
   }
 
-  // Paginação
-  const indexOfLastProduct = currentPage * productsPerPage
-  const indexOfFirstProduct = indexOfLastProduct - productsPerPage
-  const currentProducts = filteredProducts.slice(indexOfFirstProduct, indexOfLastProduct)
-  const totalPages = Math.ceil(filteredProducts.length / productsPerPage)
-
   return (
-    <div className="min-h-screen bg-gray-50 pt-20">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
-        
-        {/* Aviso de Catálogo em Construção */}
-        <div className="bg-amber-50 border border-amber-200 rounded-lg p-6 mb-8">
-          <div className="flex items-start space-x-3">
-            <AlertTriangle className="h-6 w-6 text-amber-600 flex-shrink-0 mt-1" />
-            <div>
-              <h3 className="text-lg font-montserrat font-semibold text-amber-800 mb-2">
-                🚧 Catálogo em Construção
-              </h3>
-              <p className="text-amber-700 font-lato mb-3">
-                <strong>Este catálogo está atualmente em desenvolvimento.</strong> As imagens apresentadas são meramente ilustrativas 
-                e servem como referência visual enquanto finalizamos nossa galeria completa de produtos.
-              </p>
-              <div className="bg-blue-50 border border-blue-200 rounded-md p-3 mb-3">
-                <div className="flex items-start space-x-2">
-                  <Info className="h-5 w-5 text-blue-600 flex-shrink-0 mt-0.5" />
-                  <div className="text-sm text-blue-700">
-                    <p className="font-semibold mb-1">Personalização Total:</p>
-                    <p>Todas as peças podem ser personalizadas em cores, tamanhos e acabamentos conforme sua necessidade. 
-                    Entre em contato para solicitar orçamento personalizado.</p>
-                  </div>
-                </div>
-              </div>
-              <div className="bg-green-50 border border-green-200 rounded-md p-3">
-                <div className="flex items-center space-x-2">
-                  <MessageCircle className="h-5 w-5 text-green-600 flex-shrink-0" />
-                  <div className="text-sm text-green-700">
-                    <p><strong>Catálogo Completo:</strong> Para ver nossa linha completa de produtos e receber atendimento personalizado, 
-                    entre em contato via WhatsApp.</p>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        {/* Header */}
-        <div className="text-center mb-12">
-          <h1 className="text-4xl md:text-5xl font-montserrat font-bold text-gray-900 mb-6">
+    <div className="min-h-screen bg-gray-50">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+        {/* Cabeçalho do Catálogo */}
+        <div className="text-center mb-8">
+          <h1 className="text-4xl font-bold text-gray-900 mb-4">
             Catálogo de Produtos
           </h1>
-          <p className="text-xl text-gray-600 font-lato leading-relaxed max-w-3xl mx-auto">
-            Descubra nossa linha de artigos decorativos em vidro. Cada peça é única e pode ser 
-            personalizada para atender perfeitamente ao seu projeto.
-          </p>
+          
+          {/* Aviso de Construção */}
+          <div className="bg-blue-50 border border-blue-200 rounded-lg p-6 mb-8 max-w-4xl mx-auto">
+            <div className="flex items-center justify-center mb-3">
+              <div className="bg-blue-100 rounded-full p-2 mr-3">
+                <svg className="w-6 h-6 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+                </svg>
+              </div>
+              <h2 className="text-xl font-semibold text-blue-800">Catálogo em Construção</h2>
+            </div>
+            <div className="text-blue-700 space-y-2">
+              <p className="font-medium">
+                🚧 Este catálogo está atualmente em desenvolvimento e as imagens apresentadas são meramente ilustrativas.
+              </p>
+              <p>
+                📱 Para consultar nosso catálogo completo e atualizado, entre em contato conosco via WhatsApp.
+              </p>
+              <p>
+                🎨 Todas as peças podem ser personalizadas em diferentes cores e tamanhos conforme sua necessidade.
+              </p>
+            </div>
+          </div>
         </div>
 
         {/* Filtros e Busca */}
         <div className="bg-white rounded-lg shadow-sm p-6 mb-8">
-          <div className="flex flex-col lg:flex-row gap-4 items-center justify-between">
+          <div className="grid md:grid-cols-2 gap-4">
             {/* Busca */}
-            <div className="flex-1 max-w-md">
-              <div className="relative">
-                <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 h-5 w-5" />
-                <input
-                  type="text"
-                  placeholder="Buscar por código ou nome..."
-                  value={searchTerm}
-                  onChange={(e) => setSearchTerm(e.target.value)}
-                  className="w-full pl-10 pr-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary"
-                />
-              </div>
+            <div className="relative">
+              <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 w-5 h-5" />
+              <input
+                type="text"
+                placeholder="Buscar por código, nome ou dimensões..."
+                value={searchTerm}
+                onChange={(e) => setSearchTerm(e.target.value)}
+                className="w-full pl-10 pr-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#214567] focus:border-transparent"
+              />
             </div>
-            
-            {/* Filtro de Cor */}
-            <div className="flex-1 max-w-xs">
+
+            {/* Filtro por Cor */}
+            <div>
               <select
                 value={selectedColor}
                 onChange={(e) => setSelectedColor(e.target.value)}
-                className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary"
+                className="w-full py-2 px-4 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#214567] focus:border-transparent"
               >
-                <option value="">Todas as cores</option>
-                {availableColors.map(color => (
+                <option value="all">Todas as Cores</option>
+                {allColors.map(color => (
                   <option key={color} value={color}>{color}</option>
                 ))}
               </select>
             </div>
-            
-            {/* Controles de Visualização */}
-            <div className="flex items-center space-x-4">
-              <div className="flex items-center space-x-2">
-                <button
-                  onClick={() => setViewMode('grid')}
-                  className={`p-2 rounded-lg ${viewMode === 'grid' ? 'bg-primary text-white' : 'bg-gray-100 text-gray-600'}`}
-                >
-                  <Grid className="h-5 w-5" />
-                </button>
-                <button
-                  onClick={() => setViewMode('list')}
-                  className={`p-2 rounded-lg ${viewMode === 'list' ? 'bg-primary text-white' : 'bg-gray-100 text-gray-600'}`}
-                >
-                  <List className="h-5 w-5" />
-                </button>
-              </div>
-              
-              <Button
-                onClick={handleWhatsAppContact}
-                className="bg-green-600 hover:bg-green-700 text-white font-montserrat font-semibold"
-              >
-                <MessageCircle className="mr-2 h-4 w-4" />
-                ORÇAMENTO
-              </Button>
-            </div>
           </div>
         </div>
 
-        {/* Produtos */}
-        <div className={`${viewMode === 'grid' ? 'grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6' : 'space-y-4'}`}>
-          {currentProducts.map((product) => (
-            <div 
-              key={product.id} 
-              className={`bg-white rounded-lg shadow-sm hover:shadow-lg transition-all cursor-pointer group ${viewMode === 'list' ? 'flex items-center p-4' : 'overflow-hidden'}`}
-              onClick={() => handleProductClick(product)}
-            >
-              {viewMode === 'grid' ? (
-                <>
-                  <div className="aspect-square bg-gray-100 relative overflow-hidden">
-                    <img
-                      src={Object.values(product.imagens)[0]}
-                      alt={product.nome}
-                      className="w-full h-full object-contain group-hover:scale-105 transition-transform duration-300"
-                      onError={(e) => {
-                        e.target.src = '/placeholder-product.jpg'
-                      }}
-                    />
-                    <div className="absolute top-2 left-2 bg-primary text-white px-2 py-1 rounded text-sm font-montserrat font-semibold">
-                      {product.codigo}
-                    </div>
-                    <div className="absolute top-2 right-2 bg-black bg-opacity-50 text-white px-2 py-1 rounded text-xs">
-                      {product.cores.length} cor{product.cores.length > 1 ? 'es' : ''}
-                    </div>
-                  </div>
-                  <div className="p-4">
-                    <h3 className="font-montserrat font-semibold text-gray-900 mb-2 group-hover:text-primary transition-colors">
-                      {product.nome}
-                    </h3>
-                    <p className="text-sm text-gray-500 font-lato mb-3 line-clamp-2">
-                      {product.descricao}
-                    </p>
-                    <div className="flex flex-wrap gap-1 mb-3">
-                      {product.cores.slice(0, 3).map((cor, index) => (
-                        <span key={cor} className="text-xs bg-gray-100 text-gray-600 px-2 py-1 rounded">
-                          {cor}
-                        </span>
-                      ))}
-                      {product.cores.length > 3 && (
-                        <span className="text-xs bg-gray-100 text-gray-600 px-2 py-1 rounded">
-                          +{product.cores.length - 3}
-                        </span>
-                      )}
-                    </div>
-                    <p className="text-xs text-primary font-montserrat font-medium">
-                      Clique para ver detalhes
-                    </p>
-                  </div>
-                </>
-              ) : (
-                <>
-                  <div className="w-24 h-24 bg-gray-100 rounded-lg overflow-hidden flex-shrink-0 mr-4">
-                    <img
-                      src={Object.values(product.imagens)[0]}
-                      alt={product.nome}
-                      className="w-full h-full object-contain"
-                      onError={(e) => {
-                        e.target.src = '/placeholder-product.jpg'
-                      }}
-                    />
-                  </div>
-                  <div className="flex-1">
-                    <div className="flex items-start justify-between">
-                      <div>
-                        <div className="flex items-center space-x-2 mb-1">
-                          <span className="bg-primary text-white px-2 py-1 rounded text-xs font-montserrat font-semibold">
-                            {product.codigo}
-                          </span>
-                          <span className="text-xs text-gray-500">
-                            {product.cores.length} cor{product.cores.length > 1 ? 'es' : ''}
-                          </span>
-                        </div>
-                        <h3 className="font-montserrat font-semibold text-gray-900 mb-1 group-hover:text-primary transition-colors">
-                          {product.nome}
-                        </h3>
-                        <p className="text-sm text-gray-500 font-lato mb-2">
-                          {product.descricao}
-                        </p>
-                        <div className="flex flex-wrap gap-1">
-                          {product.cores.slice(0, 2).map((cor) => (
-                            <span key={cor} className="text-xs bg-gray-100 text-gray-600 px-2 py-1 rounded">
-                              {cor}
-                            </span>
-                          ))}
-                          {product.cores.length > 2 && (
-                            <span className="text-xs bg-gray-100 text-gray-600 px-2 py-1 rounded">
-                              +{product.cores.length - 2}
-                            </span>
-                          )}
-                        </div>
-                      </div>
-                      <div className="ml-4 text-right">
-                        <p className="text-xs text-primary font-montserrat font-medium">
-                          Ver detalhes
-                        </p>
-                      </div>
-                    </div>
-                  </div>
-                </>
-              )}
-            </div>
-          ))}
+        {/* Contador de Produtos */}
+        <div className="mb-6">
+          <p className="text-gray-600">
+            Exibindo {filteredProducts.length} de {allProducts.length} produtos
+          </p>
         </div>
 
-        {/* Paginação */}
-        {totalPages > 1 && (
-          <div className="flex justify-center mt-12">
-            <div className="flex space-x-2">
-              {Array.from({ length: totalPages }, (_, i) => (
-                <button
-                  key={i + 1}
-                  onClick={() => setCurrentPage(i + 1)}
-                  className={`px-4 py-2 rounded-lg font-montserrat font-medium ${
-                    currentPage === i + 1
-                      ? 'bg-primary text-white'
-                      : 'bg-white text-gray-700 hover:bg-gray-50'
-                  }`}
-                >
-                  {i + 1}
-                </button>
-              ))}
+        {/* Grade de Produtos */}
+        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-6 mb-12">
+          {filteredProducts.map((product) => {
+            const primaryColor = getPrimaryColor(product)
+            
+            return (
+              <div
+                key={product.code}
+                className="bg-white rounded-lg shadow-md hover:shadow-lg transition-all duration-300 cursor-pointer group"
+                onClick={() => handleProductClick(product)}
+              >
+                {/* Imagem do Produto */}
+                <div className="aspect-square bg-gray-50 rounded-t-lg overflow-hidden">
+                  <img
+                    src={primaryColor.image}
+                    alt={`${product.name} - ${primaryColor.name}`}
+                    className="w-full h-full object-contain group-hover:scale-105 transition-transform duration-300"
+                  />
+                </div>
+
+                {/* Informações do Produto */}
+                <div className="p-4">
+                  <div className="text-center">
+                    <h3 className="text-lg font-bold text-[#214567] mb-1">
+                      {product.code}
+                    </h3>
+                    <p className="text-sm text-gray-600 mb-2">
+                      {product.dimensions}
+                    </p>
+                    
+                    {/* Indicador de Cores */}
+                    <div className="flex justify-center gap-1 mb-3">
+                      {product.colors.map((color, index) => (
+                        <div
+                          key={index}
+                          className="w-3 h-3 rounded-full border border-gray-300"
+                          style={{
+                            backgroundColor: color.name === 'BRANCO' ? '#f8f9fa' :
+                                           color.name === 'PRETO' ? '#1a1a1a' :
+                                           color.name === 'VERMELHO' ? '#dc2626' :
+                                           color.name === 'VERDE' ? '#16a34a' :
+                                           color.name === 'MEL' ? '#f59e0b' :
+                                           color.name === 'TURQUESA' ? '#06b6d4' :
+                                           color.name === 'BRONZE' ? '#a16207' :
+                                           color.name === 'GRAFITE' ? '#4b5563' :
+                                           color.name === 'PRATA' ? '#9ca3af' :
+                                           '#6b7280'
+                          }}
+                          title={color.name}
+                        />
+                      ))}
+                    </div>
+                    
+                    <p className="text-xs text-gray-500">
+                      {product.colors.length} cor{product.colors.length > 1 ? 'es' : ''} disponível{product.colors.length > 1 ? 'eis' : ''}
+                    </p>
+                  </div>
+                </div>
+              </div>
+            )
+          })}
+        </div>
+
+        {/* Mensagem quando não há produtos */}
+        {filteredProducts.length === 0 && (
+          <div className="text-center py-12">
+            <div className="text-gray-400 mb-4">
+              <Search className="w-16 h-16 mx-auto" />
             </div>
+            <h3 className="text-xl font-semibold text-gray-600 mb-2">
+              Nenhum produto encontrado
+            </h3>
+            <p className="text-gray-500">
+              Tente ajustar os filtros ou termos de busca
+            </p>
           </div>
         )}
 
         {/* Informações Adicionais */}
-        <div className="mt-16 bg-white rounded-lg shadow-sm p-8">
-          <div className="text-center">
-            <h2 className="text-2xl font-montserrat font-bold text-gray-900 mb-4">
-              Precisa de Mais Informações?
-            </h2>
-            <p className="text-gray-600 font-lato mb-6 max-w-2xl mx-auto">
-              Nossa equipe está pronta para ajudar você a escolher as peças perfeitas para seu projeto. 
-              Entre em contato para mais detalhes sobre disponibilidade, cores e acabamentos.
-            </p>
-            <div className="flex flex-col sm:flex-row gap-4 justify-center">
-              <Button 
-                onClick={handleWhatsAppContact}
-                className="bg-green-600 hover:bg-green-700 text-white font-montserrat font-semibold"
-              >
-                <MessageCircle className="mr-2 h-4 w-4" />
-                Solicitar Orçamento
-              </Button>
-              <Button variant="outline" className="font-montserrat font-semibold">
-                Entre em Contato
-              </Button>
+        <div className="bg-white rounded-lg shadow-sm p-6 mt-8">
+          <h3 className="text-lg font-semibold text-gray-800 mb-4">
+            Informações Importantes
+          </h3>
+          <div className="grid md:grid-cols-2 gap-6 text-sm text-gray-600">
+            <div>
+              <h4 className="font-medium text-gray-800 mb-2">Personalização</h4>
+              <ul className="space-y-1">
+                <li>• Todas as peças podem ser personalizadas</li>
+                <li>• Cores disponíveis conforme estoque</li>
+                <li>• Tamanhos especiais sob consulta</li>
+              </ul>
+            </div>
+            <div>
+              <h4 className="font-medium text-gray-800 mb-2">Orçamento</h4>
+              <ul className="space-y-1">
+                <li>• Clique no produto para ver detalhes</li>
+                <li>• Solicite orçamento via WhatsApp</li>
+                <li>• Atendimento personalizado</li>
+              </ul>
             </div>
           </div>
         </div>
       </div>
 
       {/* Modal do Produto */}
-      <ProductModal
+      <NewProductModal
         product={selectedProduct}
         isOpen={isModalOpen}
-        onClose={() => setIsModalOpen(false)}
+        onClose={closeModal}
       />
     </div>
   )
