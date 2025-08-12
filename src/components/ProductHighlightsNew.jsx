@@ -1,71 +1,69 @@
 import { useState } from 'react'
-import { X, ChevronLeft, ChevronRight } from 'lucide-react'
+import { X } from 'lucide-react'
 import { featuredProducts } from '../data/featuredProducts'
 
 const ProductHighlightsNew = () => {
   const [selectedProduct, setSelectedProduct] = useState(null)
-  const [selectedColorIndex, setSelectedColorIndex] = useState(0)
+  const [currentImageIndex, setCurrentImageIndex] = useState(0)
 
   const openModal = (product) => {
     setSelectedProduct(product)
-    setSelectedColorIndex(0)
+    setCurrentImageIndex(0)
   }
 
   const closeModal = () => {
     setSelectedProduct(null)
-    setSelectedColorIndex(0)
+    setCurrentImageIndex(0)
   }
 
-  const nextColor = () => {
-    if (selectedProduct && selectedColorIndex < selectedProduct.colors.length - 1) {
-      setSelectedColorIndex(selectedColorIndex + 1)
+  const nextImage = () => {
+    if (selectedProduct && selectedProduct.images) {
+      setCurrentImageIndex((prev) => 
+        prev === selectedProduct.images.length - 1 ? 0 : prev + 1
+      )
     }
   }
 
-  const prevColor = () => {
-    if (selectedProduct && selectedColorIndex > 0) {
-      setSelectedColorIndex(selectedColorIndex - 1)
+  const prevImage = () => {
+    if (selectedProduct && selectedProduct.images) {
+      setCurrentImageIndex((prev) => 
+        prev === 0 ? selectedProduct.images.length - 1 : prev - 1
+      )
     }
-  }
-
-  const getCurrentImage = () => {
-    if (!selectedProduct) return ''
-    const currentColor = selectedProduct.colors[selectedColorIndex]
-    return selectedProduct.images[currentColor]
   }
 
   return (
-    <section style={{ padding: '4rem 2rem', backgroundColor: '#f8f9fa' }}>
+    <div style={{ padding: '4rem 2rem', backgroundColor: '#f8f9fa' }}>
       <div style={{ maxWidth: '1200px', margin: '0 auto' }}>
-        {/* Título da Seção */}
-        <div style={{ textAlign: 'center', marginBottom: '3rem' }}>
-          <h2 style={{
-            fontSize: '2.5rem',
-            fontFamily: 'Montserrat, sans-serif',
-            fontWeight: 'bold',
-            color: '#002b29',
-            marginBottom: '1rem'
-          }}>
-            Produtos em Destaque
-          </h2>
-          <p style={{
-            fontSize: '1.1rem',
-            fontFamily: 'Lato, sans-serif',
-            color: '#666',
-            maxWidth: '600px',
-            margin: '0 auto'
-          }}>
-            Conheça nossa seleção especial de peças que transformam qualquer ambiente
-          </p>
-        </div>
+        <h2 style={{
+          fontSize: '2.5rem',
+          fontFamily: 'Montserrat, sans-serif',
+          fontWeight: 'bold',
+          textAlign: 'center',
+          marginBottom: '1rem',
+          color: '#002b29'
+        }}>
+          Produtos em Destaque
+        </h2>
+        
+        <p style={{
+          fontSize: '1.125rem',
+          fontFamily: 'Lato, sans-serif',
+          textAlign: 'center',
+          color: '#666',
+          marginBottom: '3rem',
+          maxWidth: '600px',
+          margin: '0 auto 3rem auto'
+        }}>
+          Conheça nossa seleção especial de peças que transformam qualquer ambiente
+        </p>
 
-        {/* Grid de Produtos - 5 Colunas */}
         <div 
           className="produtos-grid"
           style={{
             display: 'grid',
             gridTemplateColumns: 'repeat(auto-fit, minmax(220px, 1fr))',
-            gap: '1rem',
+            gap: '1.5rem',
             padding: '0'
           }}
         >
@@ -81,96 +79,76 @@ const ProductHighlightsNew = () => {
                 padding: '1rem',
                 cursor: 'pointer',
                 transition: 'all 0.3s ease',
-                border: '1px solid #e0e0e0'
+                border: '1px solid #e0e0e0',
+                display: 'flex',
+                flexDirection: 'column',
+                height: '100%'
               }}
               onClick={() => openModal(product)}
               onMouseEnter={(e) => {
                 e.currentTarget.style.transform = 'translateY(-5px)'
-                e.currentTarget.style.boxShadow = '0 8px 20px rgba(0,0,0,0.15)'
+                e.currentTarget.style.boxShadow = '0 8px 25px rgba(0,0,0,0.15)'
               }}
               onMouseLeave={(e) => {
                 e.currentTarget.style.transform = 'translateY(0)'
                 e.currentTarget.style.boxShadow = '0 4px 6px rgba(0,0,0,0.1)'
               }}
             >
-              {/* Imagem do Produto */}
               <div style={{
-                width: '100%',
-                height: '200px',
-                marginBottom: '1rem',
-                overflow: 'hidden',
-                borderRadius: '6px',
-                backgroundColor: '#f5f5f5'
-              }}>
-                <img
-                  src={product.mainImage}
-                  alt={product.name}
-                  style={{
-                    width: '100%',
-                    height: '100%',
-                    objectFit: 'cover',
-                    transition: 'transform 0.3s ease'
-                  }}
-                  onMouseEnter={(e) => {
-                    e.target.style.transform = 'scale(1.05)'
-                  }}
-                  onMouseLeave={(e) => {
-                    e.target.style.transform = 'scale(1)'
-                  }}
-                />
-              </div>
-
-              {/* Código do Produto */}
-              <div style={{
-                fontSize: '0.9rem',
-                fontFamily: 'Montserrat, sans-serif',
+                fontSize: '0.75rem',
                 fontWeight: 'bold',
                 color: '#006d67',
-                marginBottom: '0.5rem'
+                marginBottom: '0.5rem',
+                textAlign: 'left'
               }}>
                 Código: {product.code}
               </div>
 
-              {/* Nome do Produto */}
+              <img 
+                src={product.image} 
+                alt={product.name}
+                style={{
+                  width: '100%',
+                  height: '200px',
+                  objectFit: 'contain',
+                  borderRadius: '6px',
+                  marginBottom: '1rem',
+                  backgroundColor: '#f8f9fa'
+                }}
+              />
+
               <h3 style={{
-                fontSize: '1.1rem',
+                fontSize: '1.125rem',
                 fontFamily: 'Montserrat, sans-serif',
                 fontWeight: '600',
-                color: '#002b29',
                 marginBottom: '0.5rem',
-                lineHeight: '1.3'
+                color: '#002b29'
               }}>
                 {product.name}
               </h3>
 
-              {/* Dimensões */}
-              <p style={{
-                fontSize: '0.9rem',
-                fontFamily: 'Lato, sans-serif',
-                color: '#666',
-                marginBottom: '0.5rem'
+              <div style={{ 
+                fontSize: '0.875rem', 
+                color: '#666', 
+                marginBottom: '1rem',
+                flexGrow: 1
               }}>
                 {product.dimensions}
-              </p>
+              </div>
 
-              {/* Cores Disponíveis */}
-              <div style={{
-                display: 'flex',
-                justifyContent: 'center',
-                gap: '0.5rem',
-                marginBottom: '1rem'
-              }}>
+              <div style={{ marginBottom: '1rem' }}>
                 {product.colors.map((color, index) => (
-                  <span
+                  <span 
                     key={index}
                     style={{
-                      fontSize: '0.8rem',
-                      fontFamily: 'Montserrat, sans-serif',
-                      fontWeight: '500',
-                      color: '#006d67',
-                      backgroundColor: '#e8f4f3',
+                      display: 'inline-block',
+                      backgroundColor: '#006d67',
+                      color: 'white',
                       padding: '0.25rem 0.5rem',
-                      borderRadius: '12px'
+                      borderRadius: '4px',
+                      fontSize: '0.75rem',
+                      margin: '0.125rem',
+                      fontWeight: '500'
                     }}
                   >
                     {color}
@@ -178,7 +156,6 @@ const ProductHighlightsNew = () => {
                 ))}
               </div>
 
-              {/* Botão Ver Detalhes */}
               <button
                 style={{
                   background: '#006d67',
@@ -186,14 +163,14 @@ const ProductHighlightsNew = () => {
                   padding: '0.8rem 1.5rem',
                   borderRadius: '6px',
                   border: 'none',
-                  fontFamily: 'Montserrat, sans-serif',
-                  fontWeight: '600',
-                  fontSize: '0.9rem',
                   cursor: 'pointer',
+                  fontSize: '0.875rem',
+                  fontWeight: '500',
                   transition: 'background-color 0.3s ease',
-                  width: '100%'
+                  width: '100%',
+                  marginTop: 'auto'
                 }}
-                onMouseEnter={(e) => e.target.style.backgroundColor = '#005a55'}
+                onMouseEnter={(e) => e.target.style.backgroundColor = '#004d47'}
                 onMouseLeave={(e) => e.target.style.backgroundColor = '#006d67'}
               >
                 Ver Detalhes
@@ -212,7 +189,7 @@ const ProductHighlightsNew = () => {
             left: 0,
             right: 0,
             bottom: 0,
-            backgroundColor: 'rgba(0,0,0,0.8)',
+            backgroundColor: 'rgba(0, 0, 0, 0.8)',
             display: 'flex',
             alignItems: 'center',
             justifyContent: 'center',
@@ -225,7 +202,7 @@ const ProductHighlightsNew = () => {
             style={{
               backgroundColor: 'white',
               borderRadius: '12px',
-              maxWidth: '800px',
+              maxWidth: '900px',
               width: '100%',
               maxHeight: '90vh',
               overflow: 'auto',
@@ -240,8 +217,7 @@ const ProductHighlightsNew = () => {
                 position: 'absolute',
                 top: '1rem',
                 right: '1rem',
-                background: 'rgba(0,0,0,0.5)',
-                color: 'white',
+                background: 'rgba(0, 0, 0, 0.1)',
                 border: 'none',
                 borderRadius: '50%',
                 width: '40px',
@@ -250,8 +226,11 @@ const ProductHighlightsNew = () => {
                 alignItems: 'center',
                 justifyContent: 'center',
                 cursor: 'pointer',
-                zIndex: 10
+                zIndex: 1001,
+                transition: 'background-color 0.3s ease'
               }}
+              onMouseEnter={(e) => e.target.style.backgroundColor = 'rgba(0, 0, 0, 0.2)'}
+              onMouseLeave={(e) => e.target.style.backgroundColor = 'rgba(0, 0, 0, 0.1)'}
             >
               <X size={20} />
             </button>
@@ -260,106 +239,63 @@ const ProductHighlightsNew = () => {
               {/* Galeria de Imagens */}
               <div style={{ flex: 1, position: 'relative', minHeight: '400px' }}>
                 <img
-                  src={getCurrentImage()}
+                  src={selectedProduct.images && selectedProduct.images.length > 0 
+                    ? selectedProduct.images[currentImageIndex] 
+                    : selectedProduct.image}
                   alt={selectedProduct.name}
                   style={{
                     width: '100%',
                     height: '400px',
-                    objectFit: 'cover',
-                    borderTopLeftRadius: '12px',
-                    borderBottomLeftRadius: '12px'
+                    objectFit: 'contain',
+                    borderRadius: '12px 0 0 12px',
+                    backgroundColor: '#f8f9fa'
                   }}
                 />
 
                 {/* Navegação de Cores */}
                 {selectedProduct.colors.length > 1 && (
-                  <>
-                    <button
-                      onClick={prevColor}
-                      disabled={selectedColorIndex === 0}
-                      style={{
-                        position: 'absolute',
-                        left: '1rem',
-                        top: '50%',
-                        transform: 'translateY(-50%)',
-                        background: 'rgba(0,0,0,0.5)',
-                        color: 'white',
-                        border: 'none',
-                        borderRadius: '50%',
-                        width: '40px',
-                        height: '40px',
-                        display: 'flex',
-                        alignItems: 'center',
-                        justifyContent: 'center',
-                        cursor: selectedColorIndex === 0 ? 'not-allowed' : 'pointer',
-                        opacity: selectedColorIndex === 0 ? 0.5 : 1
-                      }}
-                    >
-                      <ChevronLeft size={20} />
-                    </button>
-
-                    <button
-                      onClick={nextColor}
-                      disabled={selectedColorIndex === selectedProduct.colors.length - 1}
-                      style={{
-                        position: 'absolute',
-                        right: '1rem',
-                        top: '50%',
-                        transform: 'translateY(-50%)',
-                        background: 'rgba(0,0,0,0.5)',
-                        color: 'white',
-                        border: 'none',
-                        borderRadius: '50%',
-                        width: '40px',
-                        height: '40px',
-                        display: 'flex',
-                        alignItems: 'center',
-                        justifyContent: 'center',
-                        cursor: selectedColorIndex === selectedProduct.colors.length - 1 ? 'not-allowed' : 'pointer',
-                        opacity: selectedColorIndex === selectedProduct.colors.length - 1 ? 0.5 : 1
-                      }}
-                    >
-                      <ChevronRight size={20} />
-                    </button>
-                  </>
+                  <div style={{
+                    position: 'absolute',
+                    bottom: '1rem',
+                    left: '50%',
+                    transform: 'translateX(-50%)',
+                    display: 'flex',
+                    gap: '0.5rem',
+                    backgroundColor: 'rgba(255, 255, 255, 0.9)',
+                    padding: '0.5rem',
+                    borderRadius: '8px'
+                  }}>
+                    {selectedProduct.colors.map((color, index) => (
+                      <button
+                        key={index}
+                        style={{
+                          padding: '0.25rem 0.5rem',
+                          borderRadius: '4px',
+                          border: currentImageIndex === index ? '2px solid #006d67' : '1px solid #ccc',
+                          backgroundColor: currentImageIndex === index ? '#006d67' : 'white',
+                          color: currentImageIndex === index ? 'white' : '#333',
+                          fontSize: '0.75rem',
+                          cursor: 'pointer',
+                          transition: 'all 0.3s ease'
+                        }}
+                        onClick={() => setCurrentImageIndex(index)}
+                      >
+                        {color}
+                      </button>
+                    ))}
+                  </div>
                 )}
-
-                {/* Indicadores de Cor */}
-                <div style={{
-                  position: 'absolute',
-                  bottom: '1rem',
-                  left: '50%',
-                  transform: 'translateX(-50%)',
-                  display: 'flex',
-                  gap: '0.5rem'
-                }}>
-                  {selectedProduct.colors.map((color, index) => (
-                    <button
-                      key={index}
-                      onClick={() => setSelectedColorIndex(index)}
-                      style={{
-                        background: index === selectedColorIndex ? 'white' : 'rgba(255,255,255,0.5)',
-                        color: index === selectedColorIndex ? '#002b29' : 'white',
-                        border: 'none',
-                        borderRadius: '12px',
-                        padding: '0.25rem 0.75rem',
-                        fontSize: '0.8rem',
-                        fontFamily: 'Montserrat, sans-serif',
-                        fontWeight: '500',
-                        cursor: 'pointer'
-                      }}
-                    >
-                      {color}
-                    </button>
-                  ))}
-                </div>
               </div>
 
               {/* Informações do Produto */}
-              <div style={{ flex: 1, padding: '2rem' }}>
+              <div style={{
+                flex: 1,
+                padding: '2rem',
+                display: 'flex',
+                flexDirection: 'column'
+              }}>
                 <div style={{
-                  fontSize: '1rem',
-                  fontFamily: 'Montserrat, sans-serif',
+                  fontSize: '0.875rem',
                   fontWeight: 'bold',
                   color: '#006d67',
                   marginBottom: '0.5rem'
@@ -368,11 +304,11 @@ const ProductHighlightsNew = () => {
                 </div>
 
                 <h2 style={{
-                  fontSize: '1.8rem',
+                  fontSize: '1.75rem',
                   fontFamily: 'Montserrat, sans-serif',
                   fontWeight: 'bold',
-                  color: '#002b29',
-                  marginBottom: '1rem'
+                  marginBottom: '1rem',
+                  color: '#002b29'
                 }}>
                   {selectedProduct.name}
                 </h2>
@@ -389,16 +325,16 @@ const ProductHighlightsNew = () => {
 
                 <div style={{ marginBottom: '1.5rem' }}>
                   <h3 style={{
-                    fontSize: '1.1rem',
+                    fontSize: '1rem',
                     fontFamily: 'Montserrat, sans-serif',
                     fontWeight: '600',
-                    color: '#002b29',
-                    marginBottom: '0.5rem'
+                    marginBottom: '0.5rem',
+                    color: '#002b29'
                   }}>
                     Dimensões
                   </h3>
                   <p style={{
-                    fontSize: '1rem',
+                    fontSize: '0.875rem',
                     fontFamily: 'Lato, sans-serif',
                     color: '#666'
                   }}>
@@ -408,26 +344,26 @@ const ProductHighlightsNew = () => {
 
                 <div style={{ marginBottom: '2rem' }}>
                   <h3 style={{
-                    fontSize: '1.1rem',
+                    fontSize: '1rem',
                     fontFamily: 'Montserrat, sans-serif',
                     fontWeight: '600',
-                    color: '#002b29',
-                    marginBottom: '0.5rem'
+                    marginBottom: '0.5rem',
+                    color: '#002b29'
                   }}>
                     Cores Disponíveis
                   </h3>
                   <div style={{ display: 'flex', flexWrap: 'wrap', gap: '0.5rem' }}>
                     {selectedProduct.colors.map((color, index) => (
-                      <span
+                      <span 
                         key={index}
                         style={{
-                          fontSize: '0.9rem',
-                          fontFamily: 'Montserrat, sans-serif',
-                          fontWeight: '500',
-                          color: '#006d67',
-                          backgroundColor: '#e8f4f3',
+                          display: 'inline-block',
+                          backgroundColor: '#006d67',
+                          color: 'white',
                           padding: '0.5rem 1rem',
-                          borderRadius: '20px'
+                          borderRadius: '6px',
+                          fontSize: '0.875rem',
+                          fontWeight: '500'
                         }}
                       >
                         {color}
@@ -437,15 +373,16 @@ const ProductHighlightsNew = () => {
                 </div>
 
                 <div style={{
-                  backgroundColor: '#f8f9fa',
-                  padding: '1rem',
+                  backgroundColor: '#fff3cd',
+                  border: '1px solid #ffeaa7',
                   borderRadius: '8px',
-                  marginBottom: '1.5rem'
+                  padding: '1rem',
+                  marginTop: 'auto'
                 }}>
                   <p style={{
-                    fontSize: '0.9rem',
+                    fontSize: '0.875rem',
                     fontFamily: 'Lato, sans-serif',
-                    color: '#666',
+                    color: '#856404',
                     margin: 0,
                     fontStyle: 'italic'
                   }}>
@@ -459,16 +396,16 @@ const ProductHighlightsNew = () => {
         </div>
       )}
 
-      {/* Media Queries para Responsividade */}
+      {/* CSS para responsividade */}
       <style jsx>{`
         @media (max-width: 768px) {
           .produtos-grid {
-            grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)) !important;
-            gap: 0.8rem !important;
+            grid-template-columns: repeat(2, 1fr) !important;
+            gap: 1rem !important;
           }
           
           .card {
-            padding: 0.8rem !important;
+            padding: 0.75rem !important;
           }
           
           .card img {
@@ -477,21 +414,27 @@ const ProductHighlightsNew = () => {
           
           .modal-content {
             flex-direction: column !important;
+            margin: 1rem !important;
+            max-height: 95vh !important;
           }
           
-          .modal-content > div:first-child {
+          .modal-image {
+            height: 300px !important;
             border-radius: 12px 12px 0 0 !important;
+          }
+          
+          .modal-info {
+            padding: 1.5rem !important;
           }
         }
         
         @media (max-width: 480px) {
           .produtos-grid {
-            grid-template-columns: repeat(2, 1fr) !important;
-            gap: 0.5rem !important;
+            grid-template-columns: 1fr !important;
           }
         }
       `}</style>
-    </section>
+    </div>
   )
 }
 

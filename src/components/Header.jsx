@@ -49,11 +49,11 @@ const Header = () => {
       <div style={{ display: 'flex', alignItems: 'center' }}>
         <Link to="/" style={{ display: 'flex', alignItems: 'center', textDecoration: 'none', color: 'white' }}>
           <img 
-            src="/retangularlogo.png" 
+            src="/LOGO_BRANCA.png" 
             alt="Toque Ideal Logo" 
             style={{ height: '40px', width: 'auto', marginRight: '12px' }}
             onError={(e) => {
-              e.target.src = '/LOGO_BRANCA.png'
+              e.target.src = '/retangularlogo.png'
             }}
           />
           <span style={{ 

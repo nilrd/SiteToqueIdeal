@@ -21,7 +21,7 @@ const Footer = () => {
           <div style={{ textAlign: 'left' }}>
             <div style={{ display: 'flex', alignItems: 'center', marginBottom: '1rem' }}>
               <img 
-                src="/retangularlogo.png" 
+                src="/LOGO_BRANCA.png" 
                 alt="Toque Ideal Logo" 
                 style={{ height: '32px', width: 'auto', marginRight: '12px' }}
               />

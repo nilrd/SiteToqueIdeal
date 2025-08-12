@@ -1,15 +1,36 @@
 /* Responsividade Global */
+
+/* Reset e base */
+* {
+  box-sizing: border-box;
+}
+
+/* Header responsivo */
 @media (max-width: 768px) {
-  /* Header responsivo */
   header {
     padding: 1rem !important;
+    flex-wrap: wrap;
   }
   
   header .logo-text {
     font-size: 1.25rem !important;
   }
   
-  /* Hero responsivo */
+  .hidden {
+    display: none !important;
+  }
+  
+  .md\:hidden {
+    display: block !important;
+  }
+  
+  .md\:flex {
+    display: none !important;
+  }
+}
+
+/* Hero responsivo */
+@media (max-width: 768px) {
   .hero-section {
     padding: 3rem 1rem !important;
     min-height: 60vh !important;
@@ -22,8 +43,35 @@
   .hero-subtitle {
     font-size: 1rem !important;
   }
+}
+
+@media (max-width: 480px) {
+  .hero-section {
+    padding: 2rem 1rem !important;
+    min-height: 50vh !important;
+  }
   
-  /* Produtos em destaque responsivo */
+  .hero-title {
+    font-size: 1.75rem !important;
+  }
+}
+
+/* Produtos em destaque responsivo */
+@media (max-width: 1200px) {
+  .produtos-grid {
+    grid-template-columns: repeat(4, 1fr) !important;
+    gap: 1.25rem !important;
+  }
+}
+
+@media (max-width: 992px) {
+  .produtos-grid {
+    grid-template-columns: repeat(3, 1fr) !important;
+    gap: 1rem !important;
+  }
+}
+
+@media (max-width: 768px) {
   .produtos-grid {
     grid-template-columns: repeat(2, 1fr) !important;
     gap: 0.8rem !important;
@@ -38,11 +86,34 @@
     height: 150px !important;
   }
   
-  /* Modal responsivo */
+  .product-card h3 {
+    font-size: 1rem !important;
+  }
+  
+  .product-card button {
+    padding: 0.6rem 1rem !important;
+    font-size: 0.8rem !important;
+  }
+}
+
+@media (max-width: 480px) {
+  .produtos-grid {
+    grid-template-columns: 1fr !important;
+    gap: 0.5rem !important;
+  }
+  
+  .product-card img {
+    height: 200px !important;
+  }
+}
+
+/* Modal responsivo */
+@media (max-width: 768px) {
   .modal-content {
     flex-direction: column !important;
     margin: 1rem !important;
     max-height: 95vh !important;
+    overflow-y: auto !important;
   }
   
   .modal-image {
@@ -54,7 +125,31 @@
     padding: 1.5rem !important;
   }
   
-  /* Eventos e formulários responsivos */
+  .modal-info h2 {
+    font-size: 1.5rem !important;
+  }
+  
+  .modal-info p {
+    font-size: 0.9rem !important;
+  }
+}
+
+@media (max-width: 480px) {
+  .modal-content {
+    margin: 0.5rem !important;
+  }
+  
+  .modal-info {
+    padding: 1rem !important;
+  }
+  
+  .modal-image {
+    height: 250px !important;
+  }
+}
+
+/* Eventos e formulários responsivos */
+@media (max-width: 768px) {
   .flex-container {
     flex-direction: column !important;
   }
@@ -71,17 +166,6 @@
     font-size: 1.5rem !important;
   }
   
-  /* Footer responsivo */
-  .footer-grid {
-    grid-template-columns: 1fr !important;
-    text-align: center !important;
-  }
-  
-  .footer-section {
-    text-align: center !important;
-  }
-  
-  /* Formulários responsivos */
   .form-container {
     padding: 1.5rem !important;
   }
@@ -89,35 +173,56 @@
   .form-title {
     font-size: 1.25rem !important;
   }
-  
-  /* Botões responsivos */
-  .btn-responsive {
-    padding: 0.7rem 1.25rem !important;
-    font-size: 0.9rem !important;
-  }
 }
 
 @media (max-width: 480px) {
-  /* Ajustes para telas muito pequenas */
-  .produtos-grid {
-    grid-template-columns: 1fr !important;
-    gap: 0.5rem !important;
-  }
-  
-  .hero-title {
+  .events-title {
     font-size: 1.75rem !important;
   }
   
-  .modal-content {
-    margin: 0.5rem !important;
-  }
-  
-  .modal-info {
-    padding: 1rem !important;
+  .invitation-title {
+    font-size: 1.25rem !important;
   }
   
   .form-container {
     padding: 1rem !important;
+  }
+}
+
+/* Footer responsivo */
+@media (max-width: 768px) {
+  .footer-grid {
+    grid-template-columns: 1fr !important;
+    text-align: center !important;
+    gap: 1.5rem !important;
+  }
+  
+  .footer-section {
+    text-align: center !important;
+  }
+  
+  footer {
+    padding: 1.5rem 1rem !important;
+  }
+}
+
+/* Formulários responsivos */
+@media (max-width: 768px) {
+  .form-grid {
+    grid-template-columns: 1fr !important;
+    gap: 1rem !important;
+  }
+  
+  .form-input {
+    font-size: 16px !important; /* Previne zoom no iOS */
+  }
+}
+
+/* Botões responsivos */
+@media (max-width: 768px) {
+  .btn-responsive {
+    padding: 0.7rem 1.25rem !important;
+    font-size: 0.9rem !important;
   }
 }
 
@@ -138,11 +243,6 @@
   .visible-mobile {
     display: block !important;
   }
-}
-
-/* Transições suaves */
-* {
-  transition: all 0.3s ease;
 }
 
 /* Grid responsivo padrão */
@@ -199,6 +299,20 @@
   }
 }
 
+@media (max-width: 480px) {
+  .text-responsive-xl {
+    font-size: 1.75rem;
+  }
+  
+  .text-responsive-lg {
+    font-size: 1.25rem;
+  }
+  
+  .text-responsive-md {
+    font-size: 1.125rem;
+  }
+}
+
 /* Espaçamento responsivo */
 .spacing-responsive {
   padding: 4rem 2rem;
@@ -207,6 +321,61 @@
 @media (max-width: 768px) {
   .spacing-responsive {
     padding: 2rem 1rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .spacing-responsive {
+    padding: 1.5rem 0.75rem;
+  }
+}
+
+/* Transições suaves */
+* {
+  transition: all 0.3s ease;
+}
+
+/* Correções específicas para mobile */
+@media (max-width: 768px) {
+  /* Previne overflow horizontal */
+  body {
+    overflow-x: hidden;
+  }
+  
+  /* Melhora a legibilidade em telas pequenas */
+  p, span, div {
+    line-height: 1.6 !important;
+  }
+  
+  /* Garante que imagens não quebrem o layout */
+  img {
+    max-width: 100% !important;
+    height: auto !important;
+  }
+  
+  /* Melhora a usabilidade de botões em touch */
+  button, a {
+    min-height: 44px !important;
+    min-width: 44px !important;
+  }
+}
+
+/* Correções para telas muito pequenas */
+@media (max-width: 320px) {
+  .container-responsive {
+    padding: 0 0.5rem;
+  }
+  
+  .spacing-responsive {
+    padding: 1rem 0.5rem;
+  }
+  
+  .text-responsive-xl {
+    font-size: 1.5rem;
+  }
+  
+  .text-responsive-lg {
+    font-size: 1.125rem;
   }
 }
 
