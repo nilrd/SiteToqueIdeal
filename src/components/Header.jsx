@@ -31,7 +31,7 @@ const Header = () => {
   }
 
   return (
-    <header className="bg-white shadow-sm sticky top-0 z-50">
+    <header className="bg-[#214567] shadow-sm sticky top-0 z-50">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex justify-between items-center h-16">
           {/* Logo */}
@@ -58,8 +58,8 @@ const Header = () => {
                   to={item.href}
                   className={`transition-colors duration-200 font-montserrat font-medium ${
                     isActive(item.href) 
-                      ? 'text-primary border-b-2 border-primary' 
-                      : 'text-gray-700 hover:text-primary'
+                      ? 'text-white border-b-2 border-white' 
+                      : 'text-gray-200 hover:text-white'
                   }`}
                 >
                   {item.name}
@@ -88,9 +88,9 @@ const Header = () => {
               onClick={() => setIsMenuOpen(!isMenuOpen)}
             >
               {isMenuOpen ? (
-                <X className="h-6 w-6" />
+                <X className="h-6 w-6 text-white" />
               ) : (
-                <Menu className="h-6 w-6" />
+                <Menu className="h-6 w-6 text-white" />
               )}
             </Button>
           </div>
@@ -99,15 +99,15 @@ const Header = () => {
         {/* Mobile Navigation */}
         {isMenuOpen && (
           <div className="md:hidden">
-            <div className="px-2 pt-2 pb-3 space-y-1 sm:px-3 bg-white border-t">
+            <div className="px-2 pt-2 pb-3 space-y-1 sm:px-3 bg-[#214567] border-t border-gray-400">
               {menuItems.map((item) => (
                 <Link
                   key={item.name}
                   to={item.href}
                   className={`block px-3 py-2 transition-colors duration-200 font-montserrat font-medium ${
                     isActive(item.href) 
-                      ? 'text-primary bg-teal-50' 
-                      : 'text-gray-700 hover:text-primary'
+                      ? 'text-white bg-[#1a3a52]' 
+                      : 'text-gray-200 hover:text-white'
                   }`}
                   onClick={() => setIsMenuOpen(false)}
                 >

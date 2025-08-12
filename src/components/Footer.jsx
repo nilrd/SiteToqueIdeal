@@ -4,7 +4,7 @@ import { contactInfo, generateWhatsAppLink, generateEmailLink } from '../data/co
 
 const Footer = () => {
   return (
-    <footer className="bg-teal-800 text-white">
+    <footer className="bg-[#214567] text-white">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
         <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
           {/* Logo and Company Info */}
@@ -19,7 +19,7 @@ const Footer = () => {
                 TOQUE IDEAL
               </h3>
             </div>
-            <p className="text-sm text-teal-300 font-lato leading-relaxed">
+            <p className="text-sm text-gray-300 font-lato leading-relaxed">
               Há mais de 10 anos criando peças únicas em vidro que transformam ambientes 
               e expressam personalidade com qualidade e sofisticação.
             </p>
@@ -32,21 +32,21 @@ const Footer = () => {
             </h3>
             <div className="space-y-3">
               <div className="flex items-center space-x-3">
-                <Phone className="h-5 w-5 text-teal-300" />
+                <Phone className="h-5 w-5 text-gray-300" />
                 <a 
                   href={generateWhatsAppLink("Olá! Gostaria de falar sobre o telefone.")}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="font-lato hover:text-teal-300 transition-colors"
+                  className="font-lato hover:text-gray-300 transition-colors"
                 >
                   {contactInfo.phoneFormatted}
                 </a>
               </div>
               <div className="flex items-center space-x-3">
-                <Mail className="h-5 w-5 text-teal-300" />
+                <Mail className="h-5 w-5 text-gray-300" />
                 <a 
                   href={generateEmailLink("Contato via Site Toque Ideal")}
-                  className="font-lato hover:text-teal-300 transition-colors"
+                  className="font-lato hover:text-gray-300 transition-colors"
                 >
                   {contactInfo.email}
                 </a>
@@ -57,7 +57,7 @@ const Footer = () => {
                   href={contactInfo.whatsapp.url}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="font-lato hover:text-teal-300 transition-colors"
+                  className="font-lato hover:text-gray-300 transition-colors"
                 >
                   WhatsApp
                 </a>
@@ -71,22 +71,22 @@ const Footer = () => {
               Links Rápidos
             </h3>
             <div className="space-y-2">
-              <Link to="/" className="block font-lato hover:text-teal-300 transition-colors">
+              <Link to="/" className="block font-lato hover:text-gray-300 transition-colors">
                 Home
               </Link>
-              <Link to="/catalogo" className="block font-lato hover:text-teal-300 transition-colors">
+              <Link to="/catalogo" className="block font-lato hover:text-gray-300 transition-colors">
                 Catálogo
               </Link>
-              <Link to="/sobre-nos" className="block font-lato hover:text-teal-300 transition-colors">
+              <Link to="/sobre-nos" className="block font-lato hover:text-gray-300 transition-colors">
                 Sobre Nós
               </Link>
-              <Link to="/eventos" className="block font-lato hover:text-teal-300 transition-colors">
+              <Link to="/eventos" className="block font-lato hover:text-gray-300 transition-colors">
                 Feiras & Eventos
               </Link>
-              <Link to="/trabalhe-conosco" className="block font-lato hover:text-teal-300 transition-colors">
+              <Link to="/trabalhe-conosco" className="block font-lato hover:text-gray-300 transition-colors">
                 Trabalhe Conosco
               </Link>
-              <Link to="/contato" className="block font-lato hover:text-teal-300 transition-colors">
+              <Link to="/contato" className="block font-lato hover:text-gray-300 transition-colors">
                 Contato
               </Link>
             </div>
@@ -102,7 +102,7 @@ const Footer = () => {
                 href={contactInfo.socialMedia.instagram.url} 
                 target="_blank"
                 rel="noopener noreferrer"
-                className="w-10 h-10 bg-teal-700 rounded-full flex items-center justify-center hover:bg-pink-600 transition-colors"
+                className="w-10 h-10 bg-[#1a3a52] rounded-full flex items-center justify-center hover:bg-pink-600 transition-colors"
                 aria-label="Instagram"
               >
                 <Instagram className="h-5 w-5" />
@@ -111,7 +111,7 @@ const Footer = () => {
                 href={contactInfo.socialMedia.facebook.url} 
                 target="_blank"
                 rel="noopener noreferrer"
-                className="w-10 h-10 bg-teal-700 rounded-full flex items-center justify-center hover:bg-blue-600 transition-colors"
+                className="w-10 h-10 bg-[#1a3a52] rounded-full flex items-center justify-center hover:bg-blue-600 transition-colors"
                 aria-label="Facebook"
               >
                 <Facebook className="h-5 w-5" />
@@ -120,16 +120,16 @@ const Footer = () => {
                 href={contactInfo.whatsapp.url} 
                 target="_blank"
                 rel="noopener noreferrer"
-                className="w-10 h-10 bg-teal-700 rounded-full flex items-center justify-center hover:bg-green-600 transition-colors"
+                className="w-10 h-10 bg-[#1a3a52] rounded-full flex items-center justify-center hover:bg-green-600 transition-colors"
                 aria-label="WhatsApp"
               >
                 <MessageCircle className="h-5 w-5" />
               </a>
             </div>
-            <p className="text-sm text-teal-300 font-lato">
+            <p className="text-sm text-gray-300 font-lato">
               Siga-nos nas redes sociais:
             </p>
-            <p className="text-sm text-teal-300 font-lato">
+            <p className="text-sm text-gray-300 font-lato">
               Instagram: <a 
                 href={contactInfo.socialMedia.instagram.url} 
                 target="_blank"
@@ -139,7 +139,7 @@ const Footer = () => {
                 {contactInfo.socialMedia.instagram.handle}
               </a>
             </p>
-            <p className="text-sm text-teal-300 font-lato">
+            <p className="text-sm text-gray-300 font-lato">
               Facebook: <a 
                 href={contactInfo.socialMedia.facebook.url} 
                 target="_blank"
@@ -153,9 +153,9 @@ const Footer = () => {
         </div>
 
         {/* Bottom Bar */}
-        <div className="border-t border-teal-700 mt-8 pt-8 text-center">
+        <div className="border-t border-gray-500 mt-8 pt-8 text-center">
           <div className="flex flex-col md:flex-row justify-center items-center">
-            <div className="text-sm text-teal-300 font-lato">
+            <div className="text-sm text-gray-300 font-lato">
               <p>&copy; 2024 Toque Ideal. Todos os direitos reservados.</p>
               <p className="mt-1">
                 Desenvolvido com <span className="text-red-400">❤️</span> para transformar ambientes através do vidro.
