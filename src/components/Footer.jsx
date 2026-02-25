@@ -22,7 +22,7 @@ const Footer = () => {
           {/* Coluna 1: Logo + Descricao */}
           <div>
             <img
-              src="/LOGO_BRANCA.png"
+              src="/logo toque ideal (3).png"
               alt="Toque Ideal"
               style={{ height: '32px', width: 'auto', marginBottom: '1.25rem' }}
             />
@@ -111,9 +111,9 @@ const Footer = () => {
                     transition: 'border-color 0.2s, color 0.2s, background 0.2s',
                   }}
                   onMouseEnter={e => {
-                    e.currentTarget.style.borderColor = '#006d67'
+                    e.currentTarget.style.borderColor = '#214567'
                     e.currentTarget.style.color = '#ffffff'
-                    e.currentTarget.style.background = '#006d67'
+                    e.currentTarget.style.background = '#214567'
                   }}
                   onMouseLeave={e => {
                     e.currentTarget.style.borderColor = 'rgba(255,255,255,0.2)'

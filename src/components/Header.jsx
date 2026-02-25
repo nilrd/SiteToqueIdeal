@@ -50,7 +50,7 @@ const Header = () => {
           style={{ display: 'flex', alignItems: 'center', textDecoration: 'none' }}
         >
           <img
-            src={scrolled ? '/LOGO_AZUL.png' : '/LOGO_BRANCA.png'}
+            src={scrolled ? '/logo toque ideal (2).png' : '/logo toque ideal (3).png'}
             alt="Toque Ideal"
             style={{ height: '36px', width: 'auto', transition: 'opacity 0.3s' }}
           />
@@ -78,7 +78,7 @@ const Header = () => {
                 transition: 'color 0.2s',
                 padding: '0.25rem 0',
               }}
-              onMouseEnter={e => e.currentTarget.style.color = '#006d67'}
+              onMouseEnter={e => e.currentTarget.style.color = '#214567'}
               onMouseLeave={e => e.currentTarget.style.color = scrolled ? '#1a1a1a' : 'rgba(255,255,255,0.92)'}
             >
               {link.label}
@@ -87,7 +87,7 @@ const Header = () => {
           <button
             onClick={() => handleNav('#contato')}
             style={{
-              background: '#006d67',
+              background: '#214567',
               color: '#ffffff',
               border: 'none',
               padding: '0.6rem 1.5rem',
@@ -100,8 +100,8 @@ const Header = () => {
               cursor: 'pointer',
               transition: 'background 0.2s',
             }}
-            onMouseEnter={e => e.currentTarget.style.background = '#005450'}
-            onMouseLeave={e => e.currentTarget.style.background = '#006d67'}
+            onMouseEnter={e => e.currentTarget.style.background = '#1a3650'}
+            onMouseLeave={e => e.currentTarget.style.background = '#214567'}
           >
             Orcamento
           </button>
@@ -157,7 +157,7 @@ const Header = () => {
           <button
             onClick={() => handleNav('#contato')}
             style={{
-              background: '#006d67',
+              background: '#214567',
               color: '#ffffff',
               border: 'none',
               padding: '0.75rem 1.5rem',
