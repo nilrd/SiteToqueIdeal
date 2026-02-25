@@ -37,7 +37,6 @@ const galeriaFotos = [
   '/fotosinstagram/post_insta_3.jpg',
   '/fotosinstagram/post_insta_4.jpg',
   '/fotosinstagram/post_insta_5.jpg',
-  '/fotosinstagram/post_insta_6.jpg',
   '/fotosinstagram/post_insta_9.png',
   '/fotosinstagram/post_insta_10.png',
   '/fotosinstagram/post_insta_11.png',
