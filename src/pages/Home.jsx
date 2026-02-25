@@ -17,10 +17,10 @@ const produtos = [
     imagem: '/1814BRANCO.jpg',
   },
   {
-    codigo: '603',
-    nome: 'Petisqueira Quadrada',
-    cor: 'Verde',
-    imagem: '/603-VERDE.jpg',
+    codigo: '307',
+    nome: 'Peca Decorativa',
+    cor: 'Mel',
+    imagem: '/307MEL.jpg',
   },
   {
     codigo: '800',
@@ -36,9 +36,9 @@ const galeriaFotos = [
   '/fotosinstagram/post_insta_4.jpg',
   '/fotosinstagram/post_insta_5.jpg',
   '/fotosinstagram/post_insta_6.jpg',
-  '/fotosinstagram/post_insta_7.jpg',
-  '/fotosinstagram/post_insta_8.jpg',
   '/fotosinstagram/post_insta_9.png',
+  '/fotosinstagram/post_insta_10.png',
+  '/fotosinstagram/post_insta_11.png',
 ]
 
 /* ─────────────────── HELPERS ─────────────────── */
@@ -343,14 +343,18 @@ const ProdutoCard = ({ produto }) => {
       <div style={{
         aspectRatio: '1',
         overflow: 'hidden',
-        background: '#f0eeeb',
+        background: '#f5f3f0',
+        display: 'flex',
+        alignItems: 'center',
+        justifyContent: 'center',
       }}>
         <img
           src={produto.imagem}
           alt={produto.nome}
           style={{
             width: '100%', height: '100%',
-            objectFit: 'cover',
+            objectFit: 'contain',
+            padding: '1.5rem',
             transition: 'transform 0.5s ease',
             transform: hovered ? 'scale(1.05)' : 'scale(1)',
           }}
@@ -506,7 +510,7 @@ const Galeria = () => (
 
       <div style={{ marginTop: '2.5rem', textAlign: 'center' }}>
         <a
-          href="https://www.instagram.com/toqueideal"
+          href="https://www.instagram.com/toque.ideal"
           target="_blank"
           rel="noopener noreferrer"
           style={{

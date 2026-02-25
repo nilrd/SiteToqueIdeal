@@ -50,7 +50,7 @@ const Header = () => {
           style={{ display: 'flex', alignItems: 'center', textDecoration: 'none' }}
         >
           <img
-            src={scrolled ? '/logo-toque-ideal.png' : '/LOGO_BRANCA.png'}
+            src={scrolled ? '/LOGO_AZUL.png' : '/LOGO_BRANCA.png'}
             alt="Toque Ideal"
             style={{ height: '36px', width: 'auto', transition: 'opacity 0.3s' }}
           />
