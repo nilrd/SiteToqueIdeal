@@ -2,18 +2,19 @@
 @tailwind components;
 @tailwind utilities;
 
-/* Importação das fontes */
-@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700;800&family=Lato:wght@300;400;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700;800&family=Lato:ital,wght@0,300;0,400;0,700;1,300&display=swap');
 
-/* Variáveis CSS customizadas */
 :root {
-  --primary: #8B4513;
-  --primary-dark: #654321;
-  --secondary: #D2B48C;
-  --accent: #F4A460;
-  --text-dark: #2D2D2D;
-  --text-light: #6B7280;
-  --background: #FAFAFA;
+  --primary: #006d67;
+  --primary-dark: #005450;
+  --primary-light: #e6f2f1;
+  --secondary: #214567;
+  --secondary-dark: #1a3650;
+  --text-dark: #1a1a1a;
+  --text-muted: #6b7280;
+  --background: #ffffff;
+  --background-alt: #f8f7f4;
+  --border: #e5e4e0;
 }
 
 /* Estilos base */
