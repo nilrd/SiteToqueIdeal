@@ -220,7 +220,7 @@ const Sobre = () => (
           border: `2px solid ${COR}`, borderRadius: '1px', opacity: 0.25,
         }} />
         <img
-          src="/pe\u00e7a (4).png"
+          src="/escultura.png"
           alt="Pecas decorativas Toque Ideal"
           style={{ width: '100%', aspectRatio: '4/5', objectFit: 'contain', display: 'block', position: 'relative', background: '#f0eeed' }}
         />
@@ -289,7 +289,7 @@ const Galeria = () => {
         </div>
         <div style={{
           display: 'grid',
-          gridTemplateColumns: 'repeat(auto-fill, minmax(200px, 1fr))',
+          gridTemplateColumns: 'repeat(4, 1fr)',
           gap: '0.6rem',
         }}>
           {galeriaFotos.map((src, i) => (
@@ -320,21 +320,101 @@ const Galeria = () => {
             </div>
           ))}
         </div>
-        <div style={{ marginTop: '2.5rem', textAlign: 'center' }}>
-          <a href="https://www.instagram.com/toque.ideal" target="_blank" rel="noopener noreferrer"
-            style={{
-              display: 'inline-flex', alignItems: 'center', gap: '0.5rem',
-              fontFamily: 'Montserrat, sans-serif', fontWeight: '600',
-              fontSize: '0.8rem', letterSpacing: '0.1em', textTransform: 'uppercase',
-              color: COR, textDecoration: 'none',
-              borderBottom: `1px solid ${COR}`, paddingBottom: '2px',
-              transition: 'opacity 0.2s',
-            }}
-            onMouseEnter={e => e.currentTarget.style.opacity = '0.65'}
-            onMouseLeave={e => e.currentTarget.style.opacity = '1'}
-          >
-            Ver mais no Instagram — @toque.ideal
-          </a>
+        {/* CTA Instagram */}
+        <div style={{ marginTop: '3.5rem', display: 'flex', alignItems: 'center', gap: '3rem', flexWrap: 'wrap', justifyContent: 'space-between' }}>
+          {/* Texto + botão */}
+          <div style={{ flex: '1 1 260px' }}>
+            <p style={{ fontFamily: 'Montserrat, sans-serif', fontWeight: '700', fontSize: '1.25rem', color: '#1a1a1a', marginBottom: '0.5rem' }}>
+              Siga-nos no Instagram
+            </p>
+            <p style={{ fontFamily: 'Lato, sans-serif', fontSize: '0.9rem', color: '#666', lineHeight: '1.6', marginBottom: '1.5rem' }}>
+              Acompanhe nossos lancamentos, ambientes decorados e novidades direto pelo Instagram.
+            </p>
+            <a
+              href="https://www.instagram.com/toque.ideal"
+              target="_blank" rel="noopener noreferrer"
+              style={{
+                display: 'inline-flex', alignItems: 'center', gap: '0.6rem',
+                background: 'linear-gradient(135deg, #833ab4, #fd1d1d, #fcb045)',
+                color: '#fff', textDecoration: 'none',
+                padding: '0.75rem 1.5rem', borderRadius: '2px',
+                fontFamily: 'Montserrat, sans-serif', fontWeight: '600',
+                fontSize: '0.78rem', letterSpacing: '0.08em', textTransform: 'uppercase',
+                transition: 'opacity 0.2s, transform 0.2s',
+              }}
+              onMouseEnter={e => { e.currentTarget.style.opacity = '0.85'; e.currentTarget.style.transform = 'translateY(-2px)' }}
+              onMouseLeave={e => { e.currentTarget.style.opacity = '1'; e.currentTarget.style.transform = 'none' }}
+            >
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                <rect x="2" y="2" width="20" height="20" rx="5" ry="5"/>
+                <circle cx="12" cy="12" r="4"/>
+                <circle cx="17.5" cy="6.5" r="1" fill="currentColor" stroke="none"/>
+              </svg>
+              @toque.ideal
+            </a>
+          </div>
+
+          {/* Placeholder Instagram Card */}
+          <div style={{ flex: '1 1 300px', maxWidth: '340px' }}>
+            <div style={{
+              border: '1px solid #e0ddd8',
+              borderRadius: '4px', overflow: 'hidden',
+              background: '#fff',
+              boxShadow: '0 2px 16px rgba(0,0,0,0.06)',
+            }}>
+              {/* Header do card */}
+              <div style={{
+                display: 'flex', alignItems: 'center', gap: '0.75rem',
+                padding: '0.75rem 1rem',
+                borderBottom: '1px solid #f0ede8',
+              }}>
+                <div style={{
+                  width: '36px', height: '36px', borderRadius: '50%',
+                  background: 'linear-gradient(135deg, #833ab4, #fd1d1d, #fcb045)',
+                  padding: '2px',
+                  flexShrink: 0,
+                }}>
+                  <div style={{ width: '100%', height: '100%', borderRadius: '50%', background: '#fff', display: 'flex', alignItems: 'center', justifyContent: 'center', overflow: 'hidden' }}>
+                    <img src="/logo toque ideal (2).png" alt="Toque Ideal" style={{ width: '28px', height: '28px', objectFit: 'contain' }} />
+                  </div>
+                </div>
+                <div>
+                  <p style={{ fontFamily: 'Montserrat, sans-serif', fontWeight: '600', fontSize: '0.8rem', color: '#1a1a1a', lineHeight: '1' }}>toque.ideal</p>
+                  <p style={{ fontFamily: 'Lato, sans-serif', fontSize: '0.7rem', color: '#999', marginTop: '2px' }}>Home Decor</p>
+                </div>
+                <a href="https://www.instagram.com/toque.ideal" target="_blank" rel="noopener noreferrer"
+                  style={{
+                    marginLeft: 'auto',
+                    fontFamily: 'Montserrat, sans-serif', fontWeight: '600', fontSize: '0.68rem',
+                    color: '#3b82f6', textDecoration: 'none', letterSpacing: '0.04em',
+                  }}
+                >
+                  Seguir
+                </a>
+              </div>
+              {/* Imagem preview */}
+              <div style={{ aspectRatio: '1', overflow: 'hidden', background: '#f5f3f0' }}>
+                <img
+                  src="/7.png"
+                  alt="Instagram Toque Ideal"
+                  style={{ width: '100%', height: '100%', objectFit: 'cover', display: 'block' }}
+                />
+              </div>
+              {/* Footer do card */}
+              <div style={{ padding: '0.75rem 1rem' }}>
+                <p style={{ fontFamily: 'Lato, sans-serif', fontSize: '0.82rem', color: '#1a1a1a', lineHeight: '1.5' }}>
+                  <span style={{ fontWeight: '700' }}>toque.ideal</span>{' '}
+                  Pecas decorativas em vidro com design exclusivo. ✨
+                  <span style={{ color: '#3b82f6' }}> #homedecor #decoracao #vidro</span>
+                </p>
+                <a href="https://www.instagram.com/toque.ideal" target="_blank" rel="noopener noreferrer"
+                  style={{ fontFamily: 'Lato, sans-serif', fontSize: '0.75rem', color: '#999', textDecoration: 'none', display: 'block', marginTop: '0.4rem' }}
+                >
+                  Ver no Instagram →
+                </a>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
     </section>
