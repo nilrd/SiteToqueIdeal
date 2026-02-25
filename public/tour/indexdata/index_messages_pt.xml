@@ -1,0 +1,157 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<krpano>
+
+<!-- ************************ -->
+<!--         Messages         -->
+<!-- ************************ -->
+
+  <data name="pt_project_title"><![CDATA[Novo Projecto]]></data>
+
+
+
+  <data name="pt_pano37_title"><![CDATA[Amb1]]></data>
+  <data name="pt_spotpoint71_tooltip"><![CDATA[Clique Aqui]]></data>
+
+
+  <data name="pt_pano40_title"><![CDATA[Amb2]]></data>
+  <data name="pt_spotpoint72_tooltip"><![CDATA[Clique Aqui]]></data>
+
+
+  <data name="pt_pano41_title"><![CDATA[Amb3]]></data>
+  <data name="pt_spotpoint73_tooltip"><![CDATA[Clique Aqui]]></data>
+
+
+  <data name="pt_pano42_title"><![CDATA[Amb4]]></data>
+  <data name="pt_spotpoint74_tooltip"><![CDATA[Clique Aqui]]></data>
+
+
+  <data name="pt_pano43_title"><![CDATA[Amb5]]></data>
+  <data name="pt_spotpoint75_tooltip"><![CDATA[Clique Aqui]]></data>
+
+
+  <data name="pt_pano44_title"><![CDATA[Amb6]]></data>
+  <data name="pt_spotpoint76_tooltip"><![CDATA[Clique Aqui]]></data>
+
+
+  <data name="pt_pano45_title"><![CDATA[Amb7]]></data>
+  <data name="pt_spotpoint77_tooltip"><![CDATA[Clique Aqui]]></data>
+
+
+  <data name="pt_pano46_title"><![CDATA[Amb8]]></data>
+  <data name="pt_spotpoint78_tooltip"><![CDATA[Clique Aqui]]></data>
+
+
+  <data name="pt_pano47_title"><![CDATA[Amb9]]></data>
+  <data name="pt_spotpoint79_tooltip"><![CDATA[Clique Aqui]]></data>
+
+
+  <data name="pt_pano38_title"><![CDATA[Amb10]]></data>
+  <data name="pt_spotpoint80_tooltip"><![CDATA[Clique Aqui]]></data>
+
+
+  <data name="pt_pano39_title"><![CDATA[Amb11]]></data>
+  <data name="pt_spotpoint81_tooltip"><![CDATA[Clique Aqui]]></data>
+
+
+	<data name="pt_spotmap60_tooltip"><![CDATA[]]></data>
+	<data name="pt_spotmap61_tooltip"><![CDATA[]]></data>
+	<data name="pt_spotmap62_tooltip"><![CDATA[]]></data>
+	<data name="pt_spotmap63_tooltip"><![CDATA[]]></data>
+	<data name="pt_spotmap64_tooltip"><![CDATA[]]></data>
+	<data name="pt_spotmap65_tooltip"><![CDATA[]]></data>
+	<data name="pt_spotmap66_tooltip"><![CDATA[]]></data>
+	<data name="pt_spotmap67_tooltip"><![CDATA[]]></data>
+	<data name="pt_spotmap68_tooltip"><![CDATA[]]></data>
+	<data name="pt_spotmap69_tooltip"><![CDATA[]]></data>
+	<data name="pt_spotmap70_tooltip"><![CDATA[]]></data>
+
+
+
+
+  <data name="pt_controlBar_classicprevSceneTip"><![CDATA[Panorâmica anterior]]></data>
+  <data name="pt_controlBar_classicnextSceneTip"><![CDATA[Próxima panorâmica]]></data>
+  <data name="pt_controlBar_classiczoomInTip"><![CDATA[Ampliar]]></data>
+  <data name="pt_controlBar_classiczoomOutTip"><![CDATA[Afastar]]></data>
+  <data name="pt_controlBar_classicmoveLeftTip"><![CDATA[Mover para  a esquerda]]></data>
+  <data name="pt_controlBar_classicmoveRightTip"><![CDATA[Mover par a a direita]]></data>
+  <data name="pt_controlBar_classicmoveUpTip"><![CDATA[Mover para cima]]></data>
+  <data name="pt_controlBar_classicmoveDownTip"><![CDATA[Mover para baixo]]></data>
+  <data name="pt_controlBar_classicopenFsTip"><![CDATA[Activa Ecrã Inteiro]]></data>
+  <data name="pt_controlBar_classiccloseFsTip"><![CDATA[Desactiva Ecrã Inteiro]]></data>
+  <data name="pt_controlBar_classicautorotateOnTip"><![CDATA[Iniciar Auto-rotação]]></data>
+  <data name="pt_controlBar_classicautorotateOffTip"><![CDATA[Parar Auto-rotação]]></data>
+  <data name="pt_controlBar_classicdisplayHelpTip"><![CDATA[Mostrar Tela de Ajuda]]></data>
+  <data name="pt_controlBar_classichideHelpTip"><![CDATA[Esconder Tela de Ajuda]]></data>
+  <data name="pt_controlBar_classicdisplayControlsTip"><![CDATA[Mostrar controles]]></data>
+  <data name="pt_controlBar_classichideControlsTip"><![CDATA[Esconder controles]]></data>
+  <data name="pt_controlBar_classicctrlmodeDragTip"><![CDATA[Alterar modo de controle]]></data>
+  <data name="pt_controlBar_classicctrlmodeMoveTip"><![CDATA[Alterar modo de controle]]></data>
+
+
+  <data name="pt_vr_setup_hmd0"><![CDATA[SELECIONAR O SEU HMD]]></data>
+  <data name="pt_vr_setup_advanced"><![CDATA[CONFIGURAÇÕES AVANÇADAS]]></data>
+  <data name="pt_vr_setup_title"><![CDATA[CONFIGURAÇÕES WEB VR]]></data>
+  <data name="pt_vr_setup_dvn1"><![CDATA[Dispositivo:]]></data>
+  <data name="pt_vr_setup_siz1"><![CDATA[Tamanho do ecrã:]]></data>
+  <data name="pt_vr_setup_ipd1"><![CDATA[IPD:]]></data>
+  <data name="pt_vr_setup_hmd1"><![CDATA[HMD:]]></data>
+  <data name="pt_vr_setup_hmd3"><![CDATA[Personalizar]]></data>
+  <data name="pt_vr_setup_cal"><![CDATA[Calibrar giroscópio]]></data>
+  <data name="pt_vr_setup_sav"><![CDATA[SALVAR]]></data>
+  <data name="pt_vr_setup_rst"><![CDATA[APAGAR]]></data>
+  <data name="pt_vr_setup_simple"><![CDATA[SIMPLES]]></data>
+  <data name="pt_vr_setup_cls"><![CDATA[FECHAR]]></data>
+  <data name="pt_vr_setup_m31"><![CDATA[CONFIGURAÇÕES HMD]]></data>
+  <data name="pt_vr_setup_fov1"><![CDATA[FOV:]]></data>
+  <data name="pt_vr_setup_dst1"><![CDATA[Distorção:]]></data>
+  <data name="pt_vr_setup_d2tx"><![CDATA[Distorção 2:]]></data>
+  <data name="pt_vr_setup_vig1"><![CDATA[Recorte:]]></data>
+  <data name="pt_vr_setup_cac1"><![CDATA[Aberração cromática:]]></data>
+  <data name="pt_vr_setup_olp1"><![CDATA[Sobreposição:]]></data>
+  <data name="pt_vr_setup_m35"><![CDATA[VOLTAR]]></data>
+  <data name="pt_vr_setup_cb1"><![CDATA[GIROSCÓPIO]]></data>
+  <data name="pt_vr_setup_cb2"><![CDATA[Coloque o seu dispositivo numa superfície plana e [br]estável, clique para CALIBRAR[br] para corrigir o movimento anormal do giroscópio.]]></data>
+  <data name="pt_vr_setup_cb3"><![CDATA[CALIBRAR]]></data>
+  <data name="pt_vr_setup_cb4"><![CDATA[APAGAR]]></data>
+  <data name="pt_vr_setup_cb5"><![CDATA[VOLTAR]]></data>
+  <data name="pt_vr_setup_cb6"><![CDATA[Calibrando]]></data>
+  <data name="pt_vr_setup_cb7"><![CDATA[Calibração com sucesso]]></data>
+  <data name="pt_vr_setup_cb8"><![CDATA[Calibração sem sucesso]]></data>
+  <data name="pt_vr_setup_unavailable"><![CDATA[Modo VR[br]não está disponivel no seu dispositivo ]]></data>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</krpano>
