@@ -31,6 +31,8 @@ const produtos = [
 ]
 
 const galeriaFotos = [
+  '/7.png',
+  '/8.png',
   '/fotosinstagram/post_insta_2.jpg',
   '/fotosinstagram/post_insta_3.jpg',
   '/fotosinstagram/post_insta_4.jpg',
