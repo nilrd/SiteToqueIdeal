@@ -1,92 +1,39 @@
-# Site Toque Ideal
+# Toque Ideal
 
-Site institucional da Toque Ideal - Decoração em vidro que transforma ambientes.
+Site institucional para lojistas, com catálogo solicitado pelo WhatsApp. A versão atual usa Next.js, React, TypeScript, Tailwind e fontes locais.
 
-## Sobre o Projeto
+Antes de editar o site, leia `_contexto/LEIA-PRIMEIRO.md`, incluindo a atualização da seção 8.
 
-Este é o site oficial da Toque Ideal, empresa especializada em decoração em vidro há mais de 5 anos. O site apresenta nosso catálogo completo de produtos e permite aos clientes solicitar orçamentos de forma prática e eficiente.
+## Desenvolvimento local
 
-## Funcionalidades
-
-- **Catálogo Completo**: Mais de 287 produtos organizados por séries
-- **Sistema de Busca**: Busca por código ou dimensões dos produtos
-- **Filtros Avançados**: Filtros por série de produtos
-- **Orçamento Online**: Sistema completo de solicitação de orçamentos
-- **Integração WhatsApp**: Envio direto de orçamentos via WhatsApp
-- **Design Responsivo**: Otimizado para desktop e mobile
-
-## Tecnologias Utilizadas
-
-- **React 18**: Framework principal
-- **Vite**: Build tool e dev server
-- **Tailwind CSS**: Framework de CSS
-- **Lucide React**: Ícones
-- **React Router**: Navegação
-- **Context API**: Gerenciamento de estado
-
-## Estrutura do Projeto
-
-```
-src/
-├── components/          # Componentes reutilizáveis
-│   ├── Header.jsx      # Cabeçalho e navegação
-│   ├── Hero.jsx        # Banner principal
-│   ├── ProductHighlights.jsx  # Destaques de produtos
-│   ├── EventsSection.jsx      # Seção de eventos
-│   └── Footer.jsx      # Rodapé
-├── pages/              # Páginas principais
-│   ├── Home.jsx        # Página inicial
-│   ├── Catalog.jsx     # Catálogo de produtos
-│   └── Quote.jsx       # Página de orçamento
-├── context/            # Contextos React
-│   └── QuoteContext.jsx # Gerenciamento do orçamento
-└── assets/             # Recursos estáticos
-    ├── products.json   # Dados dos produtos
-    ├── fotos1/         # Fotos dos produtos
-    ├── fotosinstagram/ # Fotos do Instagram
-    └── logotoqueideal/ # Logos da empresa
-```
-
-## Como Executar
-
-1. Clone o repositório:
-```bash
-git clone https://github.com/nilrd/SiteToqueIdeal.git
-cd SiteToqueIdeal
-```
-
-2. Instale as dependências:
-```bash
+```sh
 npm install
-# ou
-pnpm install
-```
-
-3. Execute o servidor de desenvolvimento:
-```bash
 npm run dev
-# ou
-pnpm run dev
 ```
 
-4. Acesse http://localhost:5173 no seu navegador
+## Produção local
 
-## Build para Produção
-
-```bash
+```sh
 npm run build
-# ou
-pnpm run build
+npm start -- --hostname 127.0.0.1 --port 3010
 ```
 
-## Contato
+O site fica em http://127.0.0.1:3010.
 
-- **Empresa**: Toque Ideal
-- **Telefone**: (11) 98999-9999
-- **E-mail**: contato@toqueideal.com
-- **Endereço**: R. Iout Bernarda Pinto, 383 - São Paulo - SP
+## Fotos e contatos
 
-## Licença
+- Os contatos e as fotos em uso estão em `src/config/toque.ts`.
+- O banner fornecido pelo cliente está em `public/fotos/banner-horizontal.webp`.
+- As fotos de coleção ficam em `public/fotos/`.
+- Ao remover ou substituir uma foto de origem, atualize os arquivos públicos e a configuração antes de publicar. Não existe sincronização automática com a pasta Downloads.
+- A coleção de Caixinhas depende de uma foto; a quarta coleção da revisão atual é Travessas.
 
-© 2024 Toque Ideal. Todos os direitos reservados.
+## Revisão visual
 
+Os prints das telas 1440x900, 1280x720, 1100x850, 390x844 e 360x740 ficam em `_contexto/revisao/`.
+
+Com Playwright e Chrome disponíveis no ambiente, rode `node scripts/verificar-site.cjs` para repetir a verificação local. Se o Playwright estiver em uma pasta externa, aponte `NODE_PATH` para ela. A URL pode ser definida com `TOQUE_TEST_URL` e o navegador com `TOQUE_BROWSER_CHANNEL`.
+
+## Publicação
+
+O repositório existente é https://github.com/nilrd/SiteToqueIdeal e contém a versão anterior em React/Vite. Esta pasta é a versão nova em Next.js. Antes de atualizar o repositório e publicar, preservar o histórico e ajustar o projeto da Vercel para Next.js. Fazer a revisão visual local antes da publicação.

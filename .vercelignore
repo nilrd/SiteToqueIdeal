@@ -1,0 +1,7 @@
+_contexto
+_publicacao
+scripts
+node_modules
+.next
+*.log
+*.tsbuildinfo
