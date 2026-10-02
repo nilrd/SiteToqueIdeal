@@ -200,9 +200,9 @@ h1, h2, h3 { font-weight: 400; }
   .banner-foto { aspect-ratio: 1 / 1; }
   .banner-foto img { object-position: right bottom; }
   .banner-texto { position: static; width: auto; padding: 22px 24px 26px; background: var(--papel-claro); }
-  .banner-titulo { position: absolute; top: 20px; left: 20px; width: calc(100% - 40px); padding: 18px; background: rgb(246 240 231 / .94); border: 1px solid rgb(255 255 255 / .6); }
+  .banner-titulo { position: absolute; top: 16px; left: 16px; width: calc(100% - 32px); padding: 12px; background: rgb(246 240 231 / .94); border: 1px solid rgb(255 255 255 / .6); }
   .assinatura-banner { font-size: 10px; letter-spacing: .18em; color: #835b28; }
-  .banner h1 { font-size: clamp(36px, 10.8vw, 48px); line-height: .98; margin: 12px 0 0; text-transform: none; letter-spacing: -.03em; }
+  .banner h1 { font-size: clamp(30px, 9vw, 40px); line-height: .98; margin: 8px 0 0; text-transform: none; letter-spacing: -.03em; }
   .banner h1 span { display: inline; }
   .banner h1 span:last-child { display: block; }
   .descricao-banner { font-size: 15px; max-width: 420px; line-height: 1.6; }

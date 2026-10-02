@@ -193,3 +193,12 @@ Esta atualização registra as decisões posteriores ao texto acima:
 - O novo favicon é um monograma T em bronze sobre creme. A fonte é `public/favicon.svg`; os PNGs correspondentes e `src/app/icon.png` foram atualizados. `scripts/gerar-favicons.cjs` regenera as variantes.
 - A prévia local usa `next dev` na porta 3010, com atualização automática e indicadores de desenvolvimento ocultos. Os registros ficam em `_contexto/revisao/servidor*.log`.
 - Nilson esclareceu que a futura limpeza e publicação dizem respeito à **Vercel**, não ao Supabase. Nenhum projeto remoto foi excluído ou alterado nesta revisão.
+
+### Publicação e troca de fotos — 01/10/2026
+
+- O site foi publicado em https://toqueideal.com pelo repositório existente `nilrd/SiteToqueIdeal`, branch `master`. Esta pasta está vinculada ao Git; o histórico anterior foi preservado.
+- Os deploys antigos da Vercel foram removidos, preservando o projeto, os domínios e a versão nova. Após a atualização do painel, o Toque Ideal passou de 4,77 GB para 5,82 MB de Deployment Storage. O indicador não atualizou imediatamente após as exclusões.
+- Nilson reprovou a foto marrom com orquídeas. `public/fotos/chocolate-orquideas.webp` foi removida do projeto e substituída por `detalhe-bronze.webp`, a partir da foto enviada `Imagem do ChatGPT 1 de out. de 2026, 14_23_12.png`. A legenda agora é “Texturas em bronze.”.
+- O banner atual é `banner-contas.webp`, convertido sem recorte ou alteração da peça a partir de `Bandeja Dourada com Contas de Madeira.png`, de 1672x941. O painel de título móvel foi reduzido para ficar acima da bandeja.
+- Texto corrigido: “Composições para inspirar a sua vitrine e transformar os espaços de quem leva um toque ideal para a casa.”.
+- Nilson autorizou commit, push e deploy das alterações. Arquivos de revisão e dependências ficam fora da publicação.

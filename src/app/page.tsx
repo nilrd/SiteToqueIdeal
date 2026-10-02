@@ -93,8 +93,8 @@ export default function Home() {
               <div className="ambientes-texto">
                 <h2 id="titulo-ambientes">Novos tons para cada ambiente.</h2>
                 <span className="linha-ouro" aria-hidden="true" />
-                <p>O vidro encontra a luz e revela outras possibilidades. A leveza do fumê, o aconchego do marrom e a borda dourada que une cada detalhe.</p>
-                <p>Composições para inspirar a sua vitrine e transformar os espaços de quem leva uma Toque Ideal para casa.</p>
+                <p>O vidro encontra a luz e revela outras possibilidades. A leveza do fumê e os reflexos do bronze valorizam cada forma e textura.</p>
+                <p>Composições para inspirar a sua vitrine e transformar os espaços de quem leva um toque ideal para a casa.</p>
                 <a className="botao-catalogo" href={linkWhatsApp()} target="_blank" rel="noopener noreferrer"><IconeWhatsApp />Receber catálogo</a>
               </div>
               <div className="ambientes-fotos">
@@ -103,8 +103,8 @@ export default function Home() {
                   <figcaption>A leveza do fumê.</figcaption>
                 </figure>
                 <figure className="ambiente-detalhe">
-                  <Image src={FOTOS.marrom.src} alt={FOTOS.marrom.alt} width={FOTOS.marrom.w} height={FOTOS.marrom.h} sizes="(min-width: 768px) 25vw, 70vw" />
-                  <figcaption>Marrom com borda dourada.</figcaption>
+                  <Image src={FOTOS.bronze.src} alt={FOTOS.bronze.alt} width={FOTOS.bronze.w} height={FOTOS.bronze.h} sizes="(min-width: 768px) 25vw, 70vw" />
+                  <figcaption>Texturas em bronze.</figcaption>
                 </figure>
               </div>
             </div>

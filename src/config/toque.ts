@@ -32,9 +32,9 @@ export const COLECOES: { nome: string; img: Foto }[] = [
 ]
 
 export const FOTOS = {
-  banner: { src: '/fotos/banner-horizontal.webp', alt: 'Peça de vidro bronze com colar sobre travertino, em um ambiente mediterrâneo com luz dourada', w: 1672, h: 941 },
+  banner: { src: '/fotos/banner-contas.webp', alt: 'Bandeja de vidro com borda dourada e contas de madeira sobre travertino, em um ambiente com luz dourada', w: 1672, h: 941 },
   essencia: { src: '/fotos/bronze-orquideas.webp', alt: 'Centro de mesa bronze com orquídeas brancas sobre mesa de travertino', w: 1448, h: 1086 },
   detalhes: { src: '/fotos/incolor-orquideas.webp', alt: 'Centro de mesa incolor com orquídeas brancas', w: 1448, h: 1086 },
   expressao: { src: '/fotos/fume-reflexos.webp', alt: 'Centro de mesa fumê com a luz atravessando o vidro sobre o travertino', w: 1448, h: 1086 },
-  marrom: { src: '/fotos/chocolate-orquideas.webp', alt: 'Detalhe de uma peça de vidro marrom com borda dourada e orquídeas brancas', w: 1429, h: 1101 },
+  bronze: { src: '/fotos/detalhe-bronze.webp', alt: 'Detalhe da textura de uma peça de vidro bronze sobre travertino sob luz dourada', w: 1448, h: 1086 },
 }
