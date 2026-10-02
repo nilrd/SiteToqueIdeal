@@ -1,5 +1,5 @@
 import Image from 'next/image'
-import { COLECOES, FOTOS, MENU, TOQUE, linkWhatsApp } from '@/config/toque'
+import { AMBIENTES, COLECOES, FOTOS, MENU, TOQUE, linkWhatsApp } from '@/config/toque'
 import { Cabecalho } from '@/components/Cabecalho'
 import { IconeDiamante, IconeFolha, IconeInstagram, IconeLoja, IconeWhatsApp } from '@/components/Icones'
 
@@ -93,19 +93,17 @@ export default function Home() {
               <div className="ambientes-texto">
                 <h2 id="titulo-ambientes">Novos tons para cada ambiente.</h2>
                 <span className="linha-ouro" aria-hidden="true" />
-                <p>O vidro encontra a luz e revela outras possibilidades. A leveza do fumê e os reflexos do bronze valorizam cada forma e textura.</p>
+                <p>O vidro encontra a luz e revela outras possibilidades. Do nude ao preto, tons e texturas valorizam cada forma e inspiram novas composições.</p>
                 <p>Composições para inspirar a sua vitrine e transformar os espaços de quem leva um toque ideal para a casa.</p>
                 <a className="botao-catalogo" href={linkWhatsApp()} target="_blank" rel="noopener noreferrer"><IconeWhatsApp />Receber catálogo</a>
               </div>
               <div className="ambientes-fotos">
-                <figure>
-                  <Image src={FOTOS.expressao.src} alt={FOTOS.expressao.alt} width={FOTOS.expressao.w} height={FOTOS.expressao.h} sizes="(min-width: 1280px) 34vw, (min-width: 768px) 30vw, 100vw" />
-                  <figcaption>A leveza do fumê.</figcaption>
-                </figure>
-                <figure className="ambiente-detalhe">
-                  <Image src={FOTOS.bronze.src} alt={FOTOS.bronze.alt} width={FOTOS.bronze.w} height={FOTOS.bronze.h} sizes="(min-width: 768px) 25vw, 70vw" />
-                  <figcaption>Texturas em bronze.</figcaption>
-                </figure>
+                {AMBIENTES.map(({ foto, legenda }, indice) => (
+                  <figure key={foto.src} className={indice % 2 === 1 ? 'ambiente-detalhe' : undefined}>
+                    <Image src={foto.src} alt={foto.alt} width={foto.w} height={foto.h} sizes={indice % 2 === 1 ? '(min-width: 768px) 25vw, 70vw' : '(min-width: 1280px) 34vw, (min-width: 768px) 30vw, 100vw'} />
+                    <figcaption>{legenda}</figcaption>
+                  </figure>
+                ))}
               </div>
             </div>
           </section>

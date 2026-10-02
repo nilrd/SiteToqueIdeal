@@ -202,3 +202,9 @@ Esta atualização registra as decisões posteriores ao texto acima:
 - O banner atual é `banner-contas.webp`, convertido sem recorte ou alteração da peça a partir de `Bandeja Dourada com Contas de Madeira.png`, de 1672x941. O painel de título móvel foi reduzido para ficar acima da bandeja.
 - Texto corrigido: “Composições para inspirar a sua vitrine e transformar os espaços de quem leva um toque ideal para a casa.”.
 - Nilson autorizou commit, push e deploy das alterações. Arquivos de revisão e dependências ficam fora da publicação.
+
+### Galeria ampliada — 02/10/2026
+
+- Nilson reprovou a foto fumê: fume-reflexos.webp foi removida e substituída pela foto nude com orquídeas enviada em 14_32_10.png.
+- A seção Novos tons mantém a composição em escadinha e agora mostra nude, bronze, marrom com borda dourada (nova foto aprovada 14_33_24.png), fendi, preto e bandejas spa. As cinco fotos fornecidas cabem sem repetição.
+- Desktop: duas colunas de fotos com deslocamento alternado e texto acompanhando a rolagem. Celular: fotos em sequência, alternando largura cheia e 76% alinhada à direita. Fotografias preservam sua proporção.

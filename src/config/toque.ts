@@ -35,6 +35,19 @@ export const FOTOS = {
   banner: { src: '/fotos/banner-contas.webp', alt: 'Bandeja de vidro com borda dourada e contas de madeira sobre travertino, em um ambiente com luz dourada', w: 1672, h: 941 },
   essencia: { src: '/fotos/bronze-orquideas.webp', alt: 'Centro de mesa bronze com orquídeas brancas sobre mesa de travertino', w: 1448, h: 1086 },
   detalhes: { src: '/fotos/incolor-orquideas.webp', alt: 'Centro de mesa incolor com orquídeas brancas', w: 1448, h: 1086 },
-  expressao: { src: '/fotos/fume-reflexos.webp', alt: 'Centro de mesa fumê com a luz atravessando o vidro sobre o travertino', w: 1448, h: 1086 },
+  nude: { src: '/fotos/nude-orquideas.webp', alt: 'Centro de mesa em vidro nude com orquídeas brancas sobre travertino', w: 1448, h: 1086 },
   bronze: { src: '/fotos/detalhe-bronze.webp', alt: 'Detalhe da textura de uma peça de vidro bronze sobre travertino sob luz dourada', w: 1448, h: 1086 },
+  marrom: { src: '/fotos/marrom-orquideas.webp', alt: 'Detalhe de uma peça em vidro marrom com borda dourada e orquídeas brancas', w: 1429, h: 1101 },
+  fendi: { src: '/fotos/fendi-contas.webp', alt: 'Peça em vidro fendi com contas de madeira sobre uma mesa de travertino', w: 1447, h: 1087 },
+  preto: { src: '/fotos/preto-frutas.webp', alt: 'Centro de mesa em vidro preto com peras, uvas, figos e limões', w: 1448, h: 1086 },
+  bandejas: { src: '/fotos/bandejas-spa.webp', alt: 'Composição com bandejas de borda dourada, difusor, vela, toalha e café', w: 1450, h: 1036 },
 }
+
+export const AMBIENTES = [
+  { foto: FOTOS.nude, legenda: 'A delicadeza do nude.' },
+  { foto: FOTOS.bronze, legenda: 'Texturas em bronze.' },
+  { foto: FOTOS.marrom, legenda: 'Marrom com borda dourada.' },
+  { foto: FOTOS.fendi, legenda: 'A sutileza do fendi.' },
+  { foto: FOTOS.preto, legenda: 'A presença do preto.' },
+  { foto: FOTOS.bandejas, legenda: 'Bandejas para compor.' },
+]
